@@ -1,21 +1,33 @@
 "use client";
 
 import * as React from "react";
+import { useState } from "react";
 import CustomTextField from "@components/TextFeilds/CustomTextField";
 import CustomButton from "@components/Buttons/NormalBtn";
 import CustomIconButton from "@components/Buttons/IconBtn";
-import DeleteIcon from "@mui/icons-material/Google";
 import { Google, FacebookOutlined, Twitter } from "@mui/icons-material";
 
 export default function SignUp() {
-  const handleFirstNameChange = (event: string) => {};
-  const handleLastNameChange = (event: string) => {};
+  //states
+  const [formValues, setFormValues] = useState({});
+
+  //handler for editing form
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormValues((prevValues) => ({ ...prevValues, [name]: value }));
+  };
+
+  //handler for submit button
   const handleButtonClick = (event: void) => {};
+
+  //handler for social media buttons
   const handleGoogleLogin = (event: void) => {};
+  const handleFaceBookLogin = (event: void) => {};
+  const handleTwitterLogin = (event: void) => {};
 
   return (
-    <div>
-      <header className=" mx-16 my-10 flex flex-col gap-4 items-center">
+    <div className="mx-16 my-10 mb-5 ">
+      <header className="  flex flex-col gap-4 items-center ">
         <h1 className=" text-4xl font-bold">Sales Agent Sign Up</h1>
         <p className="text-center">
           Dorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
@@ -29,14 +41,14 @@ export default function SignUp() {
         </p>
       </header>
 
-      <form className=" flex flex-col gap-5 p-10 rounded-lg sm:w-3/5 md:w-1/2 lg:w-1/2  m-auto mt-5 min-w-sm bg-gray-100 ">
+      <form className=" flex flex-col gap-5 p-10 rounded-lg sm:w-3/5 md:w-1/2 lg:w-1/2  m-auto mt-10 min-w-sm bg-gray-100 ">
         <div className=" flex gap-5 ">
           <CustomTextField
             id="FirstName"
             label="First Name"
             type="text"
             name="FirstName"
-            onChange={(e) => handleFirstNameChange(e.target.value)}
+            onChange={handleInputChange}
             width="50%"
           />
 
@@ -45,33 +57,32 @@ export default function SignUp() {
             label="Last Name"
             type="text"
             name="LastName"
-            onChange={(e) => handleLastNameChange(e.target.value)}
+            onChange={handleInputChange}
             width="50%"
           />
         </div>
         <div className=" flex flex-col gap-5 ">
           <CustomTextField
-            id="LastName"
-            label="Last Name"
+            id="Email"
+            label="Email"
+            name="Email"
             type="text"
-            name="LastName"
-            onChange={(e) => handleLastNameChange(e.target.value)}
+            onChange={handleInputChange}
+          />
+          <CustomTextField
+            id="Password"
+            label="Password"
+            type="password"
+            name="Password"
+            onChange={handleInputChange}
             width="100%"
           />
           <CustomTextField
-            id="LastName"
-            label="Last Name"
+            id="ConfirmPassword"
+            label="Confirm Password"
             type="password"
-            name="LastName"
-            onChange={(e) => handleLastNameChange(e.target.value)}
-            width="100%"
-          />
-          <CustomTextField
-            id="LastName"
-            label="Last Name"
-            type="password"
-            name="LastName"
-            onChange={(e) => handleLastNameChange(e.target.value)}
+            name="ConfirmPassword"
+            onChange={handleInputChange}
             width="100%"
           />
         </div>
@@ -104,7 +115,7 @@ export default function SignUp() {
               Google
             </CustomIconButton>
             <CustomIconButton
-              onClick={handleGoogleLogin}
+              onClick={handleFaceBookLogin}
               size="large"
               startIcon={<FacebookOutlined />}
               backgroundColor="#fff"
@@ -114,7 +125,7 @@ export default function SignUp() {
               FaceBook
             </CustomIconButton>
             <CustomIconButton
-              onClick={handleGoogleLogin}
+              onClick={handleTwitterLogin}
               size="large"
               startIcon={<Twitter />}
               backgroundColor="#fff"
