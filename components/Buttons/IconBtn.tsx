@@ -12,6 +12,7 @@ type CustomIconButtonProps = {
   backgroundColor?: string;
   iconColor?: string;
   textColor?: string;
+ 
 };
 
 const CustomIconButton: React.FC<CustomIconButtonProps> = ({
@@ -25,6 +26,7 @@ const CustomIconButton: React.FC<CustomIconButtonProps> = ({
   backgroundColor,
   iconColor,
   textColor,
+  
 }) => {
   const buttonStyle: React.CSSProperties = {
     backgroundColor: backgroundColor,

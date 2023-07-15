@@ -1,10 +1,9 @@
-import React from "react";
-import { Typography } from "@mui/material";
+import React from 'react'
 
-export default function page() {
+const HomePage = () => {
   return (
-    <div>
-      <Typography variant="h1">Page</Typography>
-    </div>
-  );
+   <div>Home</div>
+  )
 }
+
+export default HomePage
