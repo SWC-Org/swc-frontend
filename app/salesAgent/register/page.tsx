@@ -41,7 +41,7 @@ export default function SignUp() {
         </p>
       </header>
 
-      <form className=" flex flex-col gap-5 p-10 rounded-lg sm:w-3/5 md:w-1/2 lg:w-1/2  m-auto mt-10 min-w-sm bg-gray-100 ">
+      <form className=" flex flex-col gap-5 p-10 rounded-lg sm:w-4/5 md:w-4/5 lg:w-3/5  m-auto mt-10 min-w-sm bg-gray-100 ">
         <div className=" flex gap-5 ">
           <CustomTextField
             id="FirstName"
