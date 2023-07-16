@@ -35,7 +35,11 @@ const Nav = () => {
         {isLogged ? (
           <div className="flex gap-3 md:gap-5">
             {routesNames.map((route) => (
-              <Link href={route.path} className="black_btn btn-no-border">
+              <Link
+                href={route.path}
+                key={route.route}
+                className="black_btn btn-no-border"
+              >
                 {route.route}
               </Link>
             ))}
@@ -101,6 +105,7 @@ const Nav = () => {
               <div className="dropdown">
                 {routesNames.map((route) => (
                   <Link
+                    key={route.route}
                     href={route.path}
                     className="dropdown_link"
                     onClick={() => setToggleDropdown(false)}
