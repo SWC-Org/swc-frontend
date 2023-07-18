@@ -4,6 +4,8 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 type ProductCardProps = {
   onClick: () => void;
@@ -19,6 +21,8 @@ export default function ProductCard({
   imageURL,
 }: ProductCardProps) {
   const [hovered, setHovered] = React.useState(false);
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   const handleMouseEnter = () => {
     setHovered(true);
@@ -31,7 +35,7 @@ export default function ProductCard({
   return (
     <Card
       sx={{
-        maxWidth: 345,
+        maxWidth: 320,
         transform: hovered ? "scale(1.05)" : "scale(1)",
         transition: "transform 0.2s ease-in-out",
       }}
@@ -40,12 +44,15 @@ export default function ProductCard({
       onMouseLeave={handleMouseLeave}
     >
       <CardActionArea>
-        <CardMedia
-          component="img"
-          height="140"
-          image={imageURL}
-          alt="green iguana"
-        />
+        {!isSmallScreen && (
+          <CardMedia
+            component="img"
+            height="140"
+            image={imageURL}
+            alt="green iguana"
+            content="cover"
+          />
+        )}
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {title}
