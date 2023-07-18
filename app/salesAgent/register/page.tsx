@@ -26,7 +26,7 @@ export default function SignUp() {
   const handleTwitterLogin = (event: void) => {};
 
   return (
-    <div className="mx-16 my-10 mb-5 ">
+    <div className="mx-8 my-10 mb-5 ">
       <header className="  flex flex-col gap-4 items-center ">
         <h1 className=" text-4xl font-bold">Sales Agent Sign Up</h1>
         <p className="text-center">
@@ -103,7 +103,7 @@ export default function SignUp() {
         <div className=" flex flex-col gap-4  justify-between items-center">
           <h2>Or sign up with</h2>
 
-          <div className=" flex justify-between w-full">
+          <div className="flex items-center flex-wrap gap-3 justify-center lg:justify-center w-full space-x-1  lg:flex-row md:flex-col sm:flex-col">
             <CustomIconButton
               onClick={handleGoogleLogin}
               size="large"

@@ -9,7 +9,7 @@ import { Checkbox, FormControlLabel, Grid, Link } from "@mui/material";
 
 const Login = () => {
   return (
-    <div className="mx-16 my-10 mb-5 ">
+    <div className="mx-8 my-10 mb-5 ">
       <header className="  flex flex-col gap-4 items-center ">
         <h1 className=" text-4xl font-bold">Sales Agent Sign Up</h1>
         <p className="text-center">
@@ -43,22 +43,21 @@ const Login = () => {
           />
         </div>
 
-
-<Grid container>
-            <Grid item xs>
+        <Grid container>
+          <Grid item xs>
             <Grid item>
-            <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-            </Grid>
-            </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                {"Forgot password?"}
-              </Link>
+              <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
+              />
             </Grid>
           </Grid>
+          <Grid item>
+            <Link href="#" variant="body2">
+              {"Forgot password?"}
+            </Link>
+          </Grid>
+        </Grid>
 
         <CustomButton
           onClick={() => {}}
@@ -77,7 +76,7 @@ const Login = () => {
         <div className=" flex flex-col gap-4  justify-between items-center">
           <h2>Or login with</h2>
 
-          <div className="flex flex-wrap justify-center lg:justify-center w-full space-x-1  lg:flex-row md:flex-col sm:flex-col">
+          <div className="flex flex-wrap items-center gap-3 justify-center lg:justify-center w-full space-x-1  lg:flex-row md:flex-col sm:flex-col">
             <CustomIconButton
               onClick={() => {}}
               size="large"
@@ -85,7 +84,6 @@ const Login = () => {
               backgroundColor="#fff"
               iconColor="#0F62FE"
               textColor="#0F62FE"
-              
             >
               Google
             </CustomIconButton>
@@ -96,7 +94,6 @@ const Login = () => {
               backgroundColor="#fff"
               iconColor="#0F62FE"
               textColor="#0F62FE"
-              
             >
               FaceBook
             </CustomIconButton>
@@ -107,7 +104,6 @@ const Login = () => {
               backgroundColor="#fff"
               iconColor="#0F62FE"
               textColor="#0F62FE"
-              
             >
               Twitter
             </CustomIconButton>
