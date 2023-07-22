@@ -12,7 +12,6 @@ type CustomIconButtonProps = {
   backgroundColor?: string;
   iconColor?: string;
   textColor?: string;
- 
 };
 
 const CustomIconButton: React.FC<CustomIconButtonProps> = ({
@@ -26,7 +25,6 @@ const CustomIconButton: React.FC<CustomIconButtonProps> = ({
   backgroundColor,
   iconColor,
   textColor,
-  
 }) => {
   const buttonStyle: React.CSSProperties = {
     backgroundColor: backgroundColor,
@@ -41,7 +39,7 @@ const CustomIconButton: React.FC<CustomIconButtonProps> = ({
 
   return (
     <Button
-      variant="outlined"
+      variant="contained"
       startIcon={startIcon}
       onClick={onClick}
       disabled={disabled}

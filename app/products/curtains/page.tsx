@@ -8,11 +8,19 @@ import { Plantation_shutters_data } from "@constants/Plantation_shutters_data";
 import React from "react";
 import TextArea from "@components/TextFeilds/TextArea";
 import { Curtains_data } from "@constants/Curtains_data";
+import CustomIconButton from "@components/Buttons/CustomIconButton";
+import {
+  ControlPointRounded,
+  FastForward,
+  FastForwardOutlined,
+  Save,
+  Summarize,
+} from "@mui/icons-material";
 
 export default function page() {
   return (
-    <div className=" lg:mx-36 md:mx-10 p-5">
-      <section className=" ">
+    <div className=" ">
+      <section className="lg:px-32 md:px-32 p-4">
         <Typography className="text-3xl font-semibold">Curtains</Typography>
         <p className="opacity-50">
           Dorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
@@ -25,7 +33,7 @@ export default function page() {
           lacinia. Aliquam in elementum tellus.
         </p>
       </section>
-      <div className="flex flex-col gap-4  bg-slate-200 my-5 p-10 rounded-lg">
+      <div className=" lg:mx-36 md:mx-10 p-5flex flex-col gap-4  bg-slate-200 my-5 p-10 rounded-lg">
         <LableTextField
           name={"Location"}
           id={"Location"}
@@ -35,7 +43,7 @@ export default function page() {
         />
 
         <section>
-          <Typography className="border-b-2 border-blue-500 text-blue-600">
+          <Typography className="border-b-2 border-blue-500 text-blue-600 mt-5">
             Add the details about the window dimension
           </Typography>
           <div className="flex gap-16 items-center mt-2">
@@ -56,7 +64,7 @@ export default function page() {
           </div>
         </section>
         <section className=" flex flex-col gap-4">
-          <hr className=" border-b-2 border-blue-500 mb-6" />
+          <hr className=" border--2 border-blue-500 mt-6" />
           <div className="flex flex-col sm:flex-row gap-10">
             <div className="flex flex-col w-full sm:w-2/4 gap-3 mt-2">
               <DropdownNormal
@@ -182,7 +190,7 @@ export default function page() {
           />
         </section>
 
-        <section className="border-t-2 mb-10 border-blue-500">
+        <section className="border-t-2 my-10 border-blue-500">
           <div className=" mt-4">
             <TextArea
               name={"comments"}
@@ -193,6 +201,127 @@ export default function page() {
             />
           </div>
         </section>
+        <div className=" text-right mb-3">
+          <CustomIconButton
+            onClick={() => {}}
+            size="small"
+            startIcon={<Save />}
+            backgroundColor="#0066FF"
+            iconColor="white"
+            textColor="white"
+          >
+            Save Window
+          </CustomIconButton>
+        </div>
+
+        <hr className=" border-b-2 border-blue-500 mt-6" />
+
+        <Typography>Add extra materials for this window.</Typography>
+
+        {/* add new product in the same window */}
+        <div className=" flex flex-col w-full sm:w-2/4 gap-3 mt-2">
+          <CustomIconButton
+            onClick={() => {}}
+            size="small"
+            startIcon={<ControlPointRounded />}
+            backgroundColor="#48D89B"
+            iconColor="black"
+            textColor="black"
+          >
+            Plantation Shutters
+          </CustomIconButton>
+          <CustomIconButton
+            onClick={() => {}}
+            size="small"
+            startIcon={<ControlPointRounded />}
+            backgroundColor="#88D6F7"
+            iconColor="black"
+            textColor="black"
+          >
+            Roller Blinds
+          </CustomIconButton>
+          <CustomIconButton
+            onClick={() => {}}
+            size="small"
+            startIcon={<ControlPointRounded />}
+            backgroundColor="#FE8514"
+            iconColor="black"
+            textColor="black"
+          >
+            Curtains
+          </CustomIconButton>
+        </div>
+      </div>
+      <div className="p-4 sm:p-10 flex flex-col gap-4 my-5 rounded-lg">
+        <hr className="border-b-2 border-blue-500 mb-6" />
+
+        <Typography>Add a new window Data</Typography>
+        {/* add new product in the new window */}
+
+        <div className="flex flex-wrap   gap-3 mt-2 ">
+          <CustomIconButton
+            onClick={() => {}}
+            size="small"
+            startIcon={<ControlPointRounded />}
+            backgroundColor="#48D89B"
+            iconColor="black"
+            textColor="black"
+          >
+            Plantation Shutters
+          </CustomIconButton>
+          <CustomIconButton
+            onClick={() => {}}
+            size="small"
+            startIcon={<ControlPointRounded />}
+            backgroundColor="#88D6F7"
+            iconColor="black"
+            textColor="black"
+          >
+            Roller Blinds
+          </CustomIconButton>
+          <CustomIconButton
+            onClick={() => {}}
+            size="small"
+            startIcon={<ControlPointRounded />}
+            backgroundColor="#FE8514"
+            iconColor="black"
+            textColor="black"
+          >
+            Curtains
+          </CustomIconButton>
+        </div>
+        <hr className="border-b-2 border-blue-500 mb-6" />
+
+        <div className="text-center md:text-right">
+          <Typography className="mb-2">See The Summary</Typography>
+          <CustomIconButton
+            onClick={() => {}}
+            size="small"
+            startIcon={<Summarize />}
+            backgroundColor="#0066FF"
+            iconColor="white"
+            textColor="white"
+          >
+            Summary
+          </CustomIconButton>
+        </div>
+      </div>
+      {/* continue to the next window */}
+      <div className="bg-slate-800 min-w-full text-white p-5 flex flex-col gap-4">
+        <Typography>
+          Press continue if you added all the window details
+        </Typography>
+
+        <CustomIconButton
+          onClick={() => {}}
+          size="small"
+          startIcon={<FastForward />}
+          backgroundColor="#0066FF"
+          iconColor="white"
+          textColor="white"
+        >
+          Continue
+        </CustomIconButton>
       </div>
     </div>
   );

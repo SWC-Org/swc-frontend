@@ -3,7 +3,7 @@
 import React from "react";
 import CustomTextField from "@components/TextFeilds/CustomTextField";
 import CustomButton from "@components/Buttons/NormalBtn";
-import CustomIconButton from "@components/Buttons/IconBtn";
+import CustomIconButton from "@components/Buttons/CustomIconButton";
 import { Google, FacebookOutlined, Twitter } from "@mui/icons-material";
 import { Checkbox, FormControlLabel, Grid, Link } from "@mui/material";
 
