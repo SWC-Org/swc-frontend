@@ -4,7 +4,7 @@ import * as React from "react";
 import { useState } from "react";
 import CustomTextField from "@components/TextFeilds/CustomTextField";
 import CustomButton from "@components/Buttons/NormalBtn";
-import CustomIconButton from "@components/Buttons/IconBtn";
+import CustomIconButton from "@components/Buttons/CustomIconButton";
 import { Google, FacebookOutlined, Twitter } from "@mui/icons-material";
 
 export default function SignUp() {
