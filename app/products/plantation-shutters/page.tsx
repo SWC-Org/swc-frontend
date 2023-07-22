@@ -33,7 +33,7 @@ export default function page() {
           lacinia. Aliquam in elementum tellus.
         </p>
       </section>
-      <div className=" lg:mx-36 md:mx-10 flex flex-col gap-4  bg-slate-200 my-5 p-10 rounded-lg">
+      <div className=" lg:mx-36 md:mx-10 flex flex-col gap-4  bg-slate-200 border-4 border-slate-400 my-5 p-10 rounded-lg">
         <LableTextField
           name={"Location"}
           id={"Location"}
