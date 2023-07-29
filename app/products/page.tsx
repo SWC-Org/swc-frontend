@@ -16,7 +16,9 @@ export default function Page() {
         eius quaerat
       </p>
       {/* product cards */}
-      <div className="grid gap-5 p-8 rounded-lg bg-slate-200 md:grid-cols-2 lg:grid-cols-3">
+
+      <div className="flex flex-col lg:flex-row gap-5 p-8 rounded-lg bg-slate-200 border-4 border-slate-400">
+
         <ProductCard
           onClick={() => {}}
           title={"Plantation Shutters"}

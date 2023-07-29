@@ -5,7 +5,7 @@ import React from "react";
 const CustomerDetails = () => {
   return (
     <div className="sm:px-20 px-10 md:px-40 pb-10">
-      <div className=" px-5 bg-gray-100 flex flex-col w-full pb-10">
+      <div className=" px-5 bg-slate-200 border-4 border-slate-400 flex flex-col w-full pb-10">
         <div className=" my-10 text-3xl font-bold">
           <h2>Add Customer Details</h2>
         </div>
@@ -99,8 +99,7 @@ const CustomerDetails = () => {
               <div className="line-container my-10">
                 <hr className="line" />
               </div>
-              <CustomDatePicker label="Enter Date" />
-
+              {/* <CustomDatePicker label="Enter Date" /> */}
               <div className="mt-5 flex flex-col items-start">
                 <Typography
                   variant="subtitle1"
@@ -121,7 +120,6 @@ const CustomerDetails = () => {
                   }}
                 />
               </div>
-
               <div className="line-container my-10">
                 <hr className="line" />
               </div>

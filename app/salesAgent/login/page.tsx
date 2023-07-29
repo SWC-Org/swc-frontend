@@ -24,7 +24,7 @@ const Login = () => {
         </p>
       </header>
 
-      <form className=" flex flex-col gap-5 p-10 rounded-lg sm:w-3/5 md:w-1/2 lg:w-1/2  m-auto mt-10 min-w-sm bg-gray-100 ">
+      <form className=" flex flex-col gap-5 p-10 rounded-lg sm:w-3/5 md:w-1/2 lg:w-1/2  m-auto mt-10 min-w-sm bg-slate-100  border-4 border-slate-400">
         <div className=" flex flex-col gap-5 ">
           <CustomTextField
             id="Email"
