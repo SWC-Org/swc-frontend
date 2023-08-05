@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import "@styles/global.css";
 import Nav from "@components/Layout/Nav";
 import Footer from "@components/Layout/Footer";
+import { SessionProvider } from "next-auth/react"
+
 export const metadata: Metadata = {
   title: "SWC | Curtoon Window Platform",
   description: "Curtoon Window Platform",

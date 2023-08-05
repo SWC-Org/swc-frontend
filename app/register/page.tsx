@@ -6,7 +6,7 @@ import CustomTextField from "@components/TextFeilds/CustomTextField";
 import CustomButton from "@components/Buttons/NormalBtn";
 import CustomIconButton from "@components/Buttons/CustomIconButton";
 import { Google, FacebookOutlined, Twitter } from "@mui/icons-material";
-
+import { signIn } from "next-auth/react"
 export default function SignUp() {
   //states
   const [formValues, setFormValues] = useState({});
@@ -21,9 +21,9 @@ export default function SignUp() {
   const handleButtonClick = (event: void) => {};
 
   //handler for social media buttons
-  const handleGoogleLogin = (event: void) => {};
-  const handleFaceBookLogin = (event: void) => {};
-  const handleTwitterLogin = (event: void) => {};
+  const handleGoogleLogin = (event: void) => { signIn("google")};
+  const handleFaceBookLogin = (event: void) => {signIn("facebook")};
+  const handleTwitterLogin = (event: void) => {signIn("twitter")};
 
   return (
     <div className="mx-8 my-10 mb-5 ">

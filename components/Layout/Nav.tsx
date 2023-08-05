@@ -6,7 +6,7 @@ import { useState } from "react";
 import { DensitySmall } from "@mui/icons-material";
 
 const Nav = () => {
-  const isLogged = false;
+  const isLogged = true;
   const routesNames = [
     { route: "Home", path: "/home" },
     { route: "About", path: "/home" },
