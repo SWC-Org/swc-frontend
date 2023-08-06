@@ -23,11 +23,9 @@ const UserSchema :Schema = new Schema({
     },
     role:{
         type:String,
-        required :[true,"Role is required"]
     },
     policy:{
         type:String,
-        required :[true,"Policy is required"]
     },
     auth :{
         type:String,

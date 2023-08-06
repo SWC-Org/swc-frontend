@@ -4,6 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { DensitySmall } from "@mui/icons-material";
+import { useSession } from "next-auth/react"
+import { signOut } from "next-auth/react"
 
 const Nav = () => {
   const isLogged = true;
@@ -15,7 +17,7 @@ const Nav = () => {
 
   const [toggleDropdown, setToggleDropdown] = useState(false);
 
-  const signOut = () => {};
+  const { data: session, status } = useSession()
 
   return (
     <nav className="flex-between w-full mb-16 pt-3">
@@ -32,7 +34,7 @@ const Nav = () => {
 
       {/* Desktop Navigation */}
       <div className="sm:flex hidden">
-        {isLogged ? (
+        {session ? (
           <div className="flex gap-3 md:gap-5">
             {routesNames.map((route) => (
               <Link
@@ -43,13 +45,13 @@ const Nav = () => {
                 {route.route}
               </Link>
             ))}
-            <button type="button" onClick={signOut} className="outline_btn">
+            <button type="button" onClick={()=>signOut()} className="outline_btn">
               Sign Out
             </button>
 
             <Link href="/profile">
               <Image
-                src={"/assets/images/vercel.svg"}
+                src={session?.user?.image}
                 width={37}
                 height={37}
                 className="rounded-full"
@@ -85,7 +87,7 @@ const Nav = () => {
 
       {/* Mobile Navigation */}
       <div className="sm:hidden flex relative">
-        {isLogged ? (
+        {session ? (
           <div className="flex">
             <DensitySmall
               className="rounded-full"
@@ -93,7 +95,7 @@ const Nav = () => {
             />
             <Link href="/profile">
               <Image
-                src={"/assets/images/vercel.svg"}
+                src={session?.user?.image}
                 width={37}
                 height={37}
                 className="rounded-full"

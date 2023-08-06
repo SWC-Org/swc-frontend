@@ -7,18 +7,57 @@ import CustomButton from "@components/Buttons/NormalBtn";
 import CustomIconButton from "@components/Buttons/CustomIconButton";
 import { Google, FacebookOutlined, Twitter } from "@mui/icons-material";
 import { signIn } from "next-auth/react"
-export default function SignUp() {
-  //states
-  const [formValues, setFormValues] = useState({});
+import {options} from '@app/api/auth/[...nextauth]/options'
+import {useSession} from 'next-auth/react'
+import { redirect } from 'next/navigation'
+import { CircularProgress } from "@mui/material";
 
-  //handler for editing form
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setFormValues((prevValues) => ({ ...prevValues, [name]: value }));
-  };
+export default  function SignUp() {
+  const { data: session, status } = useSession()
+  if(session){
+    redirect("/")
+  }
+  // const session = await getServerSession(options)
+  // if(session){
+  //   redirect("/")
+  // }
+  //states
+  const [prograssing,setProgressing] = useState(false)
+  const [fname, setFName] = useState("");
+  const [lname, setLName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [conpassword, setConfirmPassword] = useState("");
+
+
 
   //handler for submit button
-  const handleButtonClick = (event: void) => {};
+  const handleButtonClick = async (event: void) => {
+    setProgressing(true)
+    try {
+      const response = await fetch("/api/createUser", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          email : email,
+          first_name : fname,
+          last_name : lname,
+          password : password
+        })
+    })
+    if(response.status !== 200){
+      throw new Error("Failed ");
+    }
+    setProgressing(false)
+    alert("User Create")
+    redirect("/login")
+    } catch (error) {
+      setProgressing(false)
+      alert(error)
+    }
+  };
 
   //handler for social media buttons
   const handleGoogleLogin = (event: void) => { signIn("google")};
@@ -41,14 +80,24 @@ export default function SignUp() {
         </p>
       </header>
 
-      <form className=" flex flex-col gap-5 p-10 rounded-lg sm:w-4/5 md:w-4/5 lg:w-3/5  m-auto mt-10 min-w-sm bg-slate-100 border-4 border-slate-400 ">
+      {
+        prograssing ? (
+          <div className=" flex  gap-5 p-10 rounded-lg sm:w-4/5 md:w-4/5 lg:w-3/5  m-auto mt-10 min-w-sm bg-slate-100 border-4 border-slate-400 justify-center">
+            <CircularProgress color="success" className=""/>
+          </div>
+          
+        )
+        :(
+          <form className=" flex flex-col gap-5 p-10 rounded-lg sm:w-4/5 md:w-4/5 lg:w-3/5  m-auto mt-10 min-w-sm bg-slate-100 border-4 border-slate-400 ">
         <div className=" flex gap-5 ">
           <CustomTextField
             id="FirstName"
             label="First Name"
             type="text"
             name="FirstName"
-            onChange={handleInputChange}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setFName(event.target.value)
+            }}
             width="50%"
           />
 
@@ -57,7 +106,9 @@ export default function SignUp() {
             label="Last Name"
             type="text"
             name="LastName"
-            onChange={handleInputChange}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setLName(event.target.value)
+            }}
             width="50%"
           />
         </div>
@@ -67,14 +118,18 @@ export default function SignUp() {
             label="Email"
             name="Email"
             type="text"
-            onChange={handleInputChange}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setEmail(event.target.value)
+            }}
           />
           <CustomTextField
             id="Password"
             label="Password"
             type="password"
             name="Password"
-            onChange={handleInputChange}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setPassword(event.target.value)
+            }}
             width="100%"
           />
           <CustomTextField
@@ -82,7 +137,9 @@ export default function SignUp() {
             label="Confirm Password"
             type="password"
             name="ConfirmPassword"
-            onChange={handleInputChange}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setConfirmPassword(event.target.value)
+            }}
             width="100%"
           />
         </div>
@@ -137,6 +194,8 @@ export default function SignUp() {
           </div>
         </div>
       </form>
+        )
+      }
     </div>
   );
 }

@@ -16,6 +16,7 @@ export default withAuth(
                 "/denied",req.url
             ))
         }
+        
     },
     {
         callbacks:{

@@ -1,5 +1,6 @@
- import { JWT, DefaultJWT } from "next-auth/jwt";
+ import { JWT, DefaultJWT ,} from "next-auth/jwt";
  import { DefaultUser } from "next-auth";
+
 
  declare module "next-auth"{
     interface User extends DefaultUser{
