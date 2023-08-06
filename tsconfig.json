@@ -25,15 +25,10 @@
       "@components/*": ["./components/*"],
       "@constants/*": ["./constants/*"],
       "@styles/*": ["./styles/*"],
-      "@utils/*": ["./utils/*"]
+      "@util/*": ["./util/*"],
+      "@models/*": ["./models/*"],
     }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    "app/admin-dashboard/page.js"
-  ],
+
   "exclude": ["node_modules"]
 }

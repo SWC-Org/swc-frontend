@@ -11,6 +11,7 @@ type CustomTextFieldProps = {
 };
 
 const CustomTextField: React.FC<CustomTextFieldProps> = ({
+  onChange,
   name,
   id,
   label,
@@ -23,6 +24,7 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
 
   return (
     <TextField
+      onChange={(event: React.ChangeEvent<HTMLInputElement>)=>onChange(event)}
       name={name}
       id={id}
       label={label}
