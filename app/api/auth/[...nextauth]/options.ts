@@ -69,7 +69,12 @@ export const options: NextAuthOptions = {
           await connectDB();
           const user = await User.findOne({
             email: credentials?.email,
+            auth: "Credential"
+
           });
+          if(!user){
+            return null;
+          }
 
           if (credentials?.password === user.password) {
             return user;

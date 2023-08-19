@@ -55,7 +55,7 @@ export default  function SignUp() {
     redirect("/login")
     } catch (error) {
       setProgressing(false)
-      alert(error)
+      alert("User Create failed")
     }
   };
 

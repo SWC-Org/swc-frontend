@@ -28,7 +28,7 @@ const Login = () => {
       redirect("/")
     } catch (error) {
       setProgressing(false)
-      alert(error)
+      alert("Failed to login")
     }
   };
 
