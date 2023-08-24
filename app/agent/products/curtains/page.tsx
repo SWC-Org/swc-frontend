@@ -3,8 +3,6 @@
 import DropdownNormal from "@components/DropDowns/DropdownNormal";
 import LableTextField from "@components/TextFeilds/LableTextField";
 import { SelectChangeEvent, Typography } from "@mui/material";
-import { Plantation_shutters_data } from "@constants/Plantation_shutters_data";
-
 import React from "react";
 import TextArea from "@components/TextFeilds/TextArea";
 import { Curtains_data } from "@constants/Curtains_data";
@@ -12,12 +10,43 @@ import CustomIconButton from "@components/Buttons/CustomIconButton";
 import {
   ControlPointRounded,
   FastForward,
-  FastForwardOutlined,
   Save,
   Summarize,
 } from "@mui/icons-material";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+//creaete the type for the form data
+type CurtainFormData = {
+  Location: string;
+  width: number;
+  Height: number;
+  Category: string;
+  Fabric: string;
+  Curtain_Type: string;
+  Color: string;
+  Control: string;
+  Track_Color: string;
+  Return: string;
+  Bottom_Hem: string;
+  bracket_type: string;
+  linting: string;
+  price_per_meter: number;
+  commments: string;
+};
 
 export default function page() {
+  //form validation using zod
+  // const schema  = z.object({
+
+  //   Location: z.string().nonempty({ message: "Location is required" }),
+  //   width: z.number().positive({ message: "Width is required" }),
+  //   Height: z.number().positive({ message: "Height is required" }),
+  //   Category: z.string().nonempty({ message: "Category is required" }),
+
+  // )};
+
   return (
     <div className=" ">
       <section className="lg:px-32 md:px-32 p-4">

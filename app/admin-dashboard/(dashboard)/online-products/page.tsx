@@ -1,5 +1,5 @@
 import React from "react";
 
 export default function page() {
-  return <div>online</div>;
+  return <div className=" h-screen bg-green-50">add</div>;
 }

@@ -8,7 +8,7 @@ import { connectDB } from "@util/database";
 export const options: NextAuthOptions = {
   providers: [
     GoogleProvider({
-      async profile(profile ) {
+      async profile(profile) {
         try {
           await connectDB();
           const user = await User.findOne({
@@ -90,46 +90,46 @@ export const options: NextAuthOptions = {
   },
   callbacks: {
     async signIn({ account, profile }) {
-      // if (account?.provider === "google") {
-      //   try {
-      //     await connectDB();
+      if (account?.provider === "google") {
+        try {
+          await connectDB();
 
-      //     const user = await User.findOne({
-      //       email: profile?.email,
-      //       auth: "Provider",
-      //     });
+          const user = await User.findOne({
+            email: profile?.email,
+            auth: "Provider",
+          });
 
-      //     if (!user) {
-      //       await User.create({
-      //         email: profile?.email,
-      //         first_name: profile?.name?.split(" ")[0],
-      //         last_name: profile?.name?.split(" ")[1],
-      //         password: "-",
-      //         image: profile?.image,
-      //         role: "",
-      //         policy: "",
-      //         auth: "Provider",
-      //       });
-      //     }
-      //     return true;
-      //   } catch (error) {
-      //     console.log(error);
-      //     return false;
-      //   }
-      // }
+          if (!user) {
+            await User.create({
+              email: profile?.email,
+              first_name: profile?.name?.split(" ")[0],
+              last_name: profile?.name?.split(" ")[1],
+              password: "-",
+              image: profile?.image,
+              role: "",
+              policy: "",
+              auth: "Provider",
+            });
+          }
+          return true;
+        } catch (error) {
+          console.log(error);
+          return false;
+        }
+      }
 
       return true;
     },
-    async jwt({ token, user,profile ,account}) {
-      if (account?.provider === "google"){
-        console.log(account)
+    async jwt({ token, user, profile, account }) {
+      if (account?.provider === "google") {
+        console.log(account);
         if (profile?.role && token) {
           token.role = profile.role;
         } else {
           token.role = "";
         }
       }
-      if (account?.provider === "credentials"){
+      if (account?.provider === "credentials") {
         if (user?.role && token) {
           token.role = user.role;
         } else {
@@ -138,6 +138,5 @@ export const options: NextAuthOptions = {
       }
       return token;
     },
-    
   },
 };
