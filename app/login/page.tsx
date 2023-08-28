@@ -5,30 +5,39 @@ import CustomTextField from "@components/TextFeilds/CustomTextField";
 import CustomButton from "@components/Buttons/NormalBtn";
 import CustomIconButton from "@components/Buttons/CustomIconButton";
 import { Google, FacebookOutlined, Twitter } from "@mui/icons-material";
-import { Checkbox, CircularProgress, FormControlLabel, Grid, Link } from "@mui/material";
-import {signIn, useSession} from 'next-auth/react'
-import { redirect } from 'next/navigation'
+import {
+  Checkbox,
+  CircularProgress,
+  FormControlLabel,
+  Grid,
+  Link,
+} from "@mui/material";
+import { signIn, useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 const Login = () => {
-
-  const { data: session, status } = useSession()
-  if(session){
-    redirect("/")
+  const { data: session, status } = useSession();
+  if (session) {
+    redirect("/");
   }
-  const [prograssing,setProgressing] = useState(false)
+  const [prograssing, setProgressing] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  
+
   //handler for submit button
   const handleButtonClick = async (event: void) => {
-    setProgressing(true)
+    setProgressing(true);
     try {
-      signIn('credentials', { redirect:false, password: password,email :email})
-      setProgressing(false)
-      redirect("/")
+      signIn("credentials", {
+        redirect: false,
+        password: password,
+        email: email,
+      });
+      setProgressing(false);
+      redirect("/");
     } catch (error) {
-      setProgressing(false)
-      alert("Failed to login")
+      setProgressing(false);
+      alert("Failed to login");
     }
   };
 
@@ -49,29 +58,33 @@ const Login = () => {
       </header>
 
       <form className=" flex flex-col gap-5 p-10 rounded-lg sm:w-3/5 md:w-1/2 lg:w-1/2  m-auto mt-10 min-w-sm bg-slate-100  border-4 border-slate-400">
-        {
-          prograssing ? ( 
+        {prograssing ? (
           <div className="flex flex-col gap-5 ">
-            <CircularProgress color="success" className=""/>
-          </div>):
-          (<div className=" flex flex-col gap-5 ">
-          <CustomTextField
-            id="Email"
-            label="Email"
-            name="Email"
-            type="text"
-            onChange={(e) => {setEmail(e.target.value)}}
-          />
-          <CustomTextField
-            id="Password"
-            label="Password"
-            type="password"
-            name="Password"
-            onChange={(e) => {setPassword(e.target.value)}}
-            width="100%"
-          />
-        </div>)
-        }
+            <CircularProgress color="success" className="" />
+          </div>
+        ) : (
+          <div className=" flex flex-col gap-5 ">
+            <CustomTextField
+              id="Email"
+              label="Email"
+              name="Email"
+              type="text"
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            />
+            <CustomTextField
+              id="Password"
+              label="Password"
+              type="password"
+              name="Password"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+              width="100%"
+            />
+          </div>
+        )}
 
         <Grid container>
           <Grid item xs>
@@ -108,7 +121,9 @@ const Login = () => {
 
           <div className="flex flex-wrap items-center gap-3 justify-center lg:justify-center w-full space-x-1  lg:flex-row md:flex-col sm:flex-col">
             <CustomIconButton
-              onClick={() => {signIn("google")}}
+              onClick={() => {
+                signIn("google");
+              }}
               size="large"
               startIcon={<Google />}
               backgroundColor="#fff"
@@ -118,7 +133,9 @@ const Login = () => {
               Google
             </CustomIconButton>
             <CustomIconButton
-              onClick={() => {signIn("facebook")}}
+              onClick={() => {
+                signIn("facebook");
+              }}
               size="large"
               startIcon={<FacebookOutlined />}
               backgroundColor="#fff"
@@ -128,7 +145,9 @@ const Login = () => {
               FaceBook
             </CustomIconButton>
             <CustomIconButton
-              onClick={() => {signIn("twitter")}}
+              onClick={() => {
+                signIn("twitter");
+              }}
               size="large"
               startIcon={<Twitter />}
               backgroundColor="#fff"

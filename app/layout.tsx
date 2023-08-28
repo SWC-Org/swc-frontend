@@ -18,7 +18,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="gradient-bg">
         <AuthProvider>
-          <Nav />
+          <Nav src={""} alt={""} />
           <div>{children}</div>
         </AuthProvider>
         <div className="z-[100]">

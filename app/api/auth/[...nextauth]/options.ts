@@ -2,8 +2,14 @@ import type { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-import User from "@models/user";
+import User from "@models/agent";
 import { connectDB } from "@util/database";
+
+declare module "next-auth" {
+  interface Profile {
+    role: string;
+  }
+}
 
 export const options: NextAuthOptions = {
   providers: [
@@ -69,10 +75,9 @@ export const options: NextAuthOptions = {
           await connectDB();
           const user = await User.findOne({
             email: credentials?.email,
-            auth: "Credential"
-
+            auth: "Credential",
           });
-          if(!user){
+          if (!user) {
             return null;
           }
 

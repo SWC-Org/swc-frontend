@@ -242,6 +242,36 @@ const statusObj: StatusObj = {
 import React from "react";
 
 export default function page() {
+  //update the role of the agent
+
+  //TODO:pass the agent id and the new role to the function
+
+  async function updateAgentRole(agentId: string, newRole: string) {
+    try {
+      const response = await fetch("/api/updateAgentRole", {
+        method: "PUT", // Change to PUT
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ agentId, newRole }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        console.log(data.message);
+        // Do something with the updated agent data if needed
+      } else {
+        console.error(data.message);
+      }
+    } catch (error) {
+      console.error("Error updating agent role:", error);
+    }
+  }
+
+  // Call the function with the agentId and newRole you want to update
+  updateAgentRole("agentId123", "newRoleValue");
+
   return (
     <Card>
       <TableContainer>
@@ -279,6 +309,10 @@ export default function page() {
                 <TableCell>{row.date}</TableCell>
                 <TableCell>
                   <Chip
+                    clickable
+                    onClick={() => {
+                      updateAgentRole;
+                    }}
                     label={"Approve"}
                     color={"success"}
                     sx={{

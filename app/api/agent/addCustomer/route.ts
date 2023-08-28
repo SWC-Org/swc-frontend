@@ -1,24 +1,20 @@
 import { NextResponse } from "next/server";
-import User from "@models/user";
 import { connectDB } from "@util/database";
+import Customer from "@models/customer";
 
 export async function POST(request: Request) {
   try {
     await connectDB();
     const res = await request.json();
-    console.log(res);
-    const user = await User.create({
-      email: res["email"],
-      first_name: res["first_name"],
-      last_name: res["last_name"],
-      password: res["password"],
-      image: "",
-      role: "",
-      policy: "",
-      auth: "Credential",
+    const customer = await Customer.create({
+      name: res["CustomerName"],
+      email: res["CustomerEmail"],
+      phone: res["CustomerContactNumber"],
+      address: res["CustomerAddress"],
+      orderNumber: res["CustomerOrderNumber"],
     });
-    if (!user) {
-      throw new Error("Failed to create user");
+    if (!customer) {
+      throw new Error("Failed to create customer");
     }
     return NextResponse.json({ error: false });
   } catch (error) {

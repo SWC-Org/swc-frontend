@@ -5,7 +5,7 @@ export default function layout({ children }: { children: React.ReactNode }) {
   return (
     <div>
       {/* side pannel for the dashboard */}
-      <div className=" hidden mb-[260px] md:flex md:w-60 md:flex-col md:fixed md:inset-y-0 z-[80]  mt-28 rounded-sm">
+      <div className=" hidden mb-[260px] md:flex md:w-60 md:flex-col md:fixed md:inset-y-0   mt-28 rounded-sm">
         <SideBar />
       </div>
 
