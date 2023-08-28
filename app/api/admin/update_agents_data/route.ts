@@ -1,24 +1,21 @@
 import { NextResponse } from "next/server";
-import User from "@models/user";
 import { connectDB } from "@util/database";
+import Agent from "@models/agent";
 
+//here i want to update the agent role in to 'agent' and policy into 'policy'
 export async function POST(request: Request) {
   try {
     await connectDB();
     const res = await request.json();
-    console.log(res);
-    const user = await User.create({
-      email: res["email"],
-      first_name: res["first_name"],
-      last_name: res["last_name"],
-      password: res["password"],
-      image: "",
-      role: "",
-      policy: "",
-      auth: "Credential",
-    });
-    if (!user) {
-      throw new Error("Failed to create user");
+    const agent = await Agent.findOneAndUpdate(
+      { email: res["email"] },
+      {
+        role: "agent",
+        policy: "policy",
+      }
+    );
+    if (!agent) {
+      throw new Error("Failed to update user");
     }
     return NextResponse.json({ error: false });
   } catch (error) {
