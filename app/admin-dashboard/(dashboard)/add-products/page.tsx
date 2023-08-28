@@ -3,14 +3,21 @@
 import CustomIconButton from "@components/Buttons/CustomIconButton";
 import LableTextField from "@components/TextFeilds/LableTextField";
 import TextArea from "@components/TextFeilds/TextArea";
-import { Button, Card, Chip } from "@mui/material";
+import PostAddIcon from "@mui/icons-material/PostAdd";
+import { Chip } from "@mui/material";
+import Link from "next/link";
 import React from "react";
 
-export default function page() {
+export default function Page() {
+  //states for the product name and description
+  const [productName, setProductName] = React.useState<string>("");
+  const [productDescription, setProductDescription] =
+    React.useState<string>("");
+
   return (
     <div className=" bg-slate-50 py-2 px-1 flex flex-col gap-5 overflow-scroll ">
       {/* prosuct name and description section */}
-      <div className=" w-full bg-slate-300 flex flex-col p-5  rounded-md">
+      <div className=" w-full bg-slate-200 flex flex-col p-5  rounded-md">
         <h2 className=" font-bold text-2xl">
           Add Product Name and Description
         </h2>
@@ -21,7 +28,9 @@ export default function page() {
             name="ProductName"
             placeholder="Enter Product Name"
             type="text"
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {}}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setProductName(event.target.value);
+            }}
             width="100%"
           />
           <TextArea
@@ -30,14 +39,16 @@ export default function page() {
             name="ProductDescription"
             placeholder="Enter Product Description"
             type="text"
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {}}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setProductDescription(event.target.value);
+            }}
             width="100%"
           />
         </form>
       </div>
 
       {/*Product data section  */}
-      <div className=" w-full bg-slate-300 flex flex-col p-5  rounded-md">
+      <div className=" w-full bg-slate-200 flex flex-col p-5  rounded-md">
         <h2 className=" font-bold text-2xl">Add the Product Data Set</h2>
         <p className=" opacity-50">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo
@@ -48,19 +59,23 @@ export default function page() {
         <hr className=" bg-slate-400 w-full h-1 rounded-md mt-5" />
 
         <div className="mt-3">
-          <CustomIconButton
-            onClick={() => {}}
-            color="primary"
-            backgroundColor="#48D89B"
-            textColor="#000"
-          >
-            Add Data Set
-          </CustomIconButton>
+          <Link href={"/admin-dashboard/add-products/data-set"}>
+            <CustomIconButton
+              onClick={() => {}}
+              color="primary"
+              backgroundColor="#48D89B"
+              textColor="#000"
+              startIcon={<PostAddIcon />}
+              size="medium"
+            >
+              Add Data Set
+            </CustomIconButton>
+          </Link>
         </div>
       </div>
 
       {/*Price calculation */}
-      <div className=" w-full bg-slate-300 flex flex-col p-5  rounded-md">
+      <div className=" w-full bg-slate-200 flex flex-col p-5  rounded-md">
         <h2 className=" font-bold text-2xl">Price Calculation</h2>
         <p className=" opacity-80 font-semibold">Current price Equation</p>
         <hr className=" bg-slate-400 w-full h-1 rounded-md mt-1" />
@@ -89,7 +104,7 @@ export default function page() {
           </CustomIconButton>
         </div>
       </div>
-      <div className=" w-full bg-slate-300 flex flex-col p-5  rounded-md">
+      <div className=" w-full bg-slate-200 flex flex-col p-5  rounded-md">
         <h2 className=" font-bold text-2xl">Change GST% </h2>
         <div className="flex flow-row gap-5 mt-5">
           <p className="text-lg font-bold">Current GST:</p>

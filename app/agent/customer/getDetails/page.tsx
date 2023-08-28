@@ -5,14 +5,15 @@ import CustomIconButton from "@components/Buttons/CustomIconButton";
 import React, { useState, useEffect } from "react";
 
 const CustomerDetails = () => {
-  const [CustomerName, setCustomerName] = useState("");
-  const [CustomerEmail, setCustomerEmail] = useState("");
-  const [CustomerContactNumber, setCustomerContactNumber] = useState("");
-  const [CustomerAddressLine1, setCustomerAddressLine1] = useState("");
-  const [CustomerAddressLine2, setCustomerAddressLine2] = useState("");
-  const [CustomerAddressLine3, setCustomerAddressLine3] = useState("");
-  const [CustomerAddress, setCustomerAddress] = useState({});
-  const [CustomerOrderNumber, setCustomerOrderNumber] = useState("");
+  const [CustomerName, setCustomerName] = useState<string>("");
+  const [CustomerEmail, setCustomerEmail] = useState<string>("");
+  const [CustomerContactNumber, setCustomerContactNumber] =
+    useState<string>("");
+  const [CustomerAddressLine1, setCustomerAddressLine1] = useState<string>("");
+  const [CustomerAddressLine2, setCustomerAddressLine2] = useState<string>("");
+  const [CustomerAddressLine3, setCustomerAddressLine3] = useState<string>("");
+  const [CustomerAddress, setCustomerAddress] = useState<object>({});
+  const [CustomerOrderNumber, setCustomerOrderNumber] = useState<string>("");
 
   //set the customeraddress
 
