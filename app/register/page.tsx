@@ -44,10 +44,11 @@ export default function SignUp() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          fname: fname,
+          lname: lname,
           email: email,
-          first_name: fname,
-          last_name: lname,
           password: password,
+
           // date: date,
         }),
       });
