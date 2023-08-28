@@ -11,7 +11,6 @@ import { options } from "@app/api/auth/[...nextauth]/options";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { CircularProgress } from "@mui/material";
-import Button from "../../@core/theme/overrides/button";
 
 export default function SignUp() {
   const { data: session, status } = useSession();
