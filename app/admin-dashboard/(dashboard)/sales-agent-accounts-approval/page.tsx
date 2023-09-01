@@ -283,7 +283,6 @@ export default function page() {
               <TableCell>Date</TableCell>
               <TableCell>Approve</TableCell>
               <TableCell>Reject</TableCell>
-              <TableCell>Status</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -327,18 +326,6 @@ export default function page() {
                   <Chip
                     label={"Reject"}
                     color={"error"}
-                    sx={{
-                      height: 24,
-                      fontSize: "0.75rem",
-                      textTransform: "capitalize",
-                      "& .MuiChip-label": { fontWeight: 500 },
-                    }}
-                  />
-                </TableCell>
-                <TableCell>
-                  <Chip
-                    label={row.status}
-                    color={statusObj[row.status].color}
                     sx={{
                       height: 24,
                       fontSize: "0.75rem",
