@@ -9,7 +9,7 @@ export default function layout({ children }: { children: React.ReactNode }) {
         <SideBar />
       </div>
 
-      <main className="md:pl-60">{children}</main>
+      <main className="md:pl-60 ">{children}</main>
     </div>
   );
 }
