@@ -19,10 +19,20 @@ import React, { useState } from "react";
 
 interface SelectionCardProps {
   index: number;
-  sectionData: { input: string; selectedOption: string };
+  sectionData: {
+    input: string;
+    selectedOption: string;
+    dropdownData: string[]; // For Dropdown
+    multiSelectData: string[]; // For MultiSelect
+  };
   updateSectionData: (
     index: number,
-    newData: { input: string; selectedOption: string }
+    newData: {
+      input: string;
+      selectedOption: string;
+      dropdownData: string[]; // For Dropdown
+      multiSelectData: string[]; // For MultiSelect
+    }
   ) => void;
 }
 
@@ -31,24 +41,32 @@ export default function SelectionCard({
   sectionData,
   updateSectionData,
 }: SelectionCardProps) {
-  const { input, selectedOption } = sectionData;
+  const { input, selectedOption, dropdownData, multiSelectData } = sectionData;
 
-  const [dropdownFields, setDropdownFields] = useState<string[]>([]);
-  const [multiSelectFields, setMultiSelectFields] = useState<string[]>([]);
+  const [dropdownFields, setDropdownFields] = useState<string[]>(dropdownData);
+  const [multiSelectFields, setMultiSelectFields] =
+    useState<string[]>(multiSelectData);
 
-  // Handling the section data change
-  // Handling the section data change
   const handleFieldChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    updateSectionData(index, { input: value, selectedOption });
+    updateSectionData(index, {
+      input: value,
+      selectedOption,
+      dropdownData,
+      multiSelectData,
+    });
   };
 
   const handleOptionChange = (event: any) => {
     const value = event.target.value;
-    updateSectionData(index, { input, selectedOption: value });
+    updateSectionData(index, {
+      input,
+      selectedOption: value,
+      dropdownData,
+      multiSelectData,
+    });
   };
 
-  // Handling dropdown fields add and remove and change
   const handleAddDropdownField = () => {
     setDropdownFields([...dropdownFields, ""]);
   };
@@ -61,22 +79,46 @@ export default function SelectionCard({
     const updatedFields = [...dropdownFields];
     updatedFields[index] = value;
     setDropdownFields(updatedFields);
+    updateSectionData(index, {
+      input,
+      selectedOption,
+      dropdownData: updatedFields,
+      multiSelectData,
+    });
   };
 
   const handleMultiSelectFieldChange = (index: number, value: string) => {
     const updatedFields = [...multiSelectFields];
     updatedFields[index] = value;
     setMultiSelectFields(updatedFields);
+    updateSectionData(index, {
+      input,
+      selectedOption,
+      dropdownData,
+      multiSelectData: updatedFields,
+    });
   };
 
   const handleRemoveDropdownField = (index: number) => {
     const updatedFields = dropdownFields.filter((_, i) => i !== index);
     setDropdownFields(updatedFields);
+    updateSectionData(index, {
+      input,
+      selectedOption,
+      dropdownData: updatedFields,
+      multiSelectData,
+    });
   };
 
   const handleRemoveMultiSelectField = (index: number) => {
     const updatedFields = multiSelectFields.filter((_, i) => i !== index);
     setMultiSelectFields(updatedFields);
+    updateSectionData(index, {
+      input,
+      selectedOption,
+      dropdownData,
+      multiSelectData: updatedFields,
+    });
   };
 
   const renderSelectedOption = () => {
@@ -171,15 +213,14 @@ export default function SelectionCard({
                   color="primary"
                   onClick={() => handleRemoveDropdownField(index)}
                 >
-                  <RemoveIcon className=" bg-red-500 rounded-sm  text-white hover:bg-red-600" />
+                  <RemoveIcon className="bg-red-500 rounded-sm text-white hover:bg-red-600" />
                 </IconButton>
               </div>
             ))}
             <IconButton color="primary" onClick={handleAddDropdownField}>
-              <div className=" flex items-center bg-slate-100 p-1 gap-1 rounded-sm justify-center hover:bg-slate-200">
-                <p className=" text-black text-base "> Add</p>
-
-                <AddIcon className=" bg-green-500 rounded-sm text-white" />
+              <div className="flex items-center bg-slate-100 p-1 gap-1 rounded-sm justify-center hover:bg-slate-200">
+                <p className="text-black text-base"> Add</p>
+                <AddIcon className="bg-green-500 rounded-sm text-white" />
               </div>
             </IconButton>
           </div>
@@ -202,15 +243,14 @@ export default function SelectionCard({
                   color="primary"
                   onClick={() => handleRemoveMultiSelectField(index)}
                 >
-                  <RemoveIcon className=" bg-red-500 rounded-sm  text-white hover:bg-red-600" />
+                  <RemoveIcon className="bg-red-500 rounded-sm text-white hover:bg-red-600" />
                 </IconButton>
               </div>
             ))}
             <IconButton color="primary" onClick={handleAddMultiSelectField}>
-              <div className=" flex items-center bg-slate-100 p-1 gap-1 rounded-sm justify-center hover:bg-slate-200 ">
-                <p className=" text-black text-base "> Add</p>
-
-                <AddIcon className=" bg-green-500 rounded-sm text-white" />
+              <div className="flex items-center bg-slate-100 p-1 gap-1 rounded-sm justify-center hover:bg-slate-200">
+                <p className="text-black text-base"> Add</p>
+                <AddIcon className="bg-green-500 rounded-sm text-white" />
               </div>
             </IconButton>
           </div>
