@@ -17,21 +17,44 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 
-export default function SelectionCard() {
-  const [selectedOption, setSelectedOption] = useState<string>("");
-  const [dropdownFields, setDropdownFields] = useState<string[]>([]);
-  const [multiSelectFeilds, setmultiSelectFeilds] = useState<string[]>([]);
+interface SelectionCardProps {
+  index: number;
+  sectionData: { input: string; selectedOption: string };
+  updateSectionData: (
+    index: number,
+    newData: { input: string; selectedOption: string }
+  ) => void;
+}
 
-  const handleOptionChange = (event: any) => {
-    setSelectedOption(event.target.value as string);
+export default function SelectionCard({
+  index,
+  sectionData,
+  updateSectionData,
+}: SelectionCardProps) {
+  const { input, selectedOption } = sectionData;
+
+  const [dropdownFields, setDropdownFields] = useState<string[]>([]);
+  const [multiSelectFields, setMultiSelectFields] = useState<string[]>([]);
+
+  // Handling the section data change
+  // Handling the section data change
+  const handleFieldChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    updateSectionData(index, { input: value, selectedOption });
   };
 
-  //handling dropdown fields add and remove and change
+  const handleOptionChange = (event: any) => {
+    const value = event.target.value;
+    updateSectionData(index, { input, selectedOption: value });
+  };
+
+  // Handling dropdown fields add and remove and change
   const handleAddDropdownField = () => {
     setDropdownFields([...dropdownFields, ""]);
   };
+
   const handleAddMultiSelectField = () => {
-    setmultiSelectFeilds([...multiSelectFeilds, ""]);
+    setMultiSelectFields([...multiSelectFields, ""]);
   };
 
   const handleDropdownFieldChange = (index: number, value: string) => {
@@ -41,9 +64,9 @@ export default function SelectionCard() {
   };
 
   const handleMultiSelectFieldChange = (index: number, value: string) => {
-    const updatedFields = [...multiSelectFeilds];
+    const updatedFields = [...multiSelectFields];
     updatedFields[index] = value;
-    setmultiSelectFeilds(updatedFields);
+    setMultiSelectFields(updatedFields);
   };
 
   const handleRemoveDropdownField = (index: number) => {
@@ -52,8 +75,8 @@ export default function SelectionCard() {
   };
 
   const handleRemoveMultiSelectField = (index: number) => {
-    const updatedFields = multiSelectFeilds.filter((_, i) => i !== index);
-    setmultiSelectFeilds(updatedFields);
+    const updatedFields = multiSelectFields.filter((_, i) => i !== index);
+    setMultiSelectFields(updatedFields);
   };
 
   const renderSelectedOption = () => {
@@ -94,7 +117,12 @@ export default function SelectionCard() {
   return (
     <div className="flex flex-row gap-4 w-full mx-20 justify-between bg-white p-5 rounded-md border-2 border-slate-400">
       <div className="w-full mb-3">
-        <TextField fullWidth label="Enter the data" />
+        <TextField
+          fullWidth
+          label="Enter the data"
+          value={input}
+          onChange={handleFieldChange}
+        />
       </div>
 
       <div className="w-full">
@@ -157,8 +185,8 @@ export default function SelectionCard() {
           </div>
         )}
         {selectedOption === "multiSelect" && (
-          <div className="mt-3">
-            {multiSelectFeilds.map((field, index) => (
+          <div className="mt-3 h-full m-5">
+            {multiSelectFields.map((field, index) => (
               <div key={index} className="flex items-center gap-2 my-2">
                 <Checkbox defaultChecked />
                 <TextField
