@@ -251,7 +251,6 @@ const DashboardTable = () => {
               <TableCell>Date</TableCell>
               <TableCell>Dissable</TableCell>
               <TableCell>Delete</TableCell>
-              <TableCell>Status</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -302,18 +301,6 @@ const DashboardTable = () => {
                         fontWeight: 500,
                         cursor: "pointer",
                       },
-                    }}
-                  />
-                </TableCell>
-                <TableCell>
-                  <Chip
-                    label={row.status}
-                    color={statusObj[row.status].color}
-                    sx={{
-                      height: 24,
-                      fontSize: "0.75rem",
-                      textTransform: "capitalize",
-                      "& .MuiChip-label": { fontWeight: 500 },
                     }}
                   />
                 </TableCell>
