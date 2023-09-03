@@ -239,39 +239,7 @@ const statusObj: StatusObj = {
   professional: { color: "success" },
 };
 
-import React from "react";
-
-export default function page() {
-  //update the role of the agent
-
-  //TODO:pass the agent id and the new role to the function
-
-  async function updateAgentRole(agentId: string, newRole: string) {
-    try {
-      const response = await fetch("/api/updateAgentRole", {
-        method: "PUT", // Change to PUT
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ agentId, newRole }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        console.log(data.message);
-        // Do something with the updated agent data if needed
-      } else {
-        console.error(data.message);
-      }
-    } catch (error) {
-      console.error("Error updating agent role:", error);
-    }
-  }
-
-  // Call the function with the agentId and newRole you want to update
-  updateAgentRole("agentId123", "newRoleValue");
-
+const DashboardTable = () => {
   return (
     <Card>
       <TableContainer>
@@ -281,8 +249,8 @@ export default function page() {
               <TableCell>Name</TableCell>
               <TableCell>Email</TableCell>
               <TableCell>Date</TableCell>
-              <TableCell>Approve</TableCell>
-              <TableCell>Reject</TableCell>
+              <TableCell>Dissable</TableCell>
+              <TableCell>Delete</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -308,29 +276,31 @@ export default function page() {
                 <TableCell>{row.date}</TableCell>
                 <TableCell>
                   <Chip
-                    clickable
-                    onClick={() => {
-                      updateAgentRole;
-                    }}
-                    label={"Approve"}
-                    color={"success"}
+                    label={"Dissable"}
+                    color={"warning"}
                     sx={{
                       height: 24,
                       fontSize: "0.75rem",
                       textTransform: "capitalize",
-                      "& .MuiChip-label": { fontWeight: 500 },
+                      "& .MuiChip-label": {
+                        fontWeight: 500,
+                        cursor: "pointer",
+                      },
                     }}
                   />
                 </TableCell>
                 <TableCell>
                   <Chip
-                    label={"Reject"}
+                    label={"Delete"}
                     color={"error"}
                     sx={{
                       height: 24,
                       fontSize: "0.75rem",
                       textTransform: "capitalize",
-                      "& .MuiChip-label": { fontWeight: 500 },
+                      "& .MuiChip-label": {
+                        fontWeight: 500,
+                        cursor: "pointer",
+                      },
                     }}
                   />
                 </TableCell>
@@ -341,4 +311,6 @@ export default function page() {
       </TableContainer>
     </Card>
   );
-}
+};
+
+export default DashboardTable;

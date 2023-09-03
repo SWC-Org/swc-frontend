@@ -4,20 +4,26 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { DensitySmall } from "@mui/icons-material";
-import { useSession } from "next-auth/react"
-import { signOut } from "next-auth/react"
+import { useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 
-const Nav = () => {
+//interface for the profile image
+interface ProfileImage {
+  src: string;
+  alt: string;
+}
+
+const Nav = ({ src, alt }: ProfileImage) => {
   const isLogged = true;
   const routesNames = [
-    { route: "Home", path: "/home" },
+    { route: "Home", path: "/" },
     { route: "About", path: "/home" },
-    { route: "Customer", path: "/home" },
+    { route: "Customer", path: "/agent/customer/getDetails" },
   ];
 
   const [toggleDropdown, setToggleDropdown] = useState(false);
 
-  const { data: session, status } = useSession()
+  const { data: session, status } = useSession();
 
   return (
     <nav className="flex-between w-full mb-16 pt-3">
@@ -45,13 +51,17 @@ const Nav = () => {
                 {route.route}
               </Link>
             ))}
-            <button type="button" onClick={()=>signOut()} className="outline_btn">
+            <button
+              type="button"
+              onClick={() => signOut()}
+              className="outline_btn"
+            >
               Sign Out
             </button>
 
             <Link href="/profile">
               <Image
-                src={session?.user?.image}
+                src={session?.user?.image || "/logo.svg"}
                 width={37}
                 height={37}
                 className="rounded-full"
@@ -95,7 +105,7 @@ const Nav = () => {
             />
             <Link href="/profile">
               <Image
-                src={session?.user?.image}
+                src={session?.user?.image || "/logo.svg"}
                 width={37}
                 height={37}
                 className="rounded-full"

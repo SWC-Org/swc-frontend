@@ -53,7 +53,7 @@ export default function CurtainComponent({cancelFunc}:CurtainProps) {
           label={"Add the Location details of the window"}
           type={"text"}
           placeholder="Bed Room.."
-          onChange={(event) => {console.log(event)}}
+          onChange={(event: SelectChangeEvent) => {console.log(eve)}}
         />
 
         <section>

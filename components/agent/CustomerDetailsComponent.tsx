@@ -63,6 +63,10 @@ const CustomerDetails: React.FC<CustomerDetailsProps> = ({
                 id="outlined-required"
                 placeholder="Jhon Wick"
                 className="w-full rounded-lg h-8"
+                name="CustomerName"
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                  setCustomerName(event.target.value);
+                }}
                 hiddenLabel
                 value={customerName}
                 onChange={(e) => {
@@ -85,7 +89,7 @@ const CustomerDetails: React.FC<CustomerDetailsProps> = ({
                 id="outlined-required"
                 className="w-full rounded-lg h-8"
                 placeholder="myemail@cyahoo.om"
-                label=""
+                name="CustomerEmail"
                 variant="outlined"
                 inputProps={{
                   pattern: "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}",
@@ -159,9 +163,13 @@ const CustomerDetails: React.FC<CustomerDetailsProps> = ({
                   id="outlined-number"
                   className="w-100 rounded-lg h-8"
                   hiddenLabel
-                  type="number"
+                  type="text"
                   InputLabelProps={{
                     shrink: true,
+                  }}
+                  name="CustomerOrderNumber"
+                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                    setCustomerOrderNumber(event.target.value);
                   }}
                 />
               </div> */}
