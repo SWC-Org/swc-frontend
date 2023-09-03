@@ -16,13 +16,16 @@ import React from "react";
 import { ThemeColor } from "../../../../@core/layouts/types";
 
 interface RowType {
-  age: number;
-  name: string;
   date: string;
-  email: string;
-  salary: string;
+  customer_name: string;
   status: string;
-  designation: string;
+  Quotation_No: string;
+  SA_details: string;
+  Order_No: string;
+  Order_data_content: string;
+  form_status: string;
+  Form_Genaration: string;
+  Quotation_status: string;
 }
 
 interface StatusObj {
@@ -33,202 +36,28 @@ interface StatusObj {
 
 const rows: RowType[] = [
   {
-    age: 27,
-    status: "current",
-    date: "09/27/2018",
-    name: "Sally Quinn",
-    salary: "$19586.23",
-    email: "eebsworth2m@sbwire.com",
-    designation: "Human Resources Assistant",
-  },
-  {
-    age: 61,
-    date: "09/23/2016",
-    salary: "$23896.35",
     status: "professional",
-    name: "Margaret Bowers",
-    email: "kocrevy0@thetimes.co.uk",
-    designation: "Nuclear Power Engineer",
+    date: "09/27/2023",
+    Quotation_No: "Q-0001",
+    customer_name: "Dorothy H. Spencer",
+    Order_data_content: "Curtains & Blinds",
+    SA_details: "SA-0001",
+    Order_No: "OD-0001",
+    form_status: "Approved",
+    Form_Genaration: "Genarate",
+    Quotation_status: "Pending",
   },
   {
-    age: 59,
-    date: "10/15/2017",
-    name: "Minnie Roy",
-    status: "rejected",
-    salary: "$18991.67",
-    email: "ediehn6@163.com",
-    designation: "Environmental Specialist",
-  },
-  {
-    age: 30,
-    date: "06/12/2018",
     status: "resigned",
-    salary: "$19252.12",
-    name: "Ralph Leonard",
-    email: "dfalloona@ifeng.com",
-    designation: "Sales Representative",
-  },
-  {
-    age: 66,
-    status: "applied",
-    date: "03/24/2018",
-    salary: "$13076.28",
-    name: "Annie Martin",
-    designation: "Operator",
-    email: "sganderton2@tuttocitta.it",
-  },
-  {
-    age: 33,
-    date: "08/25/2017",
-    salary: "$10909.52",
-    name: "Adeline Day",
-    status: "professional",
-    email: "hnisius4@gnu.org",
-    designation: "Senior Cost Accountant",
-  },
-  {
-    age: 61,
-    status: "current",
-    date: "06/01/2017",
-    salary: "$17803.80",
-    name: "Lora Jackson",
-    designation: "Geologist",
-    email: "ghoneywood5@narod.ru",
-  },
-  {
-    age: 27,
-    status: "current",
-    date: "09/27/2018",
-    name: "Sally Quinn",
-    salary: "$19586.23",
-    email: "eebsworth2m@sbwire.com",
-    designation: "Human Resources Assistant",
-  },
-  {
-    age: 61,
-    date: "09/23/2016",
-    salary: "$23896.35",
-    status: "professional",
-    name: "Margaret Bowers",
-    email: "kocrevy0@thetimes.co.uk",
-    designation: "Nuclear Power Engineer",
-  },
-  {
-    age: 59,
-    date: "10/15/2017",
-    name: "Minnie Roy",
-    status: "rejected",
-    salary: "$18991.67",
-    email: "ediehn6@163.com",
-    designation: "Environmental Specialist",
-  },
-  {
-    age: 30,
-    date: "06/12/2018",
-    status: "resigned",
-    salary: "$19252.12",
-    name: "Ralph Leonard",
-    email: "dfalloona@ifeng.com",
-    designation: "Sales Representative",
-  },
-  {
-    age: 66,
-    status: "applied",
-    date: "03/24/2018",
-    salary: "$13076.28",
-    name: "Annie Martin",
-    designation: "Operator",
-    email: "sganderton2@tuttocitta.it",
-  },
-  {
-    age: 33,
-    date: "08/25/2017",
-    salary: "$10909.52",
-    name: "Adeline Day",
-    status: "professional",
-    email: "hnisius4@gnu.org",
-    designation: "Senior Cost Accountant",
-  },
-  {
-    age: 61,
-    status: "current",
-    date: "06/01/2017",
-    salary: "$17803.80",
-    name: "Lora Jackson",
-    designation: "Geologist",
-    email: "ghoneywood5@narod.ru",
-  },
-  {
-    age: 27,
-    status: "current",
-    date: "09/27/2018",
-    name: "Sally Quinn",
-    salary: "$19586.23",
-    email: "eebsworth2m@sbwire.com",
-    designation: "Human Resources Assistant",
-  },
-  {
-    age: 61,
-    date: "09/23/2016",
-    salary: "$23896.35",
-    status: "professional",
-    name: "Margaret Bowers",
-    email: "kocrevy0@thetimes.co.uk",
-    designation: "Nuclear Power Engineer",
-  },
-  {
-    age: 59,
-    date: "10/15/2017",
-    name: "Minnie Roy",
-    status: "rejected",
-    salary: "$18991.67",
-    email: "ediehn6@163.com",
-    designation: "Environmental Specialist",
-  },
-  {
-    age: 30,
-    date: "06/12/2018",
-    status: "resigned",
-    salary: "$19252.12",
-    name: "Ralph Leonard",
-    email: "dfalloona@ifeng.com",
-    designation: "Sales Representative",
-  },
-  {
-    age: 66,
-    status: "applied",
-    date: "03/24/2018",
-    salary: "$13076.28",
-    name: "Annie Martin",
-    designation: "Operator",
-    email: "sganderton2@tuttocitta.it",
-  },
-  {
-    age: 33,
-    date: "08/25/2017",
-    salary: "$10909.52",
-    name: "Adeline Day",
-    status: "professional",
-    email: "hnisius4@gnu.org",
-    designation: "Senior Cost Accountant",
-  },
-  {
-    age: 61,
-    status: "current",
-    date: "06/01/2017",
-    salary: "$17803.80",
-    name: "Lora Jackson",
-    designation: "Geologist",
-    email: "ghoneywood5@narod.ru",
-  },
-  {
-    age: 22,
-    date: "12/03/2017",
-    salary: "$12336.17",
-    name: "Rodney Sharp",
-    status: "professional",
-    designation: "Cost Accountant",
-    email: "dcrossman3@google.co.jp",
+    date: "09/29/2023",
+    Quotation_No: "Q-0002",
+    customer_name: "Samin Chandeepa",
+    Order_data_content: "Curtains & Rollers",
+    SA_details: "SA-0002",
+    Order_No: "OD-0002",
+    form_status: "Approved",
+    Form_Genaration: "Genarate",
+    Quotation_status: "Pending",
   },
 ];
 
@@ -242,24 +71,27 @@ const statusObj: StatusObj = {
 
 export default function page() {
   return (
-    <Card>
+    <Card className=" pb-80">
       <TableContainer>
         <Table sx={{ minWidth: 800 }} aria-label="table in dashboard">
           <TableHead>
             <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>Email</TableCell>
+              <TableCell>Quotation No</TableCell>
+              <TableCell>Customer Name</TableCell>
               <TableCell>Date</TableCell>
-              <TableCell>Approve</TableCell>
-              <TableCell>Reject</TableCell>
-              <TableCell>Status</TableCell>
+              <TableCell>SA Details</TableCell>
+              <TableCell>Order Details</TableCell>
+              <TableCell>Quickbooks</TableCell>
+              <TableCell>Quotation Status</TableCell>
+              <TableCell>Forms Gen</TableCell>
+              <TableCell>Forms Status</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {rows.map((row: RowType) => (
               <TableRow
                 hover
-                key={row.name}
+                key={row.Quotation_No}
                 sx={{ "&:last-of-type td, &:last-of-type th": { border: 0 } }}
               >
                 <TableCell
@@ -269,16 +101,29 @@ export default function page() {
                     <Typography
                       sx={{ fontWeight: 500, fontSize: "0.875rem !important" }}
                     >
-                      {row.name}
+                      {row.Quotation_No}
                     </Typography>
-                    <Typography variant="caption">{row.designation}</Typography>
                   </Box>
                 </TableCell>
-                <TableCell>{row.email}</TableCell>
+                <TableCell>{row.customer_name}</TableCell>
                 <TableCell>{row.date}</TableCell>
+
+                <TableCell>{row.SA_details}</TableCell>
+
+                <Box sx={{ display: "flex", flexDirection: "column" }}>
+                  <Typography
+                    sx={{ fontWeight: 500, fontSize: "0.875rem !important" }}
+                  >
+                    {row.Order_No}
+                  </Typography>
+                  <Typography variant="caption">
+                    {row.Order_data_content}
+                  </Typography>
+                </Box>
                 <TableCell>
                   <Chip
-                    label={"Approve"}
+                    clickable
+                    label={"SendTo QuickBoooks"}
                     color={"success"}
                     sx={{
                       height: 24,
@@ -290,8 +135,9 @@ export default function page() {
                 </TableCell>
                 <TableCell>
                   <Chip
-                    label={"Reject"}
-                    color={"error"}
+                    clickable
+                    label={row.Quotation_status}
+                    color={"secondary"}
                     sx={{
                       height: 24,
                       fontSize: "0.75rem",
@@ -302,7 +148,21 @@ export default function page() {
                 </TableCell>
                 <TableCell>
                   <Chip
-                    label={row.status}
+                    clickable
+                    label={row.Form_Genaration}
+                    color={"info"}
+                    sx={{
+                      height: 24,
+                      fontSize: "0.75rem",
+                      textTransform: "capitalize",
+                      "& .MuiChip-label": { fontWeight: 500 },
+                    }}
+                  />
+                </TableCell>
+                <TableCell>
+                  <Chip
+                    clickable
+                    label={row.form_status}
                     color={statusObj[row.status].color}
                     sx={{
                       height: 24,
