@@ -1,10 +1,39 @@
 import CustomDatePicker from "@components/Layout/DatePicker";
 import { Box, Button, TextField, Typography } from "@mui/material";
+import { Dayjs } from "dayjs";
 import React from "react";
 
-const CustomerDetails = () => {
+type CustomerDetailsProps = {
+  customerName: string;
+  setCustomerName: (val: string) => void;
+  customerEmail: string;
+  setCustomerEmail: (val: string) => void;
+  customerAdressLine1: string;
+  setCustomerAdressLine1: (val: string) => void;
+  customerAdressLine2: string;
+  setCustomerAdressLine2: (val: string) => void;
+  customerCity: string;
+  setCustomerCity: (val: string) => void;
+  dateValue: Dayjs | null;
+  setDateValue: (val: Dayjs | null) => void;
+};
+
+const CustomerDetails: React.FC<CustomerDetailsProps> = ({
+  customerName,
+  setCustomerName,
+  customerEmail,
+  setCustomerEmail,
+  customerAdressLine1,
+  setCustomerAdressLine1,
+  customerAdressLine2,
+  setCustomerAdressLine2,
+  customerCity,
+  setCustomerCity,
+  dateValue,
+  setDateValue,
+}) => {
   return (
-    <div className="sm:px-20 px-10 md:px-40 pb-10">
+    <div className="sm:px-2 px-1 md:px-4 pb-1">
       <div className=" px-5 bg-slate-200 border-4 border-slate-400 flex flex-col w-full pb-10">
         <div className=" my-10 text-3xl font-bold">
           <h2>Add Customer Details</h2>
@@ -35,6 +64,10 @@ const CustomerDetails = () => {
                 placeholder="Jhon Wick"
                 className="w-full rounded-lg h-8"
                 hiddenLabel
+                value={customerName}
+                onChange={(e) => {
+                  setCustomerName(e.target.value);
+                }}
               />
             </div>
             <div className="mt-5">
@@ -58,6 +91,8 @@ const CustomerDetails = () => {
                   pattern: "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}",
                   title: "Please enter a valid email address",
                 }}
+                value={customerEmail}
+                onChange={(e) => setCustomerEmail(e.target.value)}
               />
             </div>
             <div className="mt-5">
@@ -76,6 +111,8 @@ const CustomerDetails = () => {
                   placeholder="Adress line 1.."
                   className="w-full rounded-lg h-8"
                   hiddenLabel
+                  value={customerAdressLine1}
+                  onChange={(e) => setCustomerAdressLine1(e.target.value)}
                 />
               </div>
               <div className=" mt-4">
@@ -85,6 +122,8 @@ const CustomerDetails = () => {
                   placeholder="Adress line 2.."
                   className="w-full rounded-lg h-8 "
                   hiddenLabel
+                  value={customerAdressLine2}
+                  onChange={(e) => setCustomerAdressLine2(e.target.value)}
                 />
               </div>
               <div className=" mt-4">
@@ -94,13 +133,19 @@ const CustomerDetails = () => {
                   placeholder="City"
                   className="w-full rounded-lg h-8"
                   hiddenLabel
+                  value={customerCity}
+                  onChange={(e) => setCustomerCity(e.target.value)}
                 />
               </div>
               <div className="line-container my-10">
                 <hr className="line" />
               </div>
-              {/* <CustomDatePicker label="Enter Date" /> */}
-              <div className="mt-5 flex flex-col items-start">
+              <CustomDatePicker
+                label="Enter Date"
+                value={dateValue}
+                setValue={setDateValue}
+              />
+              {/* <div className="mt-5 flex flex-col items-start">
                 <Typography
                   variant="subtitle1"
                   component="label"
@@ -119,16 +164,16 @@ const CustomerDetails = () => {
                     shrink: true,
                   }}
                 />
-              </div>
+              </div> */}
               <div className="line-container my-10">
                 <hr className="line" />
               </div>
-              <Button
+              {/* <Button
                 variant="contained"
                 className="bg-green-500 hover:bg-green-600"
               >
                 Add Window Data
-              </Button>
+              </Button> */}
             </div>
           </Box>
         </div>

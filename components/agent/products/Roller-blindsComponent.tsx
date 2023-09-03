@@ -13,11 +13,15 @@ import {
   Add,
   ControlPointRounded,
   FastForwardOutlined,
+  Cancel,
 } from "@mui/icons-material";
 import CustomIconButton from "@components/Buttons/CustomIconButton";
 import { SelectChangeEvent, Typography } from "@mui/material";
 
-export default function page() {
+interface RollerBlindProps{
+  cancelFunc :() => void
+}
+export default function RollerBlindSComponent({cancelFunc}:RollerBlindProps) {
   return (
     <div className="">
       <section className=" lg:px-32 md:px-32 p-4">
@@ -222,13 +226,25 @@ export default function page() {
             Save Window
           </CustomIconButton>
         </div>
-
+        <div className=" text-right mb-3">
+        
+          <CustomIconButton
+            onClick={cancelFunc}
+            size="small"
+            startIcon={<Cancel />}
+            backgroundColor="#eb2344"
+            iconColor="white"
+            textColor="white"
+          >
+            Cancel
+          </CustomIconButton>
+        </div>
         <hr className=" border-b-2 border-blue-500 mb-6" />
 
-        <Typography>Add extra materials for this window.</Typography>
+        {/* <Typography>Add extra materials for this window.</Typography> */}
 
         {/* add new product in the same window */}
-        <div className=" flex flex-col w-full sm:w-2/4 gap-3 mt-2">
+        {/* <div className=" flex flex-col w-full sm:w-2/4 gap-3 mt-2">
           <CustomIconButton
             onClick={() => {}}
             size="small"
@@ -259,15 +275,15 @@ export default function page() {
           >
             Curtains
           </CustomIconButton>
-        </div>
+        </div> */}
       </div>
       <div className="p-4 sm:p-10 flex flex-col gap-4 my-5 rounded-lg">
-        <hr className="border-b-2 border-blue-500 mb-6" />
+        {/* <hr className="border-b-2 border-blue-500 mb-6" /> */}
 
-        <Typography>Add a new window Data</Typography>
+        {/* <Typography>Add a new window Data</Typography> */}
         {/* add new product in the new window */}
 
-        <div className="flex flex-wrap   gap-3 mt-2 ">
+        {/* <div className="flex flex-wrap   gap-3 mt-2 ">
           <CustomIconButton
             onClick={() => {}}
             size="small"
@@ -298,10 +314,10 @@ export default function page() {
           >
             Curtains
           </CustomIconButton>
-        </div>
-        <hr className="border-b-2 border-blue-500 mb-6" />
+        </div> */}
+        {/* <hr className="border-b-2 border-blue-500 mb-6" /> */}
 
-        <div className="text-center md:text-right">
+        {/* <div className="text-center md:text-right">
           <Typography className="mb-2">See The Summary</Typography>
           <CustomIconButton
             onClick={() => {}}
@@ -313,11 +329,11 @@ export default function page() {
           >
             Summary
           </CustomIconButton>
-        </div>
+        </div> */}
       </div>
 
       {/* continue to the next window */}
-      <div className="bg-slate-800 min-w-full text-white p-5 flex flex-col gap-4">
+      {/* <div className="bg-slate-800 min-w-full text-white p-5 flex flex-col gap-4">
         <Typography>
           Press continue if you added all the window details
         </Typography>
@@ -332,7 +348,7 @@ export default function page() {
         >
           Continue
         </CustomIconButton>
-      </div>
+      </div> */}
     </div>
   );
 }
