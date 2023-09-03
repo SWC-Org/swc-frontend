@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import SelectionCard from "@components/admin/SelectionCard";
+import { SaveAllIcon } from "lucide-react";
 
 export default function Page() {
   const [numberOfSections, setNumberOfSections] = useState<number>(1);
@@ -99,6 +100,25 @@ export default function Page() {
           Add New Data
           <span>
             <AddCircleIcon />
+          </span>
+        </button>
+      </div>
+
+      <div className=" my-5">
+        <p className=" text-lg">
+          🚀If you finished adding the dataset for the new product{" "}
+          <span className=" text-red-600 font-bold">
+            💡 plaease double check
+          </span>{" "}
+          and after you can save the new product.
+        </p>
+      </div>
+
+      <div className="flex justify-end mt-10 border-t-4 py-4 border-slate-700">
+        <button className="bg-green-500 flex gap-2 text-white px-4 py-2 rounded hover:bg-green-600">
+          Save New Product
+          <span>
+            <SaveAllIcon />
           </span>
         </button>
       </div>
