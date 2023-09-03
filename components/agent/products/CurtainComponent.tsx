@@ -26,9 +26,12 @@ export default function CurtainComponent({cancelFunc}:CurtainProps) {
  
   const [windoData , setWindowData] = useState({})
 
-  const updateOnChange= (id:string,value:any)=>{
-    console.log(id)
-    console.log(value)
+  const updateOnChange= (name:string,value:any)=>{
+    let updatedValue={[name]:value}
+    setWindowData(wd=>({
+      ...wd,
+      ...updatedValue
+    }))
   }
 
   return (
@@ -53,7 +56,7 @@ export default function CurtainComponent({cancelFunc}:CurtainProps) {
           label={"Add the Location details of the window"}
           type={"text"}
           placeholder="Bed Room.."
-          onChange={(event: SelectChangeEvent) => {console.log(event)}}
+          onChange={(event: SelectChangeEvent) => {updateOnChange(event.target.name,event.target.value)}}
         />
 
         <section>
@@ -67,6 +70,7 @@ export default function CurtainComponent({cancelFunc}:CurtainProps) {
               label={"Width(mm)"}
               type={"text"}
               placeholder="1200.."
+              onChange={(event: SelectChangeEvent) => {updateOnChange(event.target.name,event.target.value)}}
             />
             <LableTextField
               name={"Height"}
@@ -74,6 +78,7 @@ export default function CurtainComponent({cancelFunc}:CurtainProps) {
               label={"Height"}
               type={"text"}
               placeholder="1200.."
+              onChange={(event: SelectChangeEvent) => {updateOnChange(event.target.name,event.target.value)}}
             />
           </div>
         </section>
@@ -87,7 +92,7 @@ export default function CurtainComponent({cancelFunc}:CurtainProps) {
                 value={"Category"}
                 name={"Category"}
                 options={Curtains_data.Category}
-                onChange={(event: SelectChangeEvent) => {}}
+                onChange={(event: SelectChangeEvent) => {updateOnChange(event.target.name,event.target.value)}}
                 index={0}
                 data={""}
               />
@@ -98,6 +103,7 @@ export default function CurtainComponent({cancelFunc}:CurtainProps) {
                 label={"Fabric"}
                 type={"text"}
                 placeholder="Cotton.."
+                onChange={(event: SelectChangeEvent) => {updateOnChange(event.target.name,event.target.value)}}
               />
             </div>
             <div className="flex flex-col w-full sm:w-2/4 gap-3 mt-2">
@@ -107,7 +113,7 @@ export default function CurtainComponent({cancelFunc}:CurtainProps) {
                 value={"Curtain_Type"}
                 name={"Curtain_Type"}
                 options={Curtains_data.Curtain_type}
-                onChange={(event: SelectChangeEvent) => {}}
+                onChange={(event: SelectChangeEvent) => {updateOnChange(event.target.name,event.target.value)}}
                 index={0}
                 data={""}
               />
@@ -117,6 +123,7 @@ export default function CurtainComponent({cancelFunc}:CurtainProps) {
                 label={"Color"}
                 type={"text"}
                 placeholder="Green.."
+                onChange={(event: SelectChangeEvent) => {updateOnChange(event.target.name,event.target.value)}}
               />
             </div>
           </div>
@@ -129,7 +136,7 @@ export default function CurtainComponent({cancelFunc}:CurtainProps) {
                 value={"Control"}
                 name={"Control"}
                 options={Curtains_data.Control}
-                onChange={(event: SelectChangeEvent) => {}}
+                onChange={(event: SelectChangeEvent) => {updateOnChange(event.target.name,event.target.value)}}
                 index={0}
                 data={""}
               />
@@ -139,7 +146,7 @@ export default function CurtainComponent({cancelFunc}:CurtainProps) {
                 value={"Track_Color"}
                 name={"Track_Color"}
                 options={Curtains_data.Track_Color}
-                onChange={(event: SelectChangeEvent) => {}}
+                onChange={(event: SelectChangeEvent) => {updateOnChange(event.target.name,event.target.value)}}
                 index={0}
                 data={""}
               />
@@ -151,7 +158,7 @@ export default function CurtainComponent({cancelFunc}:CurtainProps) {
                 value={"Return"}
                 name={"Return"}
                 options={Curtains_data.Return}
-                onChange={(event: SelectChangeEvent) => {}}
+                onChange={(event: SelectChangeEvent) => {updateOnChange(event.target.name,event.target.value)}}
                 index={0}
                 data={""}
               />
@@ -161,7 +168,7 @@ export default function CurtainComponent({cancelFunc}:CurtainProps) {
                 value={"Bottom_Hem"}
                 name={"Bottom_Hem"}
                 options={Curtains_data.Bottom_Hem}
-                onChange={(event: SelectChangeEvent) => {}}
+                onChange={(event: SelectChangeEvent) => {updateOnChange(event.target.name,event.target.value)}}
                 index={0}
                 data={""}
               />
@@ -176,7 +183,7 @@ export default function CurtainComponent({cancelFunc}:CurtainProps) {
                 value={"Bracket_Type"}
                 name={"Bracket_Type"}
                 options={Curtains_data.Bracket_Type}
-                onChange={(event: SelectChangeEvent) => {}}
+                onChange={(event: SelectChangeEvent) => {updateOnChange(event.target.name,event.target.value)}}
                 index={0}
                 data={""}
               />
@@ -188,7 +195,7 @@ export default function CurtainComponent({cancelFunc}:CurtainProps) {
                 value={"Lining"}
                 name={"Lining"}
                 options={Curtains_data.Linig}
-                onChange={(event: SelectChangeEvent) => {}}
+                onChange={(event: SelectChangeEvent) => {updateOnChange(event.target.name,event.target.value)}}
                 index={0}
                 data={""}
               />
@@ -201,7 +208,7 @@ export default function CurtainComponent({cancelFunc}:CurtainProps) {
             label={"Price Per Meter"}
             type={"number"}
             placeholder="1200.."
-            onChange={(e)=>console.log(e)}
+            onChange={(event: SelectChangeEvent) => {updateOnChange(event.target.name,event.target.value)}}
           />
         </section>
 
@@ -213,6 +220,7 @@ export default function CurtainComponent({cancelFunc}:CurtainProps) {
               label={"Please add any comments or remarks "}
               placeholder={"comments and remarks.."}
               type={"text"}
+              onChange={(event: SelectChangeEvent) => {updateOnChange(event.target.name,event.target.value)}}
             />
           </div>
         </section>

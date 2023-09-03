@@ -31,8 +31,8 @@ export const options: NextAuthOptions = {
           } else {
             await User.create({
               email: profile?.email,
-              first_name: profile?.name,
-              last_name: "",
+              first_name: profile?.name?.split(" ")[0],
+              last_name: profile?.name?.split(" ")[1],
               password: "-",
               image: profile?.picture,
               role: "",

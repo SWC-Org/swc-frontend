@@ -69,9 +69,6 @@ const CustomerDetails: React.FC<CustomerDetailsProps> = ({
                 }}
                 hiddenLabel
                 value={customerName}
-                onChange={(e) => {
-                  setCustomerName(e.target.value);
-                }}
               />
             </div>
             <div className="mt-5">

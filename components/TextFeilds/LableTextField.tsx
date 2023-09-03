@@ -19,6 +19,7 @@ const LableTextField: React.FC<LableTextFieldProps> = ({
   placeholder,
   type,
   width = "100%",
+  onChange
 }) => {
   const inputStyle = {
     width: width,
@@ -35,6 +36,7 @@ const LableTextField: React.FC<LableTextFieldProps> = ({
         placeholder={placeholder}
         style={inputStyle}
         required
+        onChange={onChange}
       />
     </div>
   );
