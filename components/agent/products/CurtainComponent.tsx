@@ -53,7 +53,7 @@ export default function CurtainComponent({cancelFunc}:CurtainProps) {
           label={"Add the Location details of the window"}
           type={"text"}
           placeholder="Bed Room.."
-          onChange={(event: SelectChangeEvent) => {console.log(eve)}}
+          onChange={(event: SelectChangeEvent) => {console.log(event)}}
         />
 
         <section>
@@ -201,6 +201,7 @@ export default function CurtainComponent({cancelFunc}:CurtainProps) {
             label={"Price Per Meter"}
             type={"number"}
             placeholder="1200.."
+            onChange={(e)=>console.log(e)}
           />
         </section>
 
