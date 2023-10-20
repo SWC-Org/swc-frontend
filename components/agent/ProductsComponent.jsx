@@ -20,7 +20,7 @@ export default function ProductComponent({
   
   switch (pageNumber) {
     case 1:
-      return <CurtainComponent cancelFunc={cancelFunc}/>;
+      return <CurtainComponent cancelFunc={cancelFunc} data={{}}/>;
     case 2:
       return <PlantaionShutterComponent cancelFunc={cancelFunc}/>
     case 3:

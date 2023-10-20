@@ -29,6 +29,7 @@ export default function Checkout() {
   const [customerCity, setCustomerCity] = useState("");
   const [dateValue, setDateValue] = useState<Dayjs | null>(dayjs("2022-04-17"));
   const [window_data, setWindow_data] = useState([]);
+  const [id, setId] = useState(0)
 
   const window_data_deleteHandler = (id: number) => {
     const arrayWithoutD = window_data.filter(function (data) {
@@ -73,7 +74,34 @@ export default function Checkout() {
     }
   }
 
+  const isCustomerdDetailsEmpty = ()=>{
+    if (customerName == "" || customerEmail == "" || customerAdressLine1 == "" || customerCity == "") {
+      return true
+    }
+    return false
+  }
+  const isWindowDataEmpty = () =>{
+    if (window_data.length == 0) {
+      return true
+    }
+    return false
+  }
   const handleNext = () => {
+    console.log(activeStep)
+    switch(activeStep){
+      case 0:
+        if(isCustomerdDetailsEmpty()) {
+          alert("Feilds cannt be empty.")
+          return
+        }
+        break
+      case 1:
+        if (isWindowDataEmpty()) {
+          alert("There should be at least one window")
+          return
+        }
+        break
+    }
     setActiveStep(activeStep + 1);
   };
 

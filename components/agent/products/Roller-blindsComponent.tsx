@@ -3,7 +3,7 @@
 import DropdownNormal from "@components/DropDowns/DropdownNormal";
 import LableTextField from "@components/TextFeilds/LableTextField";
 
-import React from "react";
+import React, { useState } from "react";
 import TextArea from "@components/TextFeilds/TextArea";
 
 import { Roller_blinds_data } from "@constants/Roller_blinds_data";
@@ -14,14 +14,61 @@ import {
   ControlPointRounded,
   FastForwardOutlined,
   Cancel,
+  Calculate,
 } from "@mui/icons-material";
 import CustomIconButton from "@components/Buttons/CustomIconButton";
-import { SelectChangeEvent, Typography } from "@mui/material";
+import { Box, SelectChangeEvent, Typography } from "@mui/material";
 
 interface RollerBlindProps{
-  cancelFunc :() => void
+  cancelFunc :() => void;
+  data: Object;
 }
-export default function RollerBlindSComponent({cancelFunc}:RollerBlindProps) {
+export default function RollerBlindSComponent({cancelFunc,data}:RollerBlindProps) {
+  function isEmpty(obj: Object) {
+    return Object.keys(obj).length === 0;
+  }
+  const [windowData, setWindowData] = useState(
+    isEmpty(data)
+      ? {
+          Location: "",
+          width :0,
+          Height :0,
+          Fabric : "",
+          Color : "",
+          Category :"",
+          Control_Side :"",
+          Chanin_Type : "",
+          Chain_Drop : "",
+          Chain_Color : "",
+          Bottom_Rail : "",
+          Roll_Drop : "",
+          Bottom_Color_Drop : "",
+          Winder_Color : "",
+          comments : "",
+          price : 0
+
+        }
+      : data
+  );
+
+  const calculatePrice = async () =>{
+    // develope api fetch in next stage
+    let updatedValue = { price: windowData["width"]*windowData["Price_Per_Meter"] };
+    setWindowData((wd) => ({
+      ...wd,
+      ...updatedValue,
+    }));
+
+  }
+
+  const updateOnChange = (name: string, value: any) => {
+    let updatedValue = { [name]: value };
+    setWindowData((wd) => ({
+      ...wd,
+      ...updatedValue,
+    }));
+  };
+  
   return (
     <div className="">
       <section className=" lg:px-32 md:px-32 p-4">
@@ -46,6 +93,12 @@ export default function RollerBlindSComponent({cancelFunc}:RollerBlindProps) {
           label={"Add the Location details of the window"}
           type={"text"}
           placeholder="Bed Room.."
+          onChange={(event: SelectChangeEvent) => {
+            updateOnChange(event.target.name, event.target.value);
+          }}
+          value={
+            windowData["Location"]
+          }
         />
 
         <section>
@@ -57,15 +110,27 @@ export default function RollerBlindSComponent({cancelFunc}:RollerBlindProps) {
               name={"width"}
               id={"width"}
               label={"Width(mm)"}
-              type={"text"}
+              type={"number"}
               placeholder="1200.."
+              onChange={(event: SelectChangeEvent) => {
+                updateOnChange(event.target.name, event.target.value);
+              }}
+              value={
+                windowData["width"]
+              }
             />
             <LableTextField
               name={"Height"}
               id={"Height"}
               label={"Height"}
-              type={"text"}
+              type={"number"}
               placeholder="1200.."
+              onChange={(event: SelectChangeEvent) => {
+                updateOnChange(event.target.name, event.target.value);
+              }}
+              value={
+                windowData["Height"]
+              }
             />
           </div>
         </section>
@@ -80,6 +145,12 @@ export default function RollerBlindSComponent({cancelFunc}:RollerBlindProps) {
                 label={"Fabric"}
                 type={"text"}
                 placeholder="Cotton.."
+                onChange={(event: SelectChangeEvent) => {
+                  updateOnChange(event.target.name, event.target.value);
+                }}
+                value={
+                  windowData["Fabric"]
+                }
               />
 
               <LableTextField
@@ -88,6 +159,12 @@ export default function RollerBlindSComponent({cancelFunc}:RollerBlindProps) {
                 label={"Color"}
                 type={"text"}
                 placeholder="Green.."
+                onChange={(event: SelectChangeEvent) => {
+                  updateOnChange(event.target.name, event.target.value);
+                }}
+                value={
+                  windowData["Color"]
+                }
               />
             </div>
             <div className="flex flex-col w-full sm:w-2/4 gap-3 mt-2">
@@ -97,7 +174,12 @@ export default function RollerBlindSComponent({cancelFunc}:RollerBlindProps) {
                 value={"Category"}
                 name={"Category"}
                 options={Roller_blinds_data.Category}
-                onChange={(event: SelectChangeEvent) => {}}
+                onChange={(event: SelectChangeEvent) => {
+                  updateOnChange(event.target.name, event.target.value);
+                }}
+                value={
+                  windowData["Category"]
+                }
                 index={0}
                 data={""}
               />
@@ -114,7 +196,12 @@ export default function RollerBlindSComponent({cancelFunc}:RollerBlindProps) {
                 value={"Control_Side"}
                 name={"Control_Side"}
                 options={Roller_blinds_data.Control_Side}
-                onChange={(event: SelectChangeEvent) => {}}
+                onChange={(event: SelectChangeEvent) => {
+                  updateOnChange(event.target.name, event.target.value);
+                }}
+                value={
+                  windowData["Control_Side"]
+                }
                 index={0}
                 data={""}
               />
@@ -124,7 +211,12 @@ export default function RollerBlindSComponent({cancelFunc}:RollerBlindProps) {
                 value={"Chanin_Type"}
                 name={"Chanin_Type"}
                 options={Roller_blinds_data.Chain_Type}
-                onChange={(event: SelectChangeEvent) => {}}
+                onChange={(event: SelectChangeEvent) => {
+                  updateOnChange(event.target.name, event.target.value);
+                }}
+                value={
+                  windowData["Chanin_Type"]
+                }
                 index={0}
                 data={""}
               />
@@ -136,7 +228,12 @@ export default function RollerBlindSComponent({cancelFunc}:RollerBlindProps) {
                 value={"Chain_Drop"}
                 name={"Chain_Drop"}
                 options={Roller_blinds_data.Chain_Drop}
-                onChange={(event: SelectChangeEvent) => {}}
+                onChange={(event: SelectChangeEvent) => {
+                  updateOnChange(event.target.name, event.target.value);
+                }}
+                value={
+                  windowData["Chain_Drop"]
+                }
                 index={0}
                 data={""}
               />
@@ -146,7 +243,12 @@ export default function RollerBlindSComponent({cancelFunc}:RollerBlindProps) {
                 value={"Chain_Color"}
                 name={"Chain_Color"}
                 options={Roller_blinds_data.Bottom_Color}
-                onChange={(event: SelectChangeEvent) => {}}
+                onChange={(event: SelectChangeEvent) => {
+                  updateOnChange(event.target.name, event.target.value);
+                }}
+                value={
+                  windowData["Chain_Color"]
+                }
                 index={0}
                 data={""}
               />
@@ -163,7 +265,12 @@ export default function RollerBlindSComponent({cancelFunc}:RollerBlindProps) {
                 value={"Bottom_Rail"}
                 name={"Bottom_Rail"}
                 options={Roller_blinds_data.Bottom_Rail}
-                onChange={(event: SelectChangeEvent) => {}}
+                onChange={(event: SelectChangeEvent) => {
+                  updateOnChange(event.target.name, event.target.value);
+                }}
+                value={
+                  windowData["Bottom_Rail"]
+                }
                 index={0}
                 data={""}
               />
@@ -173,7 +280,12 @@ export default function RollerBlindSComponent({cancelFunc}:RollerBlindProps) {
                 value={"Roll_Drop"}
                 name={"Roll_Drop"}
                 options={Roller_blinds_data.Roll}
-                onChange={(event: SelectChangeEvent) => {}}
+                onChange={(event: SelectChangeEvent) => {
+                  updateOnChange(event.target.name, event.target.value);
+                }}
+                value={
+                  windowData["Roll_Drop"]
+                }
                 index={0}
                 data={""}
               />
@@ -185,7 +297,12 @@ export default function RollerBlindSComponent({cancelFunc}:RollerBlindProps) {
                 value={"Bottom_Color_Drop"}
                 name={"Bottom_Color_Drop"}
                 options={Roller_blinds_data.Bottom_Color}
-                onChange={(event: SelectChangeEvent) => {}}
+                onChange={(event: SelectChangeEvent) => {
+                  updateOnChange(event.target.name, event.target.value);
+                }}
+                value={
+                  windowData["Bottom_Color_Drop"]
+                }
                 index={0}
                 data={""}
               />
@@ -195,7 +312,12 @@ export default function RollerBlindSComponent({cancelFunc}:RollerBlindProps) {
                 value={"Winder_Color"}
                 name={"Winder_Color"}
                 options={Roller_blinds_data.Winder_Color}
-                onChange={(event: SelectChangeEvent) => {}}
+                onChange={(event: SelectChangeEvent) => {
+                  updateOnChange(event.target.name, event.target.value);
+                }}
+                value={
+                  windowData["Winder_Color"]
+                }
                 index={0}
                 data={""}
               />
@@ -211,9 +333,32 @@ export default function RollerBlindSComponent({cancelFunc}:RollerBlindProps) {
               label={"Please add any comments or remarks "}
               placeholder={"comments and remarks.."}
               type={"text"}
+              onChange={(event: SelectChangeEvent) => {
+                updateOnChange(event.target.name, event.target.value);
+              }}
+              value={
+                windowData["comments"]
+              }
             />
           </div>
         </section>
+        <div className=" text-right mb-3">
+          <Box component="div" sx={{ visibility: "visible" }}>
+            Price ${windowData["price"]}
+          </Box>
+        </div>
+        <div className=" text-right mb-3">
+          <CustomIconButton
+            onClick={calculatePrice}
+            size="small"
+            startIcon={<Calculate />}
+            backgroundColor="#FFA500"
+            iconColor="white"
+            textColor="white"
+          >
+            Calculate Price
+          </CustomIconButton>
+        </div>
         <div className=" text-right">
           <CustomIconButton
             onClick={() => {}}

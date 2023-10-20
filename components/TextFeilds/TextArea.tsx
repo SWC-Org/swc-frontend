@@ -10,6 +10,7 @@ type TextAreaProps = {
   placeholder: string;
   type: string;
   width?: string;
+  value:string
 };
 
 const TextArea: React.FC<TextAreaProps> = ({
@@ -18,6 +19,7 @@ const TextArea: React.FC<TextAreaProps> = ({
   label,
   placeholder,
   width = "100%",
+  value
 }) => {
   const inputStyle = {
     width: width,
@@ -33,6 +35,7 @@ const TextArea: React.FC<TextAreaProps> = ({
         placeholder={placeholder}
         style={inputStyle}
         required
+        value={value}
       />
     </div>
   );

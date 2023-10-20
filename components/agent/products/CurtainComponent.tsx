@@ -2,11 +2,10 @@
 
 import DropdownNormal from "@components/DropDowns/DropdownNormal";
 import LableTextField from "@components/TextFeilds/LableTextField";
-import { SelectChangeEvent, Typography } from "@mui/material";
+import { Box, SelectChangeEvent, Typography } from "@mui/material";
 import { Plantation_shutters_data } from "@constants/Plantation_shutters_data";
 
-
-import React,{useState} from "react";
+import React, { useState } from "react";
 import TextArea from "@components/TextFeilds/TextArea";
 import { Curtains_data } from "@constants/Curtains_data";
 import CustomIconButton from "@components/Buttons/CustomIconButton";
@@ -16,23 +15,57 @@ import {
   FastForward,
   FastForwardOutlined,
   Save,
-  Summarize,
+  Calculate,
 } from "@mui/icons-material";
 
-interface CurtainProps{
-  cancelFunc :() => void
+interface CurtainProps {
+  cancelFunc: () => void;
+  data: Object;
 }
-export default function CurtainComponent({cancelFunc}:CurtainProps) {
- 
-  const [windoData , setWindowData] = useState({})
-
-  const updateOnChange= (name:string,value:any)=>{
-    let updatedValue={[name]:value}
-    setWindowData(wd=>({
-      ...wd,
-      ...updatedValue
-    }))
+export default function CurtainComponent({ cancelFunc, data }: CurtainProps) {
+  function isEmpty(obj: Object) {
+    return Object.keys(obj).length === 0;
   }
+  const [windowData, setWindowData] = useState(
+    isEmpty(data)
+      ? {
+          Location: "",
+          width: 0,
+          Height: 0,
+          Category: "",
+          Fabric: "",
+          Curtain_Type: "",
+          Color: "",
+          Control: "",
+          Track_Color: "",
+          Return: "",
+          Bottom_Hem: "",
+          Bracket_Type: "",
+          Lining: "",
+          Price_Per_Meter: 0,
+          comments: "",
+          price : 0,
+        }
+      : data
+  );
+      
+  const calculatePrice = async () =>{
+    // develope api fetch in next stage
+    let updatedValue = { price: windowData["width"]*windowData["Price_Per_Meter"] };
+    setWindowData((wd) => ({
+      ...wd,
+      ...updatedValue,
+    }));
+
+  }
+
+  const updateOnChange = (name: string, value: any) => {
+    let updatedValue = { [name]: value };
+    setWindowData((wd) => ({
+      ...wd,
+      ...updatedValue,
+    }));
+  };
 
   return (
     <div className=" ">
@@ -56,7 +89,10 @@ export default function CurtainComponent({cancelFunc}:CurtainProps) {
           label={"Add the Location details of the window"}
           type={"text"}
           placeholder="Bed Room.."
-          onChange={(event: SelectChangeEvent) => {updateOnChange(event.target.name,event.target.value)}}
+          onChange={(event: SelectChangeEvent) => {
+            updateOnChange(event.target.name, event.target.value);
+          }}
+          value={windowData["Location"]}
         />
 
         <section>
@@ -68,17 +104,23 @@ export default function CurtainComponent({cancelFunc}:CurtainProps) {
               name={"width"}
               id={"width"}
               label={"Width(mm)"}
-              type={"text"}
+              type={"number"}
               placeholder="1200.."
-              onChange={(event: SelectChangeEvent) => {updateOnChange(event.target.name,event.target.value)}}
+              onChange={(event: SelectChangeEvent) => {
+                updateOnChange(event.target.name, event.target.value);
+              }}
+              value={windowData["width"]}
             />
             <LableTextField
               name={"Height"}
               id={"Height"}
               label={"Height"}
-              type={"text"}
+              type={"number"}
               placeholder="1200.."
-              onChange={(event: SelectChangeEvent) => {updateOnChange(event.target.name,event.target.value)}}
+              onChange={(event: SelectChangeEvent) => {
+                updateOnChange(event.target.name, event.target.value);
+              }}
+              value={windowData["Height"]}
             />
           </div>
         </section>
@@ -89,33 +131,40 @@ export default function CurtainComponent({cancelFunc}:CurtainProps) {
               <DropdownNormal
                 label={"Category"}
                 id={"Category"}
-                value={"Category"}
+                value={windowData["Category"]}
                 name={"Category"}
                 options={Curtains_data.Category}
-                onChange={(event: SelectChangeEvent) => {updateOnChange(event.target.name,event.target.value)}}
+                onChange={(event: SelectChangeEvent) => {
+                  updateOnChange(event.target.name, event.target.value);
+                }}
                 index={0}
                 data={""}
               />
 
               <LableTextField
-                name={"Fabric "}
+                name={"Fabric"}
                 id={"Fabric"}
                 label={"Fabric"}
                 type={"text"}
                 placeholder="Cotton.."
-                onChange={(event: SelectChangeEvent) => {updateOnChange(event.target.name,event.target.value)}}
+                onChange={(event: SelectChangeEvent) => {
+                  updateOnChange(event.target.name, event.target.value);
+                }}
+                value={windowData["Fabric"]}
               />
             </div>
             <div className="flex flex-col w-full sm:w-2/4 gap-3 mt-2">
               <DropdownNormal
                 label={"Curtain Type"}
                 id={"Curtain_Type"}
-                value={"Curtain_Type"}
                 name={"Curtain_Type"}
                 options={Curtains_data.Curtain_type}
-                onChange={(event: SelectChangeEvent) => {updateOnChange(event.target.name,event.target.value)}}
+                onChange={(event: SelectChangeEvent) => {
+                  updateOnChange(event.target.name, event.target.value);
+                }}
                 index={0}
                 data={""}
+                value={windowData["Curtain_Type"]}
               />
               <LableTextField
                 name={"Color"}
@@ -123,7 +172,10 @@ export default function CurtainComponent({cancelFunc}:CurtainProps) {
                 label={"Color"}
                 type={"text"}
                 placeholder="Green.."
-                onChange={(event: SelectChangeEvent) => {updateOnChange(event.target.name,event.target.value)}}
+                onChange={(event: SelectChangeEvent) => {
+                  updateOnChange(event.target.name, event.target.value);
+                }}
+                value={windowData["Color"]}
               />
             </div>
           </div>
@@ -133,20 +185,24 @@ export default function CurtainComponent({cancelFunc}:CurtainProps) {
               <DropdownNormal
                 label={"Control"}
                 id={"Control"}
-                value={"Control"}
+                value={windowData["Control"]}
                 name={"Control"}
                 options={Curtains_data.Control}
-                onChange={(event: SelectChangeEvent) => {updateOnChange(event.target.name,event.target.value)}}
+                onChange={(event: SelectChangeEvent) => {
+                  updateOnChange(event.target.name, event.target.value);
+                }}
                 index={0}
                 data={""}
               />
               <DropdownNormal
                 label={"Track Color"}
                 id={"Track_Color"}
-                value={"Track_Color"}
+                value={windowData["Track_Color"]}
                 name={"Track_Color"}
                 options={Curtains_data.Track_Color}
-                onChange={(event: SelectChangeEvent) => {updateOnChange(event.target.name,event.target.value)}}
+                onChange={(event: SelectChangeEvent) => {
+                  updateOnChange(event.target.name, event.target.value);
+                }}
                 index={0}
                 data={""}
               />
@@ -155,20 +211,24 @@ export default function CurtainComponent({cancelFunc}:CurtainProps) {
               <DropdownNormal
                 label={"Return"}
                 id={"Return"}
-                value={"Return"}
+                value={windowData["Return"]}
                 name={"Return"}
                 options={Curtains_data.Return}
-                onChange={(event: SelectChangeEvent) => {updateOnChange(event.target.name,event.target.value)}}
+                onChange={(event: SelectChangeEvent) => {
+                  updateOnChange(event.target.name, event.target.value);
+                }}
                 index={0}
                 data={""}
               />
               <DropdownNormal
                 label={"Bottom Hem"}
                 id={"Bottom_Hem"}
-                value={"Bottom_Hem"}
+                value={windowData["Bottom_Hem"]}
                 name={"Bottom_Hem"}
                 options={Curtains_data.Bottom_Hem}
-                onChange={(event: SelectChangeEvent) => {updateOnChange(event.target.name,event.target.value)}}
+                onChange={(event: SelectChangeEvent) => {
+                  updateOnChange(event.target.name, event.target.value);
+                }}
                 index={0}
                 data={""}
               />
@@ -180,10 +240,12 @@ export default function CurtainComponent({cancelFunc}:CurtainProps) {
               <DropdownNormal
                 label={"Bracket Type"}
                 id={"Bracket_Type"}
-                value={"Bracket_Type"}
+                value={windowData["Bracket_Type"]}
                 name={"Bracket_Type"}
                 options={Curtains_data.Bracket_Type}
-                onChange={(event: SelectChangeEvent) => {updateOnChange(event.target.name,event.target.value)}}
+                onChange={(event: SelectChangeEvent) => {
+                  updateOnChange(event.target.name, event.target.value);
+                }}
                 index={0}
                 data={""}
               />
@@ -192,10 +254,12 @@ export default function CurtainComponent({cancelFunc}:CurtainProps) {
               <DropdownNormal
                 label={"Lining"}
                 id={"Lining"}
-                value={"Lining"}
+                value={windowData["Lining"]}
                 name={"Lining"}
                 options={Curtains_data.Linig}
-                onChange={(event: SelectChangeEvent) => {updateOnChange(event.target.name,event.target.value)}}
+                onChange={(event: SelectChangeEvent) => {
+                  updateOnChange(event.target.name, event.target.value);
+                }}
                 index={0}
                 data={""}
               />
@@ -208,7 +272,10 @@ export default function CurtainComponent({cancelFunc}:CurtainProps) {
             label={"Price Per Meter"}
             type={"number"}
             placeholder="1200.."
-            onChange={(event: SelectChangeEvent) => {updateOnChange(event.target.name,event.target.value)}}
+            onChange={(event: SelectChangeEvent) => {
+              updateOnChange(event.target.name, event.target.value);
+            }}
+            value={windowData["Price_Per_Meter"]}
           />
         </section>
 
@@ -220,12 +287,31 @@ export default function CurtainComponent({cancelFunc}:CurtainProps) {
               label={"Please add any comments or remarks "}
               placeholder={"comments and remarks.."}
               type={"text"}
-              onChange={(event: SelectChangeEvent) => {updateOnChange(event.target.name,event.target.value)}}
+              onChange={(event: SelectChangeEvent) => {
+                updateOnChange(event.target.name, event.target.value);
+              }}
+              value={windowData["comments"]}
             />
           </div>
         </section>
         <div className=" text-right mb-3">
-        
+          <Box component="div" sx={{ visibility: "visible" }}>
+            Price ${windowData["price"]}
+          </Box>
+        </div>
+        <div className=" text-right mb-3">
+          <CustomIconButton
+            onClick={calculatePrice}
+            size="small"
+            startIcon={<Calculate />}
+            backgroundColor="#FFA500"
+            iconColor="white"
+            textColor="white"
+          >
+            Calculate Price
+          </CustomIconButton>
+        </div>
+        <div className=" text-right mb-3">
           <CustomIconButton
             onClick={() => {}}
             size="small"
@@ -238,7 +324,6 @@ export default function CurtainComponent({cancelFunc}:CurtainProps) {
           </CustomIconButton>
         </div>
         <div className=" text-right mb-3">
-        
           <CustomIconButton
             onClick={cancelFunc}
             size="small"
@@ -250,7 +335,6 @@ export default function CurtainComponent({cancelFunc}:CurtainProps) {
             Cancel
           </CustomIconButton>
         </div>
-        
 
         <hr className=" border-b-2 border-blue-500 mt-6" />
 
