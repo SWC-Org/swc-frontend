@@ -1,0 +1,1 @@
+// here i will create the reducers and the actions for the window data

@@ -16,12 +16,38 @@ import {
   Save,
   Summarize,
 } from "@mui/icons-material";
+import { clampDaySectionIfPossible } from "@mui/x-date-pickers/internals/hooks/useField/useField.utils";
 
-interface PlantationShutterProps{
-  cancelFunc :() => void
-  data: Object;
+interface PlantationShutterProps {
+  cancelFunc: () => void;
+  data: {
+    Location: string;
+    width: number;
+    Height: number;
+    Mount_Configuration: string;
+    Panel_Quantity: number;
+    Blade_Size: string;
+    Material: string;
+    Color: string;
+    Mid_rails: string;
+    Layout_Details: string;
+    Mount_methods: string;
+    Frames_Configuration: string;
+    Frame_Size: number;
+    Split_Tilt_Rod: string;
+    Tilt_rod_type: string;
+    T_Post_Quantity: number;
+    Distance_n_to_T1_T2_T3: number;
+    Surcharge_Value: number;
+    Price_per_square_meter: number;
+    comments: string;
+    price: number;
+  };
 }
-export default function PlantationShutter({cancelFunc,data}:PlantationShutterProps) {
+export default function PlantationShutter({
+  cancelFunc,
+  data,
+}: PlantationShutterProps) {
   function isEmpty(obj: Object) {
     return Object.keys(obj).length === 0;
   }
@@ -29,39 +55,43 @@ export default function PlantationShutter({cancelFunc,data}:PlantationShutterPro
     isEmpty(data)
       ? {
           Location: "",
-          width : 0,
-          Height :0,
-          Mount_Configuration : "",
-          Panel_Quantity : 0,
-          Blade_Size : "",
-          Material : "",
-          Color :"",
-          Mid_rails :"",
-          Layout_Details : "",
-          Mount_methods : "",
-          Frames_Configuration : "",
-          Frame_Size : 0,
-          Split_Tilt_Rod : "",
-          Tilt_rod_type : "",
-          T_Post_Quantity : 0,
-          Distance_n_to_T1_T2_T3 : 0,
-          Surcharge_Value : 0,
-          Price_per_square_meter : 0,
-          comments : "",
-          price : 0
+          width: 0,
+          Height: 0,
+          Mount_Configuration: "",
+          Panel_Quantity: 0,
+          Blade_Size: "",
+          Material: "",
+          Color: "",
+          Mid_rails: "",
+          Layout_Details: "",
+          Mount_methods: "",
+          Frames_Configuration: "",
+          Frame_Size: 0,
+          Split_Tilt_Rod: "",
+          Tilt_rod_type: "",
+          T_Post_Quantity: 0,
+          Distance_n_to_T1_T2_T3: 0,
+          Surcharge_Value: 0,
+          Price_per_square_meter: 0,
+          comments: "",
+          price: 0,
         }
       : data
   );
 
-  const calculatePrice = async () =>{
+  const calculatePrice = async () => {
     // develope api fetch in next stage
-    let updatedValue = { price: windowData["width"]*windowData["Height"]*windowData["Surcharge_Value"] };
+    let updatedValue = {
+      price:
+        windowData["width"] *
+        windowData["Height"] *
+        windowData["Surcharge_Value"],
+    };
     setWindowData((wd) => ({
       ...wd,
       ...updatedValue,
     }));
-
-  }
+  };
 
   const updateOnChange = (name: string, value: any) => {
     let updatedValue = { [name]: value };
@@ -70,7 +100,9 @@ export default function PlantationShutter({cancelFunc,data}:PlantationShutterPro
       ...updatedValue,
     }));
   };
-  
+
+  console.log(windowData);
+
   return (
     <div className="">
       <section className="lg:px-32 md:px-32 p-4">
@@ -98,9 +130,7 @@ export default function PlantationShutter({cancelFunc,data}:PlantationShutterPro
           onChange={(event: SelectChangeEvent) => {
             updateOnChange(event.target.name, event.target.value);
           }}
-          value={
-            windowData["Location"]
-          }
+          value={windowData["Location"]}
         />
 
         <section>
@@ -117,9 +147,7 @@ export default function PlantationShutter({cancelFunc,data}:PlantationShutterPro
               onChange={(event: SelectChangeEvent) => {
                 updateOnChange(event.target.name, event.target.value);
               }}
-              value={
-                windowData["width"]
-              }
+              value={windowData["width"].toString()}
             />
             <LableTextField
               name={"Height"}
@@ -130,9 +158,7 @@ export default function PlantationShutter({cancelFunc,data}:PlantationShutterPro
               onChange={(event: SelectChangeEvent) => {
                 updateOnChange(event.target.name, event.target.value);
               }}
-              value={
-                windowData["Height"]
-              }
+              value={windowData["Height"].toString()}
             />
           </div>
         </section>
@@ -146,11 +172,10 @@ export default function PlantationShutter({cancelFunc,data}:PlantationShutterPro
                 name={"Mount_Configuration"}
                 options={Plantation_shutters_data.MountConfig}
                 onChange={(event: SelectChangeEvent) => {
+                  console.log(event);
                   updateOnChange(event.target.name, event.target.value);
                 }}
-                value={
-                  windowData["Mount Configuration"]
-                }
+                value={windowData["Mount_Configuration"].toString()}
                 index={0}
                 data={""}
               />
@@ -164,24 +189,19 @@ export default function PlantationShutter({cancelFunc,data}:PlantationShutterPro
                 onChange={(event: SelectChangeEvent) => {
                   updateOnChange(event.target.name, event.target.value);
                 }}
-                value={
-                  windowData["Panel_Quantity"]
-                }
+                value={windowData["Panel_Quantity"].toString()}
               />
             </div>
             <div className="flex flex-col w-full sm:w-2/4 gap-3 mt-2">
               <DropdownNormal
                 label={"Blade Size"}
                 id={"Blade_Size"}
-                value={"Blade_Size"}
                 name={"Blade_Size"}
                 options={Plantation_shutters_data.BladeSize}
                 onChange={(event: SelectChangeEvent) => {
                   updateOnChange(event.target.name, event.target.value);
                 }}
-                value={
-                  windowData["Blade_Size"]
-                }
+                value={windowData["Blade_Size"].toString()}
                 index={0}
                 data={""}
               />
@@ -193,9 +213,7 @@ export default function PlantationShutter({cancelFunc,data}:PlantationShutterPro
                 onChange={(event: SelectChangeEvent) => {
                   updateOnChange(event.target.name, event.target.value);
                 }}
-                value={
-                  windowData["Material"]
-                }
+                value={windowData["Material"]}
                 index={0}
                 data={""}
               />
@@ -207,15 +225,12 @@ export default function PlantationShutter({cancelFunc,data}:PlantationShutterPro
               <DropdownNormal
                 label={"Color"}
                 id={"Color"}
-                value={"Color"}
                 name={"Color"}
                 options={Plantation_shutters_data.Color}
                 onChange={(event: SelectChangeEvent) => {
                   updateOnChange(event.target.name, event.target.value);
                 }}
-                value={
-                  windowData["Color"]
-                }
+                value={windowData["Color"]}
                 index={0}
                 data={""}
               />
@@ -228,9 +243,7 @@ export default function PlantationShutter({cancelFunc,data}:PlantationShutterPro
                 onChange={(event: SelectChangeEvent) => {
                   updateOnChange(event.target.name, event.target.value);
                 }}
-                value={
-                  windowData["Mid_rails"]
-                }
+                value={windowData["Mid_rails"]}
               />
             </div>
             <div className="flex flex-col w-full sm:w-2/4 gap-3 mt-2">
@@ -242,9 +255,7 @@ export default function PlantationShutter({cancelFunc,data}:PlantationShutterPro
                 onChange={(event: SelectChangeEvent) => {
                   updateOnChange(event.target.name, event.target.value);
                 }}
-                value={
-                  windowData["Layout_Details"]
-                }
+                value={windowData["Layout_Details"]}
                 index={0}
                 data={""}
               />
@@ -256,9 +267,7 @@ export default function PlantationShutter({cancelFunc,data}:PlantationShutterPro
                 onChange={(event: SelectChangeEvent) => {
                   updateOnChange(event.target.name, event.target.value);
                 }}
-                value={
-                  windowData["Mount_methods"]
-                }
+                value={windowData["Mount_methods"]}
                 index={0}
                 data={""}
               />
@@ -275,9 +284,7 @@ export default function PlantationShutter({cancelFunc,data}:PlantationShutterPro
                 onChange={(event: SelectChangeEvent) => {
                   updateOnChange(event.target.name, event.target.value);
                 }}
-                value={
-                  windowData["Frames_Configuration"]
-                }
+                value={windowData["Frames_Configuration"]}
                 index={0}
                 data={""}
               />
@@ -290,9 +297,7 @@ export default function PlantationShutter({cancelFunc,data}:PlantationShutterPro
                 onChange={(event: SelectChangeEvent) => {
                   updateOnChange(event.target.name, event.target.value);
                 }}
-                value={
-                  windowData["Frame_Size"]
-                }
+                value={windowData["Frame_Size"].toString()}
               />
             </div>
             <div className="flex flex-col w-full sm:w-2/4 gap-3 mt-2">
@@ -304,9 +309,7 @@ export default function PlantationShutter({cancelFunc,data}:PlantationShutterPro
                 onChange={(event: SelectChangeEvent) => {
                   updateOnChange(event.target.name, event.target.value);
                 }}
-                value={
-                  windowData["Split_Tilt_Rod"]
-                }
+                value={windowData["Split_Tilt_Rod"]}
                 index={0}
                 data={""}
               />
@@ -318,9 +321,7 @@ export default function PlantationShutter({cancelFunc,data}:PlantationShutterPro
                 onChange={(event: SelectChangeEvent) => {
                   updateOnChange(event.target.name, event.target.value);
                 }}
-                value={
-                  windowData["Tilt_rod_type"]
-                }
+                value={windowData["Tilt_rod_type"]}
                 index={0}
                 data={""}
               />
@@ -338,9 +339,7 @@ export default function PlantationShutter({cancelFunc,data}:PlantationShutterPro
                 onChange={(event: SelectChangeEvent) => {
                   updateOnChange(event.target.name, event.target.value);
                 }}
-                value={
-                  windowData["T_Post_Quantity"]
-                }
+                value={windowData["T_Post_Quantity"].toString()}
               />
               <LableTextField
                 name={"Distance_n_to_T1_T2_T3"}
@@ -351,9 +350,7 @@ export default function PlantationShutter({cancelFunc,data}:PlantationShutterPro
                 onChange={(event: SelectChangeEvent) => {
                   updateOnChange(event.target.name, event.target.value);
                 }}
-                value={
-                  windowData["Distance_n_to_T1_T2_T3"]
-                }
+                value={windowData["Distance_n_to_T1_T2_T3"].toString()}
               />
             </div>
             <div className="flex flex-col w-full sm:w-2/4 gap-3 mt-2">
@@ -366,9 +363,7 @@ export default function PlantationShutter({cancelFunc,data}:PlantationShutterPro
                 onChange={(event: SelectChangeEvent) => {
                   updateOnChange(event.target.name, event.target.value);
                 }}
-                value={
-                  windowData["Surcharge_Value"]
-                }
+                value={windowData["Surcharge_Value"].toString()}
               />
               <LableTextField
                 name={"Price_per_square_meter"}
@@ -379,9 +374,7 @@ export default function PlantationShutter({cancelFunc,data}:PlantationShutterPro
                 onChange={(event: SelectChangeEvent) => {
                   updateOnChange(event.target.name, event.target.value);
                 }}
-                value={
-                  windowData["Price_per_square_meter"]
-                }
+                value={windowData["Price_per_square_meter"].toString()}
               />
             </div>
           </div>
@@ -398,9 +391,7 @@ export default function PlantationShutter({cancelFunc,data}:PlantationShutterPro
               onChange={(event: SelectChangeEvent) => {
                 updateOnChange(event.target.name, event.target.value);
               }}
-              value={
-                windowData["comments"]
-              }
+              value={windowData["comments"]}
             />
           </div>
         </section>
@@ -420,7 +411,7 @@ export default function PlantationShutter({cancelFunc,data}:PlantationShutterPro
           >
             Calculate Price
           </CustomIconButton>
-        </div>        
+        </div>
         <div className=" text-right">
           <CustomIconButton
             onClick={() => {}}
@@ -435,7 +426,6 @@ export default function PlantationShutter({cancelFunc,data}:PlantationShutterPro
         </div>
 
         <div className=" text-right mb-3">
-        
           <CustomIconButton
             onClick={cancelFunc}
             size="small"
@@ -447,117 +437,9 @@ export default function PlantationShutter({cancelFunc,data}:PlantationShutterPro
             Cancel
           </CustomIconButton>
         </div>
-        
+
         <hr className=" border-b-2 border-blue-500 mb-6" />
-
-        {/* <Typography>Add extra materials for this window.</Typography> */}
-
-        {/* add new product in the same window */}
-        {/* <div className=" flex flex-col w-full sm:w-2/4 gap-3 mt-2">
-          <CustomIconButton
-            onClick={() => {}}
-            size="small"
-            startIcon={<ControlPointRounded />}
-            backgroundColor="#48D89B"
-            iconColor="black"
-            textColor="black"
-          >
-            Plantation Shutters
-          </CustomIconButton>
-          <CustomIconButton
-            onClick={() => {}}
-            size="small"
-            startIcon={<ControlPointRounded />}
-            backgroundColor="#88D6F7"
-            iconColor="black"
-            textColor="black"
-          >
-            Roller Blinds
-          </CustomIconButton>
-          <CustomIconButton
-            onClick={() => {}}
-            size="small"
-            startIcon={<ControlPointRounded />}
-            backgroundColor="#FE8514"
-            iconColor="black"
-            textColor="black"
-          >
-            Curtains
-          </CustomIconButton>
-        </div> */}
       </div>
-      <div className="p-4 sm:p-10 flex flex-col gap-4 my-5 rounded-lg">
-        {/* <hr className="border-b-2 border-blue-500 mb-6" /> */}
-
-        {/* <Typography>Add a new window Data</Typography> */}
-        {/* add new product in the new window */}
-
-        {/* <div className="flex flex-wrap   gap-3 mt-2 ">
-          <CustomIconButton
-            onClick={() => {}}
-            size="small"
-            startIcon={<ControlPointRounded />}
-            backgroundColor="#48D89B"
-            iconColor="black"
-            textColor="black"
-          >
-            Plantation Shutters
-          </CustomIconButton>
-          <CustomIconButton
-            onClick={() => {}}
-            size="small"
-            startIcon={<ControlPointRounded />}
-            backgroundColor="#88D6F7"
-            iconColor="black"
-            textColor="black"
-          >
-            Roller Blinds
-          </CustomIconButton>
-          <CustomIconButton
-            onClick={() => {}}
-            size="small"
-            startIcon={<ControlPointRounded />}
-            backgroundColor="#FE8514"
-            iconColor="black"
-            textColor="black"
-          >
-            Curtains
-          </CustomIconButton>
-        </div> */}
-        {/* <hr className="border-b-2 border-blue-500 mb-6" />
-
-        <div className="text-center md:text-right">
-          <Typography className="mb-2">See The Summary</Typography>
-          <CustomIconButton
-            onClick={() => {}}
-            size="small"
-            startIcon={<Summarize />}
-            backgroundColor="#0066FF"
-            iconColor="white"
-            textColor="white"
-          >
-            Summary
-          </CustomIconButton>
-        </div> */}
-      </div>
-
-      {/* continue to the next window */}
-      {/* <div className="bg-slate-800 min-w-full text-white p-5 flex flex-col gap-4">
-        <Typography>
-          Press continue if you added all the window details
-        </Typography>
-
-        <CustomIconButton
-          onClick={() => {}}
-          size="small"
-          startIcon={<FastForwardOutlined />}
-          backgroundColor="#0066FF"
-          iconColor="white"
-          textColor="white"
-        >
-          Continue
-        </CustomIconButton>
-      </div> */}
     </div>
   );
 }

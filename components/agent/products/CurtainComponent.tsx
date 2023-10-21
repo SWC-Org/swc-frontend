@@ -20,7 +20,24 @@ import {
 
 interface CurtainProps {
   cancelFunc: () => void;
-  data: Object;
+  data: {
+    Location: string;
+    width: number;
+    Height: number;
+    Category: string;
+    Fabric: string;
+    Curtain_Type: string;
+    Color: string;
+    Control: string;
+    Track_Color: string;
+    Return: string;
+    Bottom_Hem: string;
+    Bracket_Type: string;
+    Lining: string;
+    Price_Per_Meter: number;
+    comments: string;
+    price: number;
+  };
 }
 export default function CurtainComponent({ cancelFunc, data }: CurtainProps) {
   function isEmpty(obj: Object) {
@@ -44,20 +61,21 @@ export default function CurtainComponent({ cancelFunc, data }: CurtainProps) {
           Lining: "",
           Price_Per_Meter: 0,
           comments: "",
-          price : 0,
+          price: 0,
         }
       : data
   );
-      
-  const calculatePrice = async () =>{
+
+  const calculatePrice = async () => {
     // develope api fetch in next stage
-    let updatedValue = { price: windowData["width"]*windowData["Price_Per_Meter"] };
+    let updatedValue = {
+      price: windowData["width"] * windowData["Price_Per_Meter"],
+    };
     setWindowData((wd) => ({
       ...wd,
       ...updatedValue,
     }));
-
-  }
+  };
 
   const updateOnChange = (name: string, value: any) => {
     let updatedValue = { [name]: value };
@@ -67,6 +85,8 @@ export default function CurtainComponent({ cancelFunc, data }: CurtainProps) {
     }));
   };
 
+  //PRINT THE DATA
+  console.log(windowData);
   return (
     <div className=" ">
       <section className="lg:px-32 md:px-32 p-4">
@@ -106,11 +126,12 @@ export default function CurtainComponent({ cancelFunc, data }: CurtainProps) {
               label={"Width(mm)"}
               type={"number"}
               placeholder="1200.."
-              onChange={(event: SelectChangeEvent) => {
+              onChange={(event: SelectChangeEvent<HTMLInputElement>) => {
                 updateOnChange(event.target.name, event.target.value);
               }}
-              value={windowData["width"]}
+              value={windowData["width"].toString()} // convert number to string
             />
+
             <LableTextField
               name={"Height"}
               id={"Height"}
@@ -120,7 +141,7 @@ export default function CurtainComponent({ cancelFunc, data }: CurtainProps) {
               onChange={(event: SelectChangeEvent) => {
                 updateOnChange(event.target.name, event.target.value);
               }}
-              value={windowData["Height"]}
+              value={windowData["Height"].toString()}
             />
           </div>
         </section>
@@ -275,7 +296,7 @@ export default function CurtainComponent({ cancelFunc, data }: CurtainProps) {
             onChange={(event: SelectChangeEvent) => {
               updateOnChange(event.target.name, event.target.value);
             }}
-            value={windowData["Price_Per_Meter"]}
+            value={windowData["Price_Per_Meter"].toString()}
           />
         </section>
 
@@ -338,113 +359,8 @@ export default function CurtainComponent({ cancelFunc, data }: CurtainProps) {
 
         <hr className=" border-b-2 border-blue-500 mt-6" />
 
-        {/* <Typography>Add extra materials for this window.</Typography> */}
-
-        {/* add new product in the same window */}
-        {/* <div className=" flex flex-col w-full sm:w-2/4 gap-3 mt-2">
-          <CustomIconButton
-            onClick={() => {}}
-            size="small"
-            startIcon={<ControlPointRounded />}
-            backgroundColor="#48D89B"
-            iconColor="black"
-            textColor="black"
-          >
-            Plantation Shutters
-          </CustomIconButton>
-          <CustomIconButton
-            onClick={() => {}}
-            size="small"
-            startIcon={<ControlPointRounded />}
-            backgroundColor="#88D6F7"
-            iconColor="black"
-            textColor="black"
-          >
-            Roller Blinds
-          </CustomIconButton>
-          <CustomIconButton
-            onClick={() => {}}
-            size="small"
-            startIcon={<ControlPointRounded />}
-            backgroundColor="#FE8514"
-            iconColor="black"
-            textColor="black"
-          >
-            Curtains
-          </CustomIconButton>
-        </div> */}
-      </div>
-      <div className="p-4 sm:p-10 flex flex-col gap-4 my-5 rounded-lg">
-        {/* <hr className="border-b-2 border-blue-500 mb-6" /> */}
-
-        {/* <Typography>Add a new window Data</Typography> */}
-        {/* add new product in the new window */}
-
-        {/* <div className="flex flex-wrap   gap-3 mt-2 ">
-          <CustomIconButton
-            onClick={() => {}}
-            size="small"
-            startIcon={<ControlPointRounded />}
-            backgroundColor="#48D89B"
-            iconColor="black"
-            textColor="black"
-          >
-            Plantation Shutters
-          </CustomIconButton>
-          <CustomIconButton
-            onClick={() => {}}
-            size="small"
-            startIcon={<ControlPointRounded />}
-            backgroundColor="#88D6F7"
-            iconColor="black"
-            textColor="black"
-          >
-            Roller Blinds
-          </CustomIconButton>
-          <CustomIconButton
-            onClick={() => {}}
-            size="small"
-            startIcon={<ControlPointRounded />}
-            backgroundColor="#FE8514"
-            iconColor="black"
-            textColor="black"
-          >
-            Curtains
-          </CustomIconButton>
-        </div> */}
-        {/* <hr className="border-b-2 border-blue-500 mb-6" /> */}
-
-        {/* <div className="text-center md:text-right">
-          <Typography className="mb-2">See The Summary</Typography>
-          <CustomIconButton
-            onClick={() => {}}
-            size="small"
-            startIcon={<Summarize />}
-            backgroundColor="#0066FF"
-            iconColor="white"
-            textColor="white"
-          >
-            Summary
-          </CustomIconButton>
-        </div> */}
-      </div>
-      {/* continue to the next window
-      <div className="bg-slate-800 min-w-full text-white p-5 flex flex-col gap-4">
-        <Typography>
-          Press continue if you added all the window details
-        </Typography>
-
-        <CustomIconButton
-          onClick={() => {}}
-          size="small"
-          startIcon={<FastForward />}
-          backgroundColor="#0066FF"
-          iconColor="white"
-          textColor="white"
-        >
-          Continue
-        </CustomIconButton>
-      </div> */}
+        
+    </div>
     </div>
   );
 }

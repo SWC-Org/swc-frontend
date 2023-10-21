@@ -33,6 +33,7 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({
       margin="none"
       style={inputStyle}
       size="medium"
+      required
     />
   );
 };
