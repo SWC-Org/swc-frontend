@@ -46,10 +46,12 @@ interface RollerBlindProps {
     price: number;
     Price_Per_Meter: number;
   };
+  windowId: number;
 }
 export default function RollerBlindSComponent({
   cancelFunc,
   data,
+  windowId,
 }: RollerBlindProps) {
   function isEmpty(obj: Object) {
     return Object.keys(obj).length === 0;
@@ -102,15 +104,11 @@ export default function RollerBlindSComponent({
 
   //add plantation shutter to new window
   const addRollerBlindsToNewWindow = (rollerBlindData: any) => {
-    const newWindow = {
-      windowId: "03",
-    };
-
-    dispatch(addWindow(newWindow));
+    // dispatch(addWindow(newWindow));
 
     dispatch(
       addRollerBlindData({
-        windowId: newWindow.windowId,
+        windowId: windowId.toString(),
         rollerBlindData,
       })
     );

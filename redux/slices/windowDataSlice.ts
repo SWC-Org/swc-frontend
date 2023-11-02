@@ -86,28 +86,15 @@ const windowDataSlice = createSlice({
   reducers: {
     //add a window
     addWindow: (state, action: PayloadAction<windowData>) => {
-      state.push(action.payload);
+      // state.push(action.payload);
     },
 
-    //remove a window
-    removeWindow: (state, action: PayloadAction<string>) => {
-      return state.filter((window) => window.windowId !== action.payload);
+    // //remove a window
+    removeWindow: (state, action: PayloadAction<windowData>) => {
+      return state.filter(
+        (window) => window.windowId !== action.payload.windowId
+      );
     },
-
-    //add plantation shutter data
-    // addPlantationShutterData: (
-    //   state,
-    //   action: PayloadAction<{
-    //     plantationShutterData: PlantationShutterData;
-    //     windowId: string;
-    //   }>
-    // ) => {
-    //   const { plantationShutterData, windowId } = action.payload;
-    //   const window = state.find((window) => window.windowId === windowId);
-    //   if (window) {
-    //     window.plantationShutter = plantationShutterData;
-    //   }
-    // },
 
     addPlantationShutterData: (
       state,
@@ -124,26 +111,14 @@ const windowDataSlice = createSlice({
       if (existingWindow) {
         // If a window with the same windowId exists, update the plantationShutter data
         existingWindow.plantationShutter = plantationShutterData;
-      // } else {
-      //   // If no window with the same windowId exists, add a new window
-      //   state.push({
-      //     windowId,
-      //     plantationShutter: plantationShutterData,
-      //   });
+      } else {
+        // If no window with the same windowId exists, add a new window
+        state.push({
+          windowId,
+          plantationShutter: plantationShutterData,
+        });
       }
     },
-
-    //add curtain data
-    // addCurtainData: (
-    //   state,
-    //   action: PayloadAction<{ curtainData: CurtainData; windowId: string }>
-    // ) => {
-    //   const { curtainData, windowId } = action.payload;
-    //   const window = state.find((window) => window.windowId === windowId);
-    //   if (window) {
-    //     window.curtain = curtainData;
-    //   }
-    // },
 
     addCurtainData: (
       state,
@@ -157,29 +132,14 @@ const windowDataSlice = createSlice({
       if (existingWindow) {
         // If a window with the same windowId exists, update the plantationShutter data
         existingWindow.curtain = curtainData;
-      // } else {
-      //   // If no window with the same windowId exists, add a new window
-      //   state.push({
-      //     windowId,
-      //     curtain: curtainData,
-      //   });
+      } else {
+        // If no window with the same windowId exists, add a new window
+        state.push({
+          windowId,
+          curtain: curtainData,
+        });
       }
     },
-
-    //add roller blind data
-    // addRollerBlindData: (
-    //   state,
-    //   action: PayloadAction<{
-    //     rollerBlindData: RollerBlindData;
-    //     windowId: string;
-    //   }>
-    // ) => {
-    //   const { rollerBlindData, windowId } = action.payload;
-    //   const window = state.find((window) => window.windowId === windowId);
-    //   if (window) {
-    //     window.rollerBlind = rollerBlindData;
-    //   }
-    // },
 
     addRollerBlindData: (
       state,
@@ -196,12 +156,12 @@ const windowDataSlice = createSlice({
       if (existingWindow) {
         // If a window with the same windowId exists, update the plantationShutter data
         existingWindow.rollerBlind = rollerBlindData;
-      // } else {
-      //   // If no window with the same windowId exists, add a new window
-      //   state.push({
-      //     windowId,
-      //     rollerBlind: rollerBlindData,
-      //   });
+      } else {
+        // If no window with the same windowId exists, add a new window
+        state.push({
+          windowId,
+          rollerBlind: rollerBlindData,
+        });
       }
     },
 

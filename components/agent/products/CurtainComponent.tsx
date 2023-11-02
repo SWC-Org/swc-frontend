@@ -44,8 +44,13 @@ interface CurtainProps {
     comments: string;
     price: number;
   };
+  windowId: number;
 }
-export default function CurtainComponent({ cancelFunc, data }: CurtainProps) {
+export default function CurtainComponent({
+  cancelFunc,
+  data,
+  windowId,
+}: CurtainProps) {
   function isEmpty(obj: Object) {
     return Object.keys(obj).length === 0;
   }
@@ -96,15 +101,11 @@ export default function CurtainComponent({ cancelFunc, data }: CurtainProps) {
 
   //add plantation shutter to new window
   const addCurtainsToNewWindow = (curtainData: any) => {
-    const newWindow = {
-      windowId: "01",
-    };
-
-    dispatch(addWindow(newWindow));
+    // dispatch(addWindow(newWindow));
 
     dispatch(
       addCurtainData({
-        windowId: newWindow.windowId,
+        windowId: windowId.toString(),
         curtainData,
       })
     );
@@ -116,7 +117,6 @@ export default function CurtainComponent({ cancelFunc, data }: CurtainProps) {
 
     addCurtainsToNewWindow(curtainData);
     //print the data state
-    
   };
 
   //PRINT THE DATA
