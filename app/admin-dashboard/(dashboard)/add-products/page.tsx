@@ -23,6 +23,7 @@ export default function Page() {
         </h2>
         <form>
           <LableTextField
+            value=""
             id="ProductName"
             label="Product Name"
             name="ProductName"
@@ -34,6 +35,7 @@ export default function Page() {
             width="100%"
           />
           <TextArea
+            value=""
             id="ProductDescription"
             label="Product Description"
             name="ProductDescription"
