@@ -17,6 +17,12 @@ import {
   Save,
   Calculate,
 } from "@mui/icons-material";
+import {
+  addWindow,
+  addCurtainData,
+} from "../../../redux/slices/windowDataSlice";
+import { AppDispatch, store } from "../../../redux/store";
+import { useDispatch } from "react-redux";
 
 interface CurtainProps {
   cancelFunc: () => void;
@@ -83,6 +89,34 @@ export default function CurtainComponent({ cancelFunc, data }: CurtainProps) {
       ...wd,
       ...updatedValue,
     }));
+  };
+
+  //redux
+  const dispatch = useDispatch<AppDispatch>();
+
+  //add plantation shutter to new window
+  const addCurtainsToNewWindow = (curtainData: any) => {
+    const newWindow = {
+      windowId: "01",
+    };
+
+    dispatch(addWindow(newWindow));
+
+    dispatch(
+      addCurtainData({
+        windowId: newWindow.windowId,
+        curtainData,
+      })
+    );
+  };
+
+  const handleAddCurtainsToNewWindow = () => {
+    const curtainData = windowData;
+    console.log(curtainData);
+
+    addCurtainsToNewWindow(curtainData);
+    //print the data state
+    
   };
 
   //PRINT THE DATA
@@ -334,7 +368,7 @@ export default function CurtainComponent({ cancelFunc, data }: CurtainProps) {
         </div>
         <div className=" text-right mb-3">
           <CustomIconButton
-            onClick={() => {}}
+            onClick={handleAddCurtainsToNewWindow}
             size="small"
             startIcon={<Save />}
             backgroundColor="#0066FF"
@@ -358,9 +392,7 @@ export default function CurtainComponent({ cancelFunc, data }: CurtainProps) {
         </div>
 
         <hr className=" border-b-2 border-blue-500 mt-6" />
-
-        
-    </div>
+      </div>
     </div>
   );
 }

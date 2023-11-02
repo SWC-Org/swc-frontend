@@ -16,7 +16,12 @@ import {
   Save,
   Summarize,
 } from "@mui/icons-material";
-import { clampDaySectionIfPossible } from "@mui/x-date-pickers/internals/hooks/useField/useField.utils";
+import { useDispatch } from "react-redux";
+import {
+  addWindow,
+  addPlantationShutterData,
+} from "../../../redux/slices/windowDataSlice";
+import { AppDispatch, store } from "../../../redux/store";
 
 interface PlantationShutterProps {
   cancelFunc: () => void;
@@ -101,7 +106,34 @@ export default function PlantationShutter({
     }));
   };
 
-  console.log(windowData);
+
+  //redux
+  const dispatch = useDispatch<AppDispatch>();
+
+  //add plantation shutter to new window
+  const addPlantationShutterToNewWindow = (plantationShutterData: any) => {
+    const newWindow = {
+      windowId: "03",
+    };
+
+    dispatch(addWindow(newWindow));
+
+    dispatch(
+      addPlantationShutterData({
+        windowId: newWindow.windowId,
+        plantationShutterData,
+      })
+    );
+  };
+
+  const handleAddPlantationShutterToNewWindow = () => {
+    const plantationShutterData = windowData;
+    console.log(plantationShutterData);
+
+    addPlantationShutterToNewWindow(plantationShutterData);
+    //print the data state
+    
+  };
 
   return (
     <div className="">
@@ -414,7 +446,7 @@ export default function PlantationShutter({
         </div>
         <div className=" text-right">
           <CustomIconButton
-            onClick={() => {}}
+            onClick={handleAddPlantationShutterToNewWindow}
             size="small"
             startIcon={<Save />}
             backgroundColor="#0066FF"

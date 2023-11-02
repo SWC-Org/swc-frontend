@@ -18,6 +18,12 @@ import {
 } from "@mui/icons-material";
 import CustomIconButton from "@components/Buttons/CustomIconButton";
 import { Box, SelectChangeEvent, Typography } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../../redux/store";
+import {
+  addRollerBlindData,
+  addWindow,
+} from "../../../redux/slices/windowDataSlice";
 
 interface RollerBlindProps {
   cancelFunc: () => void;
@@ -91,6 +97,32 @@ export default function RollerBlindSComponent({
     }));
   };
 
+  //redux
+  const dispatch = useDispatch<AppDispatch>();
+
+  //add plantation shutter to new window
+  const addRollerBlindsToNewWindow = (rollerBlindData: any) => {
+    const newWindow = {
+      windowId: "03",
+    };
+
+    dispatch(addWindow(newWindow));
+
+    dispatch(
+      addRollerBlindData({
+        windowId: newWindow.windowId,
+        rollerBlindData,
+      })
+    );
+  };
+
+  const handleAddRollerBlindsToNewWindow = () => {
+    const rollerBlindData = windowData;
+    console.log(rollerBlindData);
+
+    addRollerBlindsToNewWindow(rollerBlindData);
+    //print the data state
+  };
   console.log("windowData", windowData);
 
   return (
@@ -346,7 +378,7 @@ export default function RollerBlindSComponent({
         </div>
         <div className=" text-right">
           <CustomIconButton
-            onClick={() => {}}
+            onClick={handleAddRollerBlindsToNewWindow}
             size="small"
             startIcon={<Save />}
             backgroundColor="#0066FF"
