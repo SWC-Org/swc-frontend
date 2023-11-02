@@ -37,7 +37,7 @@ const LableTextField: React.FC<LableTextFieldProps> = ({
         type={type}
         placeholder={placeholder}
         style={inputStyle}
-        required
+        required 
         onChange={onChange}
         value={value}
       />

@@ -3,6 +3,7 @@ import "@styles/global.css";
 import Nav from "@components/Layout/Nav";
 import Footer from "@components/Layout/Footer";
 import AuthProvider from "@app/context/AuthProvider";
+import Providers from "../redux/provider";
 
 export const metadata: Metadata = {
   title: "SWC | Curtoon Window Platform",
@@ -19,7 +20,9 @@ export default function RootLayout({
       <body className="gradient-bg">
         <AuthProvider>
           <Nav src={""} alt={""} />
-          <div>{children}</div>
+          <div>
+            <Providers>{children}</Providers>
+          </div>
         </AuthProvider>
         <div className="z-[100]">
           <Footer />
