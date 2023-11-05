@@ -89,7 +89,7 @@ const windowDataSlice = createSlice({
       // state.push(action.payload);
     },
 
-    // //remove a window
+    // remove a window
     removeWindow: (state, action: PayloadAction<windowData>) => {
       return state.filter(
         (window) => window.windowId !== action.payload.windowId

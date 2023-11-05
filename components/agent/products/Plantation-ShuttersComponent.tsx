@@ -87,7 +87,7 @@ export default function PlantationShutter({
   );
 
   const calculatePrice = async () => {
-    // develope api fetch in next stage
+    // develope api fetch in next stage 
     let updatedValue = {
       price:
         windowData["width"] *
