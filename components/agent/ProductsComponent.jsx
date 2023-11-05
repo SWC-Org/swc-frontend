@@ -6,7 +6,11 @@ import PlantationShutterComponent from "@components/agent/products/Plantation-Sh
 import RollerBlinderComponent from "@components/agent/products/Roller-blindsComponent";
 import React, { useState } from "react";
 import { useAppSelector, AppDispatch, store } from "../../redux/store";
-import { addWindow, removeWindow } from "../../redux/slices/windowDataSlice";
+import {
+  removeCurtainData,
+  removeRollerBlindData,
+  removePlantationShutterData,
+} from "../../redux/slices/windowDataSlice";
 import { useDispatch } from "react-redux";
 
 export default function ProductComponent({
@@ -40,6 +44,12 @@ export default function ProductComponent({
     // dispatch(addWindow(newWindow));
     console.log("addWindowHandler");
   };
+
+  //remove plantation shutter data from selected window
+
+  // const removeThisPlantationShutter = () => {
+  //   dispatch(removePlantationShutterData(deleteId));
+  // };
 
   switch (pageNumber) {
     case 1:
@@ -143,6 +153,16 @@ export default function ProductComponent({
                         <div className=" bg-emerald-400 p-5">
                           <h3>Plantation Shutter Data:</h3>
                           <p>Location: {window.plantationShutter.Location}</p>
+                          <button
+                            className=" bg-red-600"
+                            onClick={() =>
+                              dispatch(
+                                removePlantationShutterData(window.windowId)
+                              )
+                            }
+                          >
+                            remove
+                          </button>
                           {/* Render other plantation shutter properties here */}
                         </div>
                       )}
@@ -150,6 +170,14 @@ export default function ProductComponent({
                         <div className="bg-blue-400 p-5 ">
                           <h3>Curtain Data:</h3>
                           <p>Location: {window.curtain.Location}</p>
+                          <button
+                            className=" bg-red-600"
+                            onClick={() =>
+                              dispatch(removeCurtainData(window.windowId))
+                            }
+                          >
+                            remove
+                          </button>
                           {/* Render other curtain properties here */}
                         </div>
                       )}
@@ -157,6 +185,14 @@ export default function ProductComponent({
                         <div className="bg-yellow-400 p-5">
                           <h3>Roller Blind Data:</h3>
                           <p>Location: {window.rollerBlind.Location}</p>
+                          <button
+                            className=" bg-red-600"
+                            onClick={() =>
+                              dispatch(removeRollerBlindData(window.windowId))
+                            }
+                          >
+                            remove
+                          </button>
                           {/* Render other roller blind properties here */}
                         </div>
                       )}
