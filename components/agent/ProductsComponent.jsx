@@ -14,7 +14,11 @@ import {
 } from "../../redux/slices/windowDataSlice";
 import { useDispatch } from "react-redux";
 
-export default function ProductComponent({}) {
+export default function ProductComponent({
+  window_data={},
+  window_data_deleteHandler={},
+  window_data_editHandler={}
+}) {
   const [pageNumber, setPageNumber] = useState(0);
 
   const [plantationShutterData, setPlantationShutterData] = useState({});
