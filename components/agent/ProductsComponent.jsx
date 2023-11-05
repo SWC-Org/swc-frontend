@@ -7,18 +7,19 @@ import RollerBlinderComponent from "@components/agent/products/Roller-blindsComp
 import React, { useState } from "react";
 import { useAppSelector, AppDispatch, store } from "../../redux/store";
 import {
+  removeWindow,
   removeCurtainData,
   removeRollerBlindData,
   removePlantationShutterData,
 } from "../../redux/slices/windowDataSlice";
 import { useDispatch } from "react-redux";
 
-export default function ProductComponent({
-  window_data,
-  window_data_deleteHandler,
-  window_data_editHandler,
-}) {
+export default function ProductComponent({}) {
   const [pageNumber, setPageNumber] = useState(0);
+
+  const [plantationShutterData, setPlantationShutterData] = useState({});
+  const [curtainData, setCurtainData] = useState({});
+  const [rollerBlindData, setRollerBlindData] = useState({});
 
   const cancelFunc = () => {
     setPageNumber(0);
@@ -45,18 +46,12 @@ export default function ProductComponent({
     console.log("addWindowHandler");
   };
 
-  //remove plantation shutter data from selected window
-
-  // const removeThisPlantationShutter = () => {
-  //   dispatch(removePlantationShutterData(deleteId));
-  // };
-
   switch (pageNumber) {
     case 1:
       return (
         <CurtainComponent
           cancelFunc={cancelFunc}
-          data={{}}
+          data={curtainData}
           windowId={currentWindowId}
         />
       );
@@ -64,7 +59,7 @@ export default function ProductComponent({
       return (
         <PlantationShutterComponent
           cancelFunc={cancelFunc}
-          data={{}}
+          data={plantationShutterData}
           windowId={currentWindowId}
         />
       );
@@ -72,7 +67,7 @@ export default function ProductComponent({
       return (
         <RollerBlinderComponent
           cancelFunc={cancelFunc}
-          data={{}}
+          data={rollerBlindData}
           windowId={currentWindowId}
         />
       );
@@ -134,12 +129,16 @@ export default function ProductComponent({
           <div className=" w-full mt-8 ">
             <div className=" py-10">
               <p className=" font-bold text-xl">Window data summary</p>
-              <button
-                onClick={addWindowHandler}
-                className=" bg-blue-500 px-5 py-2 hover:bg-blue-700 ease-in-out rounded-md"
-              >
-                Add new window
-              </button>
+
+              <div>
+                {/* <input></input> */}
+                <button
+                  onClick={addWindowHandler}
+                  className=" bg-blue-500 px-5 py-2 hover:bg-blue-700 ease-in-out rounded-md"
+                >
+                  Add new window
+                </button>
+              </div>
             </div>
 
             <div className=" bg-slate-200 p-5">
@@ -147,22 +146,50 @@ export default function ProductComponent({
                 windowData.map((window) => (
                   <div key={window.windowId} className=" border border-t-2">
                     <h2>Window ID: {window.windowId}</h2>
+                    <button
+                      className=" bg-orange-600"
+                      onClick={() => {
+                        //remove whole window
+                        dispatch(removePlantationShutterData(window.windowId));
+                        dispatch(removeRollerBlindData(window.windowId));
+                        dispatch(removeCurtainData(window.windowId));
+                      }}
+                    >
+                      remove whole window
+                    </button>
 
                     <div className=" flex  gap-5  ">
                       {window.plantationShutter && (
                         <div className=" bg-emerald-400 p-5">
                           <h3>Plantation Shutter Data:</h3>
                           <p>Location: {window.plantationShutter.Location}</p>
-                          <button
-                            className=" bg-red-600"
-                            onClick={() =>
-                              dispatch(
-                                removePlantationShutterData(window.windowId)
-                              )
-                            }
-                          >
-                            remove
-                          </button>
+
+                          <div className=" flex gap-2">
+                            <button
+                              className=" bg-red-600"
+                              onClick={() =>
+                                dispatch(
+                                  removePlantationShutterData(window.windowId)
+                                )
+                              }
+                            >
+                              remove
+                            </button>
+
+                            <button
+                              onClick={() => {
+                                setPageNumber(2);
+                                setCurrentWindowId(window.windowId);
+                                setPlantationShutterData(
+                                  window.plantationShutter
+                                );
+                              }}
+                              className=" bg-slate-400"
+                            >
+                              edit
+                            </button>
+                          </div>
+
                           {/* Render other plantation shutter properties here */}
                         </div>
                       )}
@@ -170,14 +197,29 @@ export default function ProductComponent({
                         <div className="bg-blue-400 p-5 ">
                           <h3>Curtain Data:</h3>
                           <p>Location: {window.curtain.Location}</p>
-                          <button
-                            className=" bg-red-600"
-                            onClick={() =>
-                              dispatch(removeCurtainData(window.windowId))
-                            }
-                          >
-                            remove
-                          </button>
+
+                          <div className=" flex gap-2">
+                            <button
+                              className=" bg-red-600"
+                              onClick={() =>
+                                dispatch(removeCurtainData(window.windowId))
+                              }
+                            >
+                              remove
+                            </button>
+
+                            <button
+                              onClick={() => {
+                                setPageNumber(1);
+                                setCurrentWindowId(window.windowId);
+                                setCurtainData(window.curtain);
+                              }}
+                              className=" bg-slate-400"
+                            >
+                              edit
+                            </button>
+                          </div>
+                          
                           {/* Render other curtain properties here */}
                         </div>
                       )}
@@ -185,26 +227,31 @@ export default function ProductComponent({
                         <div className="bg-yellow-400 p-5">
                           <h3>Roller Blind Data:</h3>
                           <p>Location: {window.rollerBlind.Location}</p>
-                          <button
-                            className=" bg-red-600"
-                            onClick={() =>
-                              dispatch(removeRollerBlindData(window.windowId))
-                            }
-                          >
-                            remove
-                          </button>
+                          <div className="flex gap-2">
+                            <button
+                              className=" bg-red-600"
+                              onClick={() =>
+                                dispatch(removeRollerBlindData(window.windowId))
+                              }
+                            >
+                              remove
+                            </button>
+
+                            <button
+                              onClick={() => {
+                                setPageNumber(3);
+                                setCurrentWindowId(window.windowId);
+                                setRollerBlindData(window.rollerBlind);
+                              }}
+                              className=" bg-slate-400"
+                            >
+                              edit
+                            </button>
+                          </div>
+
                           {/* Render other roller blind properties here */}
                         </div>
                       )}
-                    </div>
-
-                    <div className=" flex gap-5">
-                      <button className=" bg-blue-500 px-5 py-2 hover:bg-blue-700 ease-in-out rounded-md mt-2">
-                        Add to this window
-                      </button>
-                      <button className=" bg-red-500 px-5 py-2 hover:bg-red-700 ease-in-out rounded-md mt-2">
-                        remove this window
-                      </button>
                     </div>
                   </div>
                 ))}
