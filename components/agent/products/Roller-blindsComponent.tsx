@@ -80,15 +80,39 @@ export default function RollerBlindSComponent({
       : data
   );
 
+  //validation
+  function isFormValid(windowData: any) {
+    return (
+      windowData.Location &&
+      windowData.width > 0 &&
+      windowData.Height > 0 &&
+      windowData.Fabric &&
+      windowData.Color &&
+      windowData.Category &&
+      windowData.Control_Side &&
+      windowData.Chanin_Type &&
+      windowData.Chain_Drop &&
+      windowData.Chain_Color &&
+      windowData.Bottom_Rail &&
+      windowData.Roll_Drop &&
+      windowData.Bottom_Color_Drop &&
+      windowData.Winder_Color
+    );
+  }
+
   const calculatePrice = async () => {
-    // develope api fetch in next stage
-    let updatedValue = {
-      price: windowData["width"] * windowData["Price_Per_Meter"],
-    };
-    setWindowData((wd) => ({
-      ...wd,
-      ...updatedValue,
-    }));
+    if (isFormValid(windowData)) {
+      // Calculate the price
+      let updatedValue = {
+        price: windowData["width"] * windowData["Price_Per_Meter"],
+      };
+      setWindowData((wd) => ({
+        ...wd,
+        ...updatedValue,
+      }));
+    } else {
+      alert("Please fill in all required fields before calculating the price.");
+    }
   };
 
   const updateOnChange = (name: string, value: any) => {
@@ -115,11 +139,12 @@ export default function RollerBlindSComponent({
   };
 
   const handleAddRollerBlindsToNewWindow = () => {
-    const rollerBlindData = windowData;
-    console.log(rollerBlindData);
-
-    addRollerBlindsToNewWindow(rollerBlindData);
-    //print the data state
+    if (isFormValid(windowData)) {
+      const rollerBlindData = windowData;
+      addRollerBlindsToNewWindow(rollerBlindData);
+    } else {
+      alert("Please fill in all required fields before saving the window.");
+    }
   };
   console.log("windowData", windowData);
 

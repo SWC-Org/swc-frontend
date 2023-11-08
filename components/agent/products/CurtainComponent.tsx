@@ -77,15 +77,40 @@ export default function CurtainComponent({
       : data
   );
 
+  // validate the data
+  function isFormValid(windowData: any) {
+    return (
+      windowData.Location &&
+      windowData.width > 0 &&
+      windowData.Height > 0 &&
+      windowData.Category &&
+      windowData.Fabric &&
+      windowData.Curtain_Type &&
+      windowData.Color &&
+      windowData.Control &&
+      windowData.Track_Color &&
+      windowData.Return &&
+      windowData.Bottom_Hem &&
+      windowData.Bracket_Type &&
+      windowData.Lining &&
+      windowData.Price_Per_Meter > 0
+    );
+  }
+
   const calculatePrice = async () => {
-    // develope api fetch in next stage
-    let updatedValue = {
-      price: windowData["width"] * windowData["Price_Per_Meter"],
-    };
-    setWindowData((wd) => ({
-      ...wd,
-      ...updatedValue,
-    }));
+    if (isFormValid(windowData)) {
+      // Calculate the price
+      let updatedValue = {
+        price: windowData["width"] * windowData["Price_Per_Meter"],
+      };
+      setWindowData((wd) => ({
+        ...wd,
+        ...updatedValue,
+      }));
+    } else {
+      // Display an error message or handle invalid form data
+      alert("Please fill in all required fields before saving the window.");
+    }
   };
 
   const updateOnChange = (name: string, value: any) => {
@@ -112,11 +137,14 @@ export default function CurtainComponent({
   };
 
   const handleAddCurtainsToNewWindow = () => {
-    const curtainData = windowData;
-    console.log(curtainData);
+    if (isFormValid(windowData)) {
+      const curtainData = windowData;
+      console.log(curtainData);
 
-    addCurtainsToNewWindow(curtainData);
-    //print the data state
+      addCurtainsToNewWindow(curtainData);
+    } else {
+      alert("Please fill in all required fields before saving the window.");
+    }
   };
 
   //PRINT THE DATA
