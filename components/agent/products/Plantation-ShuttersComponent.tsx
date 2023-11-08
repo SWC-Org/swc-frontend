@@ -86,18 +86,46 @@ export default function PlantationShutter({
       : data
   );
 
+  //valiations
+  function isFormValid(windowData: any) {
+    return (
+      windowData.Location &&
+      windowData.width > 0 &&
+      windowData.Height > 0 &&
+      windowData.Mount_Configuration &&
+      windowData.Panel_Quantity > 0 &&
+      windowData.Blade_Size &&
+      windowData.Material &&
+      windowData.Color &&
+      windowData.Layout_Details &&
+      windowData.Mount_methods &&
+      windowData.Frames_Configuration &&
+      windowData.Frame_Size > 0 &&
+      windowData.Split_Tilt_Rod &&
+      windowData.Tilt_rod_type &&
+      windowData.T_Post_Quantity > 0 &&
+      windowData.Distance_n_to_T1_T2_T3 > 0 &&
+      windowData.Surcharge_Value > 0 &&
+      windowData.Price_per_square_meter > 0
+    );
+  }
+
   const calculatePrice = async () => {
-    // develope api fetch in next stage 
-    let updatedValue = {
-      price:
-        windowData["width"] *
-        windowData["Height"] *
-        windowData["Surcharge_Value"],
-    };
-    setWindowData((wd) => ({
-      ...wd,
-      ...updatedValue,
-    }));
+    if (isFormValid(windowData)) {
+      // Calculate the price
+      let updatedValue = {
+        price:
+          windowData["width"] *
+          windowData["Height"] *
+          windowData["Surcharge_Value"],
+      };
+      setWindowData((wd) => ({
+        ...wd,
+        ...updatedValue,
+      }));
+    } else {
+      alert("Please fill in all required fields before saving the window.");
+    }
   };
 
   const updateOnChange = (name: string, value: any) => {
@@ -113,12 +141,6 @@ export default function PlantationShutter({
 
   //add plantation shutter to new window
   const addPlantationShutterToNewWindow = (plantationShutterData: any) => {
-    // const newWindow = {
-    //   windowId: windowId.toString(),
-    // };
-
-    // dispatch(addWindow(newWindow));
-
     dispatch(
       addPlantationShutterData({
         windowId: windowId.toString(),
@@ -128,11 +150,12 @@ export default function PlantationShutter({
   };
 
   const handleAddPlantationShutterToNewWindow = () => {
-    const plantationShutterData = windowData;
-    console.log(plantationShutterData);
-
-    addPlantationShutterToNewWindow(plantationShutterData);
-    //print the data state
+    if (isFormValid(windowData)) {
+      const plantationShutterData = windowData;
+      addPlantationShutterToNewWindow(plantationShutterData);
+    } else {
+      alert("Please fill in all required fields before saving the window.");
+    }
   };
 
   return (
