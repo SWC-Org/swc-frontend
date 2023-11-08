@@ -15,15 +15,16 @@ import {
 import { useDispatch } from "react-redux";
 
 export default function ProductComponent({
-  window_data={},
-  window_data_deleteHandler={},
-  window_data_editHandler={}
+  window_data = {},
+  window_data_deleteHandler = {},
+  window_data_editHandler = {},
 }) {
   const [pageNumber, setPageNumber] = useState(0);
 
   const [plantationShutterData, setPlantationShutterData] = useState({});
   const [curtainData, setCurtainData] = useState({});
   const [rollerBlindData, setRollerBlindData] = useState({});
+  const [selectedWindowId, setSelectedWindowId] = useState(0);
 
   const cancelFunc = () => {
     setPageNumber(0);
@@ -39,15 +40,25 @@ export default function ProductComponent({
   console.log(currentWindowId, "currentWindowId");
 
   //add
+  // const addWindowHandler = () => {
+  //   const newWindowId = windowData.length;
+  //   setCurrentWindowId(newWindowId);
+  //   console.log(newWindowId, "newWindowId");
+  //   // const newWindow = {
+  //   //   windowId: newWindowId,
+  //   // };
+  //   // dispatch(addWindow(newWindow));
+  //   console.log("addWindowHandler");
+  // };
+
+  const handleSelectWindow = (windowId) => {
+    setCurrentWindowId(windowId);
+  };
+
   const addWindowHandler = () => {
     const newWindowId = windowData.length;
     setCurrentWindowId(newWindowId);
-    console.log(newWindowId, "newWindowId");
-    // const newWindow = {
-    //   windowId: newWindowId,
-    // };
-    // dispatch(addWindow(newWindow));
-    console.log("addWindowHandler");
+    setSelectedWindowId(null);
   };
 
   switch (pageNumber) {
@@ -138,10 +149,14 @@ export default function ProductComponent({
                 {/* <input></input> */}
                 <button
                   onClick={addWindowHandler}
-                  className=" bg-blue-500 px-5 py-2 hover:bg-blue-700 ease-in-out rounded-md"
+                  className=" bg-blue-500 px-5 py-2 hover:bg-blue-700 text-white ease-in-out rounded-md"
                 >
-                  Add new window
+                  Add new window +
                 </button>
+                <p className=" font-normal   text-xl py-1 rounded-md mt-3 bg-yellow -400 w-fit px-3">
+                  Start adding windows data to window id:{" "}
+                  <span className=" font-bold">00{currentWindowId}</span>{" "}
+                </p>
               </div>
             </div>
 
@@ -149,28 +164,45 @@ export default function ProductComponent({
               {windowData &&
                 windowData.map((window) => (
                   <div key={window.windowId} className=" border border-t-2">
-                    <h2>Window ID: {window.windowId}</h2>
-                    <button
-                      className=" bg-orange-600"
-                      onClick={() => {
-                        //remove whole window
-                        dispatch(removePlantationShutterData(window.windowId));
-                        dispatch(removeRollerBlindData(window.windowId));
-                        dispatch(removeCurtainData(window.windowId));
-                      }}
-                    >
-                      remove whole window
-                    </button>
+                    <h2 className=" border border-b-2 border-b-black/70 mb-4">
+                      Window ID: {window.windowId}
+                    </h2>
+
+                    <div className=" flex justify-between py-4">
+                      <label>
+                        <input
+                          type="checkbox"
+                          checked={currentWindowId === window.windowId}
+                          onChange={() => handleSelectWindow(window.windowId)}
+                        />
+                        Select for editing
+                      </label>
+                      <button
+                        className=" bg-red-600 text-white p-1 rounded-lg px-2 hover:bg-red-700 ease-in-out"
+                        onClick={() => {
+                          //remove whole window
+                          dispatch(
+                            removePlantationShutterData(window.windowId)
+                          );
+                          dispatch(removeRollerBlindData(window.windowId));
+                          dispatch(removeCurtainData(window.windowId));
+                        }}
+                      >
+                        remove whole window
+                      </button>
+                    </div>
+
+                    {/* planation shutter */}
 
                     <div className=" flex  gap-5  ">
                       {window.plantationShutter && (
-                        <div className=" bg-emerald-400 p-5">
-                          <h3>Plantation Shutter Data:</h3>
-                          <p>Location: {window.plantationShutter.Location}</p>
+                        <div className=" bg-[#48d89cc2] p-2 rounded-md ">
+                          <h3 className="font-semibold">Plantation Shutter Data</h3>
+                          <p>Price: {window.plantationShutter.price}</p>
 
-                          <div className=" flex gap-2">
+                          <div className=" flex  justify-between mt-2">
                             <button
-                              className=" bg-red-600"
+                              className="p-1 rounded-md hover:bg-red-700 ease-in-out text-white bg-red-600"
                               onClick={() =>
                                 dispatch(
                                   removePlantationShutterData(window.windowId)
@@ -188,23 +220,23 @@ export default function ProductComponent({
                                   window.plantationShutter
                                 );
                               }}
-                              className=" bg-slate-400"
+                              className="p-1 rounded-md hover:bg-blue-700 ease-in-out text-white bg-blue-600"
                             >
                               edit
                             </button>
                           </div>
-
-                          {/* Render other plantation shutter properties here */}
                         </div>
                       )}
-                      {window.curtain && (
-                        <div className="bg-blue-400 p-5 ">
-                          <h3>Curtain Data:</h3>
-                          <p>Location: {window.curtain.Location}</p>
 
-                          <div className=" flex gap-2">
+                      {/* curtaions */}
+                      {window.curtain && (
+                        <div className="bg-[#88D6F7] p-2 rounded-md ">
+                          <h3 className="font-semibold">Curtain Data</h3>
+                          <p>Price: {window.curtain.price}</p>
+
+                          <div className=" flex gap-2 justify-between mt-2">
                             <button
-                              className=" bg-red-600"
+                              className="p-1 rounded-md hover:bg-red-700 ease-in-out text-white bg-red-600"
                               onClick={() =>
                                 dispatch(removeCurtainData(window.windowId))
                               }
@@ -218,22 +250,22 @@ export default function ProductComponent({
                                 setCurrentWindowId(window.windowId);
                                 setCurtainData(window.curtain);
                               }}
-                              className=" bg-slate-400"
+                              className="p-1 rounded-md hover:bg-blue-700 ease-in-out text-white bg-blue-600"
                             >
                               edit
                             </button>
                           </div>
-                          
+
                           {/* Render other curtain properties here */}
                         </div>
                       )}
                       {window.rollerBlind && (
-                        <div className="bg-yellow-400 p-5">
-                          <h3>Roller Blind Data:</h3>
-                          <p>Location: {window.rollerBlind.Location}</p>
-                          <div className="flex gap-2">
+                        <div className="bg-[#fe8514a4] p-2 rounded-md">
+                          <h3 className="font-semibold">Roller Blind Data</h3>
+                          <p>Price: {window.rollerBlind.price}</p>
+                          <div className="flex gap-2 justify-between mt-2">
                             <button
-                              className=" bg-red-600"
+                              className="p-1 rounded-md hover:bg-red-700 ease-in-out text-white bg-red-600"
                               onClick={() =>
                                 dispatch(removeRollerBlindData(window.windowId))
                               }
@@ -247,13 +279,11 @@ export default function ProductComponent({
                                 setCurrentWindowId(window.windowId);
                                 setRollerBlindData(window.rollerBlind);
                               }}
-                              className=" bg-slate-400"
+                              className="p-1 rounded-md hover:bg-blue-700 ease-in-out text-white bg-blue-600"
                             >
                               edit
                             </button>
                           </div>
-
-                          {/* Render other roller blind properties here */}
                         </div>
                       )}
                     </div>

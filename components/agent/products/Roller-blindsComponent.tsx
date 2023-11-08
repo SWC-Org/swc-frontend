@@ -104,7 +104,8 @@ export default function RollerBlindSComponent({
     if (isFormValid(windowData)) {
       // Calculate the price
       let updatedValue = {
-        price: windowData["width"] * windowData["Price_Per_Meter"],
+        //? edit this
+        price: windowData["width"] * windowData["Height"] ,
       };
       setWindowData((wd) => ({
         ...wd,

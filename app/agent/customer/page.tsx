@@ -29,7 +29,7 @@ export default function Checkout() {
   const [customerCity, setCustomerCity] = useState("");
   const [dateValue, setDateValue] = useState<Dayjs | null>(dayjs("2022-04-17"));
   const [window_data, setWindow_data] = useState([]);
-  const [id, setId] = useState(0)
+  const [id, setId] = useState(0);
 
   const window_data_deleteHandler = (id: number) => {
     const arrayWithoutD = window_data.filter(function (data) {
@@ -74,33 +74,41 @@ export default function Checkout() {
     }
   }
 
-  const isCustomerdDetailsEmpty = ()=>{
-    if (customerName == "" || customerEmail == "" || customerAdressLine1 == "" || customerCity == "") {
-      return true
+  const isCustomerdDetailsEmpty = () => {
+    if (
+      customerName == "" ||
+      customerEmail == "" ||
+      customerAdressLine1 == "" ||
+      customerCity == ""
+    ) {
+      return true;
     }
-    return false
-  }
-  const isWindowDataEmpty = () =>{
+    return false;
+  };
+
+  //prnit customer details
+  console.log(customerEmail);
+  const isWindowDataEmpty = () => {
     if (window_data.length == 0) {
-      return true
+      return true;
     }
-    return false
-  }
+    return false;
+  };
   const handleNext = () => {
-    console.log(activeStep)
-    switch(activeStep){
+    console.log(activeStep);
+    switch (activeStep) {
       case 0:
-        if(isCustomerdDetailsEmpty()) {
-          alert("Feilds cannt be empty.")
-          return
+        if (isCustomerdDetailsEmpty()) {
+          alert("Feilds cannt be empty.");
+          return;
         }
-        break
+        break;
       case 1:
         if (isWindowDataEmpty()) {
-          alert("There should be at least one window")
-          return
+          alert("There should be at least one window");
+          return;
         }
-        break
+        break;
     }
     setActiveStep(activeStep + 1);
   };
@@ -112,7 +120,7 @@ export default function Checkout() {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Container >
+      <Container>
         <Paper
           variant="outlined"
           sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}
