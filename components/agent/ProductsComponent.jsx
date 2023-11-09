@@ -153,7 +153,7 @@ export default function ProductComponent({
                 >
                   Add new window +
                 </button>
-                <p className=" font-normal   text-xl py-1 rounded-md mt-3 bg-yellow -400 w-fit px-3">
+                <p className=" font-normal  bg-yellow-300  text-xl py-1 rounded-md mt-3 bg-yellow -400 w-fit px-3">
                   Start adding windows data to window id:{" "}
                   <span className=" font-bold">00{currentWindowId}</span>{" "}
                 </p>
@@ -197,7 +197,9 @@ export default function ProductComponent({
                     <div className=" flex  gap-5  ">
                       {window.plantationShutter && (
                         <div className=" bg-[#48d89cc2] p-2 rounded-md ">
-                          <h3 className="font-semibold">Plantation Shutter Data</h3>
+                          <h3 className="font-semibold">
+                            Plantation Shutter Data
+                          </h3>
                           <p>Price: {window.plantationShutter.price}</p>
 
                           <div className=" flex  justify-between mt-2">
