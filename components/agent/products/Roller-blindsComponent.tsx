@@ -24,6 +24,8 @@ import {
   addRollerBlindData,
   addWindow,
 } from "../../../redux/slices/windowDataSlice";
+import { Flip, toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface RollerBlindProps {
   cancelFunc: () => void;
@@ -105,7 +107,7 @@ export default function RollerBlindSComponent({
       // Calculate the price
       let updatedValue = {
         //? edit this
-        price: windowData["width"] * windowData["Height"] ,
+        price: windowData["width"] * windowData["Height"],
       };
       setWindowData((wd) => ({
         ...wd,
@@ -143,6 +145,19 @@ export default function RollerBlindSComponent({
     if (isFormValid(windowData)) {
       const rollerBlindData = windowData;
       addRollerBlindsToNewWindow(rollerBlindData);
+
+      //display the toast
+      toast.success("Roller Blind data added successfully", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        progress: undefined,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 60,
+        transition: Flip,
+      });
     } else {
       alert("Please fill in all required fields before saving the window.");
     }

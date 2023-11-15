@@ -17,6 +17,10 @@ import CustomerDetail from "@components/agent/CustomerDetailsComponent";
 import Products from "@components/agent/ProductsComponent";
 import Review from "@components/agent/ReviewComponent";
 import dayjs, { Dayjs } from "dayjs";
+import { useDispatch } from "react-redux";
+import { useAppSelector } from "../../../redux/store";
+import { Flip, toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const steps = ["Customer Details", "Add Windows", "Review your order"];
 
@@ -30,6 +34,11 @@ export default function Checkout() {
   const [dateValue, setDateValue] = useState<Dayjs | null>(dayjs("2022-04-17"));
   const [window_data, setWindow_data] = useState([]);
   const [id, setId] = useState(0);
+
+  //window data
+  const windowData = useAppSelector((state) => state.windowDataReducer);
+
+  console.log(windowData.length, "windowData lenght");
 
   const window_data_deleteHandler = (id: number) => {
     const arrayWithoutD = window_data.filter(function (data) {
@@ -68,7 +77,15 @@ export default function Checkout() {
           />
         );
       case 2:
-        return <Review />;
+        return (
+          <Review
+            customerName={customerName}
+            customerEmail={customerEmail}
+            customerAdressLine1={customerAdressLine1}
+            customerAdressLine2={customerAdressLine2}
+            customerCity={customerCity}
+          />
+        );
       default:
         throw new Error("Unknown step");
     }
@@ -89,7 +106,7 @@ export default function Checkout() {
   //prnit customer details
   console.log(customerEmail);
   const isWindowDataEmpty = () => {
-    if (window_data.length == 0) {
+    if (windowData.length == 0) {
       return true;
     }
     return false;
@@ -99,13 +116,33 @@ export default function Checkout() {
     switch (activeStep) {
       case 0:
         if (isCustomerdDetailsEmpty()) {
-          alert("Feilds cannt be empty.");
+          //create a toast
+          toast.error("Please fill all the fields", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            transition: Flip,
+          });
           return;
         }
         break;
       case 1:
         if (isWindowDataEmpty()) {
-          alert("There should be at least one window");
+          //add a toast
+          toast.error("Please add a window", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            transition: Flip,
+          });
           return;
         }
         break;
