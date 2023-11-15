@@ -19,6 +19,8 @@ import Review from "@components/agent/ReviewComponent";
 import dayjs, { Dayjs } from "dayjs";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../../redux/store";
+import { Flip, toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const steps = ["Customer Details", "Add Windows", "Review your order"];
 
@@ -75,7 +77,15 @@ export default function Checkout() {
           />
         );
       case 2:
-        return <Review />;
+        return (
+          <Review
+            customerName={customerName}
+            customerEmail={customerEmail}
+            customerAdressLine1={customerAdressLine1}
+            customerAdressLine2={customerAdressLine2}
+            customerCity={customerCity}
+          />
+        );
       default:
         throw new Error("Unknown step");
     }
@@ -106,13 +116,33 @@ export default function Checkout() {
     switch (activeStep) {
       case 0:
         if (isCustomerdDetailsEmpty()) {
-          alert("Feilds cannt be empty.");
+          //create a toast
+          toast.error("Please fill all the fields", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            transition: Flip,
+          });
           return;
         }
         break;
       case 1:
         if (isWindowDataEmpty()) {
-          alert("There should be at least one window");
+          //add a toast
+          toast.error("Please add a window", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            transition: Flip,
+          });
           return;
         }
         break;

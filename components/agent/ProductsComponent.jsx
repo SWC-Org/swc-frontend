@@ -39,18 +39,6 @@ export default function ProductComponent({
   const [currentWindowId, setCurrentWindowId] = useState(0);
   console.log(currentWindowId, "currentWindowId");
 
-  //add
-  // const addWindowHandler = () => {
-  //   const newWindowId = windowData.length;
-  //   setCurrentWindowId(newWindowId);
-  //   console.log(newWindowId, "newWindowId");
-  //   // const newWindow = {
-  //   //   windowId: newWindowId,
-  //   // };
-  //   // dispatch(addWindow(newWindow));
-  //   console.log("addWindowHandler");
-  // };
-
   const handleSelectWindow = (windowId) => {
     setCurrentWindowId(windowId);
   };
