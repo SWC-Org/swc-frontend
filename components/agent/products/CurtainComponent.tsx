@@ -23,7 +23,8 @@ import {
 } from "../../../redux/slices/windowDataSlice";
 import { AppDispatch, store } from "../../../redux/store";
 import { useDispatch } from "react-redux";
-
+import { Flip, toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 interface CurtainProps {
   cancelFunc: () => void;
   data: {
@@ -142,6 +143,18 @@ export default function CurtainComponent({
       console.log(curtainData);
 
       addCurtainsToNewWindow(curtainData);
+      //display the toast
+      toast.success("Curtain data added successfully", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        progress: undefined,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 60,
+        transition: Flip,
+      });
     } else {
       alert("Please fill in all required fields before saving the window.");
     }

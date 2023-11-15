@@ -22,6 +22,8 @@ import {
   addPlantationShutterData,
 } from "../../../redux/slices/windowDataSlice";
 import { AppDispatch, store } from "../../../redux/store";
+import { Flip, toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface PlantationShutterProps {
   cancelFunc: () => void;
@@ -153,6 +155,18 @@ export default function PlantationShutter({
     if (isFormValid(windowData)) {
       const plantationShutterData = windowData;
       addPlantationShutterToNewWindow(plantationShutterData);
+      //display the toast
+      toast.success("Plantation shutter added successfully", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        progress: undefined,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 60,
+        transition: Flip,
+      });
     } else {
       alert("Please fill in all required fields before saving the window.");
     }

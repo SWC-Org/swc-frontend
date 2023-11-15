@@ -17,6 +17,8 @@ import CustomerDetail from "@components/agent/CustomerDetailsComponent";
 import Products from "@components/agent/ProductsComponent";
 import Review from "@components/agent/ReviewComponent";
 import dayjs, { Dayjs } from "dayjs";
+import { useDispatch } from "react-redux";
+import { useAppSelector } from "../../../redux/store";
 
 const steps = ["Customer Details", "Add Windows", "Review your order"];
 
@@ -30,6 +32,11 @@ export default function Checkout() {
   const [dateValue, setDateValue] = useState<Dayjs | null>(dayjs("2022-04-17"));
   const [window_data, setWindow_data] = useState([]);
   const [id, setId] = useState(0);
+
+  //window data
+  const windowData = useAppSelector((state) => state.windowDataReducer);
+
+  console.log(windowData.length, "windowData lenght");
 
   const window_data_deleteHandler = (id: number) => {
     const arrayWithoutD = window_data.filter(function (data) {
@@ -89,7 +96,7 @@ export default function Checkout() {
   //prnit customer details
   console.log(customerEmail);
   const isWindowDataEmpty = () => {
-    if (window_data.length == 0) {
+    if (windowData.length == 0) {
       return true;
     }
     return false;

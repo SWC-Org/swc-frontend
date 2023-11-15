@@ -10,7 +10,7 @@ type TextAreaProps = {
   placeholder: string;
   type: string;
   width?: string;
-  value:string
+  value: string;
 };
 
 const TextArea: React.FC<TextAreaProps> = ({
@@ -19,7 +19,7 @@ const TextArea: React.FC<TextAreaProps> = ({
   label,
   placeholder,
   width = "100%",
-  value
+  value,
 }) => {
   const inputStyle = {
     width: width,
@@ -29,7 +29,7 @@ const TextArea: React.FC<TextAreaProps> = ({
     <div>
       <Typography className="mb-3">{label}</Typography>
       <textarea
-        className="border-2 border-gray-400 rounded-md p-2 h-14 w-full"
+        className="border-2 border-gray-400 rounded-md p-2 h-14 w-full z-10"
         name={name}
         id={id}
         placeholder={placeholder}

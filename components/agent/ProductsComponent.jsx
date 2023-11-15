@@ -59,6 +59,10 @@ export default function ProductComponent({
     const newWindowId = windowData.length;
     setCurrentWindowId(newWindowId);
     setSelectedWindowId(null);
+    //empty all data
+    setPlantationShutterData({});
+    setCurtainData({});
+    setRollerBlindData({});
   };
 
   switch (pageNumber) {
