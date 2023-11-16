@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Typography } from "@mui/material";
 import Image from "next/image";
 import vercel from "../../public/assets/images/vercel.svg";
@@ -20,9 +20,105 @@ const ReviewComponent = ({
   customerCity,
 }: ReviewComponentProps) => {
   //states
-  const windowData = useAppSelector((state) => state.windowDataReducer);
+  const [plantationShutterTotal, setPlantationShutterTotal] = React.useState(0);
+  const [rollerBlindsTotal, setRollerBlindsTotal] = React.useState(0);
+  const [curtainTotal, setCurtainTotal] = React.useState(0);
+  const [grossTotal, setGrossTotal] = React.useState(0);
+  const [gstTotal, setGstTotal] = React.useState(0);
 
+  const [plantationShutterLocations, setPlantationShutterLocations] =
+    React.useState<any>([]);
+  const [rollerBlindsLocations, setRollerBlindsLocations] = React.useState<any>(
+    []
+  );
+  const [venetianBlindsLocations, setVenetianBlindsLocations] =
+    React.useState<any>([]);
+
+  //redux
+  const windowData = useAppSelector((state) => state.windowDataReducer);
   console.log(windowData, "windowData");
+
+  //caicucate the total of all the plantation shutters from windowData
+  useEffect(() => {
+    //loop the windowData  and get the total of plantation shutters price
+    let plantationShutterTotal = 0;
+    let rollerBlindsTotal = 0;
+    let curtainTotal = 0;
+
+    let newPlantationShutterLocations: any[] = [];
+    let newRollerBlindsLocations: any[] = [];
+    let newVenetianBlindsLocations: any[] = [];
+
+    for (let i = 0; i < windowData.length; i++) {
+      const window = windowData[i];
+      if (window.plantationShutter) {
+        plantationShutterTotal += window.plantationShutter.price;
+        //add the location to the plantationShutterLocations
+        newPlantationShutterLocations = [
+          ...newPlantationShutterLocations,
+          window.plantationShutter.Location,
+        ];
+      }
+      if (window.rollerBlind) {
+        rollerBlindsTotal += window.rollerBlind.price;
+        //add the location to the rollerBlindsLocations
+        newRollerBlindsLocations = [
+          ...newRollerBlindsLocations,
+          window.rollerBlind.Location,
+        ];
+      }
+      if (window.curtain) {
+        curtainTotal += window.curtain.price;
+        //add the location to the venetianBlindsLocations
+        newVenetianBlindsLocations = [
+          ...newVenetianBlindsLocations,
+          window.curtain.Location,
+        ];
+      }
+    }
+
+    //set the plantationShutterTotal
+    setPlantationShutterTotal(plantationShutterTotal);
+    setRollerBlindsTotal(rollerBlindsTotal);
+    setCurtainTotal(curtainTotal);
+
+    //set the gross total
+    setGrossTotal(plantationShutterTotal + rollerBlindsTotal + curtainTotal);
+    //set the gst total
+    setGstTotal(
+      (plantationShutterTotal + rollerBlindsTotal + curtainTotal) / 10
+    );
+
+    //set the new locations
+    setPlantationShutterLocations(newPlantationShutterLocations);
+    setRollerBlindsLocations(newRollerBlindsLocations);
+    setVenetianBlindsLocations(newVenetianBlindsLocations);
+  }, [windowData]);
+
+  console.log(plantationShutterTotal, "plantationShutterTotal");
+  console.log(rollerBlindsTotal, "rollerBlindsTotal");
+  console.log(curtainTotal, "venetianBlindsTotal");
+
+  console.log(plantationShutterLocations, "plantationShutterLocations");
+  console.log(rollerBlindsLocations, "rollerBlindsLocations");
+  console.log(venetianBlindsLocations, "venetianBlindsLocations");
+
+  //handle send quotation email
+  const sendMail = async (e: any) => {
+    e.preventDefault();
+
+    const response = await fetch("/api/send", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      // body: JSON.stringify({
+      //   subject,
+      //   message,
+      // }),
+    });
+    console.log(await response.json());
+  };
 
   return (
     <div className="px-32">
@@ -74,7 +170,15 @@ const ReviewComponent = ({
                 </span>
               </p>
               <p className=" p-2 bg-blue-400 text-white w-auto">
-                Expiration Date: <span>2023/03/02 </span>
+                Expiration Date:{" "}
+                <span>
+                  {
+                    //one month from now
+                    new Date(
+                      new Date().setMonth(new Date().getMonth() + 1)
+                    ).toLocaleDateString()
+                  }
+                </span>
               </p>
             </div>
           </div>
@@ -100,20 +204,60 @@ const ReviewComponent = ({
               </tr>
             </thead>
             <tbody className="text-gray-900 bg-white">
-              <tr>
-                <th
-                  scope="row"
-                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
-                >
-                  Roller Blinders
-                </th>
-                <td className="px-6 py-4">
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  Fugit numquam
-                </td>
-                <td className="px-6 py-4">GST</td>
-                <td className="px-6 py-4">2999</td>
-              </tr>
+              {
+                //plantation shutters
+                plantationShutterTotal > 0 && (
+                  <tr>
+                    <th
+                      scope="row"
+                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+                    >
+                      Plantation Shutters
+                    </th>
+                    <td className="px-6 py-4">
+                      {
+                        //display the locations separated by comma
+                        plantationShutterLocations.join(", ")
+                      }
+                    </td>
+                    <td className="px-6 py-4">GST</td>
+                    <td className="px-6 py-4">{plantationShutterTotal}</td>
+                  </tr>
+                )
+              }
+              {rollerBlindsTotal > 0 && (
+                <tr>
+                  <th
+                    scope="row"
+                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+                  >
+                    Roller Blinds
+                  </th>
+                  <td className="px-6 py-4">
+                    {rollerBlindsLocations.join(", ")}
+                  </td>
+                  <td className="px-6 py-4">GST</td>
+                  <td className="px-6 py-4">{rollerBlindsTotal}</td>
+                </tr>
+              )}
+              {
+                //curtains
+                curtainTotal > 0 && (
+                  <tr>
+                    <th
+                      scope="row"
+                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+                    >
+                      Curtains
+                    </th>
+                    <td className="px-6 py-4">
+                      {venetianBlindsLocations.join(", ")}
+                    </td>
+                    <td className="px-6 py-4">GST</td>
+                    <td className="px-6 py-4">{curtainTotal}</td>
+                  </tr>
+                )
+              }
             </tbody>
           </table>
         </section>
@@ -124,15 +268,15 @@ const ReviewComponent = ({
           <div className=" w-64 gap-y-3 flex flex-col">
             <div className="flex justify-between">
               <p>SUBTOTAL</p>
-              <p>1212</p>
+              <p>{grossTotal}</p>
             </div>
             <div className="flex justify-between">
               <p>GST TOTAL</p>
-              <p>2000</p>
+              <p>{gstTotal}</p>
             </div>
             <div className="flex justify-between text-lg bg-blue-400 p-2 text-white">
               <p>TOTAL</p>
-              <p>A$ 2000</p>
+              <p>A$ {grossTotal + gstTotal}</p>
             </div>
           </div>
         </section>
@@ -162,8 +306,8 @@ const ReviewComponent = ({
                 >
                   GST @10%
                 </th>
-                <td className="px-6 py-4">1212</td>
-                <td className="px-6 py-4">12121</td>
+                <td className="px-6 py-4">{gstTotal}</td>
+                <td className="px-6 py-4">{gstTotal * 10}</td>
               </tr>
             </tbody>
           </table>
@@ -187,7 +331,10 @@ const ReviewComponent = ({
             value={customerEmail}
           />
 
-          <button className=" bg-blue-600 text-white px-3 py-2 rounded-md mt-3 w-40 hover:bg-blue-700 ease-in-out">
+          <button
+            onClick={sendMail}
+            className=" bg-blue-600 text-white px-3 py-2 rounded-md mt-3 w-40 hover:bg-blue-700 ease-in-out"
+          >
             Send Quotation
           </button>
         </div>

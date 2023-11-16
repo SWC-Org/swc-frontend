@@ -109,8 +109,20 @@ export default function CurtainComponent({
         ...updatedValue,
       }));
     } else {
-      // Display an error message or handle invalid form data
-      alert("Please fill in all required fields before saving the window.");
+      toast.error(
+        "Please fill in all required fields before saving the window.",
+        {
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          progress: undefined,
+          pauseOnHover: true,
+          draggable: true,
+          draggablePercent: 60,
+          transition: Flip,
+        }
+      );
     }
   };
 
@@ -156,7 +168,20 @@ export default function CurtainComponent({
         transition: Flip,
       });
     } else {
-      alert("Please fill in all required fields before saving the window.");
+      toast.error(
+        "Please fill in all required fields before saving the window.",
+        {
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          progress: undefined,
+          pauseOnHover: true,
+          draggable: true,
+          draggablePercent: 60,
+          transition: Flip,
+        }
+      );
     }
   };
 

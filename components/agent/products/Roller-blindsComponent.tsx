@@ -114,7 +114,20 @@ export default function RollerBlindSComponent({
         ...updatedValue,
       }));
     } else {
-      alert("Please fill in all required fields before calculating the price.");
+      toast.error(
+        "Please fill in all required fields before saving the window.",
+        {
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          progress: undefined,
+          pauseOnHover: true,
+          draggable: true,
+          draggablePercent: 60,
+          transition: Flip,
+        }
+      );
     }
   };
 
@@ -159,8 +172,22 @@ export default function RollerBlindSComponent({
         transition: Flip,
       });
     } else {
-      alert("Please fill in all required fields before saving the window.");
-    }
+     //display the toast
+     toast.error(
+      "Please fill in all required fields before saving the window.",
+      {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        progress: undefined,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 60,
+        transition: Flip,
+      }
+    );
+  }
   };
   console.log("windowData", windowData);
 
