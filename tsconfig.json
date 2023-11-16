@@ -55,5 +55,5 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-  ]
+, "app/api/send/route.ts"  ]
 }

@@ -8,22 +8,12 @@ import { Plantation_shutters_data } from "@constants/Plantation_shutters_data";
 import React, { useState } from "react";
 import TextArea from "@components/TextFeilds/TextArea";
 import CustomIconButton from "@components/Buttons/CustomIconButton";
-import {
-  Calculate,
-  Cancel,
-  ControlPointRounded,
-  FastForwardOutlined,
-  Save,
-  Summarize,
-} from "@mui/icons-material";
+import { Calculate, Cancel, Save } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
-import {
-  addWindow,
-  addPlantationShutterData,
-} from "../../../redux/slices/windowDataSlice";
-import { AppDispatch, store } from "../../../redux/store";
-import { Flip, toast, ToastContainer } from "react-toastify";
+import { addPlantationShutterData } from "../../../redux/slices/windowDataSlice";
+import { AppDispatch } from "../../../redux/store";
 import "react-toastify/dist/ReactToastify.css";
+import { Flip, toast } from "react-toastify";
 
 interface PlantationShutterProps {
   cancelFunc: () => void;
@@ -126,7 +116,20 @@ export default function PlantationShutter({
         ...updatedValue,
       }));
     } else {
-      alert("Please fill in all required fields before saving the window.");
+      toast.error(
+        "Please fill in all required fields before saving the window.",
+        {
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          progress: undefined,
+          pauseOnHover: true,
+          draggable: true,
+          draggablePercent: 60,
+          transition: Flip,
+        }
+      );
     }
   };
 
@@ -168,7 +171,21 @@ export default function PlantationShutter({
         transition: Flip,
       });
     } else {
-      alert("Please fill in all required fields before saving the window.");
+      //display the toast
+      toast.error(
+        "Please fill in all required fields before saving the window.",
+        {
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          progress: undefined,
+          pauseOnHover: true,
+          draggable: true,
+          draggablePercent: 60,
+          transition: Flip,
+        }
+      );
     }
   };
 
