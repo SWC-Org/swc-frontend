@@ -491,7 +491,8 @@ export default function RollerBlindSComponent({
         </section>
         <div className=" text-right mb-3">
           <Box component="div" sx={{ visibility: "visible" }}>
-            Price ${windowData["price"]}
+            {/* Price ${windowData["price"]} */}
+            Price:  {windowData["price"].toFixed(2) } {" "}AUD
           </Box>
         </div>
         <div className=" text-right mb-3">
