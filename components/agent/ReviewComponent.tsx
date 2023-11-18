@@ -141,8 +141,10 @@ const ReviewComponent = ({
             </div>
             <div>
               <p className="font-black">Address</p>
-              <p>Roshanthi Perera</p>
-              <p>100 Liberty Auenue</p>
+              <p>{customerName}</p>
+              <p>{customerAdressLine1}</p>
+              <p>{customerAdressLine2}</p>
+              <p>{customerCity}</p>
               <p>Roville</p>
             </div>
           </div>
@@ -221,7 +223,9 @@ const ReviewComponent = ({
                       }
                     </td>
                     <td className="px-6 py-4">GST</td>
-                    <td className="px-6 py-4">{plantationShutterTotal}</td>
+                    <td className="px-6 py-4 justify-end flex items-end">
+                      {plantationShutterTotal.toFixed(2)}
+                    </td>
                   </tr>
                 )
               }
@@ -237,7 +241,7 @@ const ReviewComponent = ({
                     {rollerBlindsLocations.join(", ")}
                   </td>
                   <td className="px-6 py-4">GST</td>
-                  <td className="px-6 py-4">{rollerBlindsTotal}</td>
+                  <td className="px-6 py-4">{rollerBlindsTotal.toFixed(2)}</td>
                 </tr>
               )}
               {
@@ -254,7 +258,7 @@ const ReviewComponent = ({
                       {venetianBlindsLocations.join(", ")}
                     </td>
                     <td className="px-6 py-4">GST</td>
-                    <td className="px-6 py-4">{curtainTotal}</td>
+                    <td className="px-6 py-4">{curtainTotal.toFixed(2)}</td>
                   </tr>
                 )
               }
@@ -268,15 +272,15 @@ const ReviewComponent = ({
           <div className=" w-64 gap-y-3 flex flex-col">
             <div className="flex justify-between">
               <p>SUBTOTAL</p>
-              <p>{grossTotal}</p>
+              <p>{grossTotal.toFixed(2)}</p>
             </div>
             <div className="flex justify-between">
               <p>GST TOTAL</p>
-              <p>{gstTotal}</p>
+              <p>{gstTotal.toFixed(2)}</p>
             </div>
             <div className="flex justify-between text-lg bg-blue-400 p-2 text-white">
               <p>TOTAL</p>
-              <p>A$ {grossTotal + gstTotal}</p>
+              <p>A$ {(grossTotal + gstTotal).toFixed(2)}</p>
             </div>
           </div>
         </section>
@@ -306,8 +310,8 @@ const ReviewComponent = ({
                 >
                   GST @10%
                 </th>
-                <td className="px-6 py-4">{gstTotal}</td>
-                <td className="px-6 py-4">{gstTotal * 10}</td>
+                <td className="px-6 py-4">{gstTotal.toFixed(2)}</td>
+                <td className="px-6 py-4">{(gstTotal * 10).toFixed(2)}</td>
               </tr>
             </tbody>
           </table>

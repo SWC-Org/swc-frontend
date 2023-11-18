@@ -107,9 +107,8 @@ export default function PlantationShutter({
       // Calculate the price
       let updatedValue = {
         price:
-          windowData["width"] *
-          windowData["Height"] *
-          windowData["Surcharge_Value"],
+          (((windowData["width"] / 1000) * windowData["Height"]) / 1000) *
+          windowData["Price_per_square_meter"],
       };
       setWindowData((wd) => ({
         ...wd,
@@ -485,7 +484,7 @@ export default function PlantationShutter({
           </section>
           <div className=" text-right mb-3">
             <Box component="div" sx={{ visibility: "visible" }}>
-              Price ${windowData["price"]}
+              Price:  {windowData["price"].toFixed(2) } {" "}AUD
             </Box>
           </div>
           <div className=" text-right mb-3">

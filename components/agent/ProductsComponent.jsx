@@ -192,7 +192,9 @@ export default function ProductComponent({
                           <h3 className="font-semibold">
                             Plantation Shutter Data
                           </h3>
-                          <p>Price: {window.plantationShutter.price}</p>
+                          <p>
+                            Price: {window.plantationShutter.price.toFixed(2)}
+                          </p>
 
                           <div className=" flex  justify-between mt-2">
                             <button
@@ -226,7 +228,7 @@ export default function ProductComponent({
                       {window.curtain && (
                         <div className="bg-[#88D6F7] p-2 rounded-md ">
                           <h3 className="font-semibold">Curtain Data</h3>
-                          <p>Price: {window.curtain.price}</p>
+                          <p>Price: {window.curtain.price.toFixed(2)}</p>
 
                           <div className=" flex gap-2 justify-between mt-2">
                             <button
@@ -256,7 +258,7 @@ export default function ProductComponent({
                       {window.rollerBlind && (
                         <div className="bg-[#fe8514a4] p-2 rounded-md">
                           <h3 className="font-semibold">Roller Blind Data</h3>
-                          <p>Price: {window.rollerBlind.price}</p>
+                          <p>Price: {window.rollerBlind.price.toFixed(2)}</p>
                           <div className="flex gap-2 justify-between mt-2">
                             <button
                               className="p-1 rounded-md hover:bg-red-700 ease-in-out text-white bg-red-600"

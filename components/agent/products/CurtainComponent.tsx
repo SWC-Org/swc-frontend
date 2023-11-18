@@ -102,7 +102,7 @@ export default function CurtainComponent({
     if (isFormValid(windowData)) {
       // Calculate the price
       let updatedValue = {
-        price: windowData["width"] * windowData["Price_Per_Meter"],
+        price: windowData["width"]/1000 * windowData["Price_Per_Meter"],
       };
       setWindowData((wd) => ({
         ...wd,
@@ -417,7 +417,8 @@ export default function CurtainComponent({
         </section>
         <div className=" text-right mb-3">
           <Box component="div" sx={{ visibility: "visible" }}>
-            Price ${windowData["price"]}
+            {/* Price ${windowData["price"]} */}
+            Price:  {windowData["price"].toFixed(2) } {" "}AUD
           </Box>
         </div>
         <div className=" text-right mb-3">
