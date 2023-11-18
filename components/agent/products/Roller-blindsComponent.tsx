@@ -82,6 +82,8 @@ export default function RollerBlindSComponent({
       : data
   );
 
+  const [selectedCategory, setSelectedCategory] = useState("");
+
   //validation
   function isFormValid(windowData: any) {
     return (
@@ -104,11 +106,41 @@ export default function RollerBlindSComponent({
 
   const calculatePrice = async () => {
     if (isFormValid(windowData)) {
+      //seleccted category
+      if (windowData.Category === "1") {
+        setSelectedCategory("category1");
+      }
+      if (windowData.Category === "2") {
+        setSelectedCategory("category2");
+      }
+      if (windowData.Category === "3") {
+        setSelectedCategory("category3");
+      }
+      if (windowData.Category === "4") {
+        setSelectedCategory("category4");
+      }
+
       // Calculate the price
-      let updatedValue = {
-        //? edit this
-        price: windowData["width"] * windowData["Height"],
-      };
+      let updatedValue = {};
+
+      const response = await fetch("/api/agent/price", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        //format the category to match the database
+        body: JSON.stringify({
+          category: selectedCategory,
+          width: windowData.width,
+          height: windowData.Height, // Change this to 'height'
+        }),
+      });
+
+      console.log(response.body);
+
+      updatedValue = { price: (await response.json()).price };
+
       setWindowData((wd) => ({
         ...wd,
         ...updatedValue,
@@ -172,22 +204,22 @@ export default function RollerBlindSComponent({
         transition: Flip,
       });
     } else {
-     //display the toast
-     toast.error(
-      "Please fill in all required fields before saving the window.",
-      {
-        position: "bottom-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        progress: undefined,
-        pauseOnHover: true,
-        draggable: true,
-        draggablePercent: 60,
-        transition: Flip,
-      }
-    );
-  }
+      //display the toast
+      toast.error(
+        "Please fill in all required fields before saving the window.",
+        {
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          progress: undefined,
+          pauseOnHover: true,
+          draggable: true,
+          draggablePercent: 60,
+          transition: Flip,
+        }
+      );
+    }
   };
   console.log("windowData", windowData);
 
