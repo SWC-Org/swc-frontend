@@ -402,7 +402,7 @@ export default function CurtainComponent({
 
         <section className="border-t-2 my-10 border-blue-500">
           <div className=" mt-4">
-            <TextArea
+            <LableTextField
               name={"comments"}
               id={"comments"}
               label={"Please add any comments or remarks "}
