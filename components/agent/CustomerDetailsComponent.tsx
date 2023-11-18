@@ -1,8 +1,9 @@
 import CustomDatePicker from "@components/Layout/DatePicker";
 import { Box, Button, TextField, Typography } from "@mui/material";
-import { Dayjs } from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import React from "react";
 
+// const [value, setValue] = useState(currentDate);
 type CustomerDetailsProps = {
   customerName: string;
   setCustomerName: (val: string) => void;
@@ -15,6 +16,7 @@ type CustomerDetailsProps = {
   customerCity: string;
   setCustomerCity: (val: string) => void;
   dateValue: Dayjs | null;
+  //set the default value to current date
   setDateValue: (val: Dayjs | null) => void;
 };
 
@@ -146,39 +148,10 @@ const CustomerDetails: React.FC<CustomerDetailsProps> = ({
                 value={dateValue}
                 setValue={setDateValue}
               />
-              {/* <div className="mt-5 flex flex-col items-start">
-                <Typography
-                  variant="subtitle1"
-                  component="label"
-                  htmlFor="outlined-required"
-                  className="text-l font-bold"
-                >
-                  Order Number
-                </Typography>
-                <TextField
-                  required
-                  id="outlined-number"
-                  className="w-100 rounded-lg h-8"
-                  hiddenLabel
-                  type="text"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  name="CustomerOrderNumber"
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                    setCustomerOrderNumber(event.target.value);
-                  }}
-                />
-              </div> */}
+
               <div className="line-container my-10">
                 <hr className="line" />
               </div>
-              {/* <Button
-                variant="contained"
-                className="bg-green-500 hover:bg-green-600"
-              >
-                Add Window Data
-              </Button> */}
             </div>
           </Box>
         </div>

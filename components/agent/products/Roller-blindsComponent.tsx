@@ -104,6 +104,23 @@ export default function RollerBlindSComponent({
     );
   }
 
+  //algorithm to get the correct width and height
+
+  const roundToNearest = (value: any, dataset: any) => {
+    const greaterValues = dataset.filter((v: any) => v >= value);
+
+    if (greaterValues.length === 0) {
+      // No greater values found, return the maximum value from the dataset
+      return Math.max(...dataset);
+    }
+
+    const closestGreaterValue = greaterValues.reduce((prev: any, curr: any) => {
+      return curr - value < prev - value ? curr : prev;
+    });
+
+    return closestGreaterValue;
+  };
+
   const calculatePrice = async () => {
     if (isFormValid(windowData)) {
       //seleccted category
@@ -120,8 +137,23 @@ export default function RollerBlindSComponent({
         setSelectedCategory("category4");
       }
 
+      // Round off width and height to the nearest values in the dataset
+      const roundedWidth = roundToNearest(
+        windowData.width,
+        [
+          610, 760, 910, 1060, 1210, 1360, 1510, 1660, 1810, 1960, 2110, 2260,
+          2410, 2560, 2710, 2860, 3010, 3160, 3310,
+        ]
+      );
+      const roundedHeight = roundToNearest(
+        windowData.Height,
+        [900, 1200, 1500, 1800, 2100, 2400, 2700, 3000, 3300]
+      );
+
       // Calculate the price
       let updatedValue = {};
+
+      //algorithm to getthe correct width and height
 
       const response = await fetch("/api/agent/price", {
         method: "POST",
@@ -132,8 +164,8 @@ export default function RollerBlindSComponent({
         //format the category to match the database
         body: JSON.stringify({
           category: selectedCategory,
-          width: windowData.width,
-          height: windowData.Height, // Change this to 'height'
+          width: roundedWidth,
+          height: roundedHeight, // Change this to 'height'
         }),
       });
 
@@ -444,7 +476,7 @@ export default function RollerBlindSComponent({
 
         <section className="border-t-2 mb-10 border-blue-500">
           <div className=" mt-4">
-            <TextArea
+            <LableTextField
               name={"comments"}
               id={"comments"}
               label={"Please add any comments or remarks "}
