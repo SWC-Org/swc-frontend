@@ -60,7 +60,7 @@ export default function SignUp() {
       redirect("/login");
     } catch (error) {
       setProgressing(false);
-      alert("User Create failed");
+      // alert("User Create failed");
     }
   };
 
