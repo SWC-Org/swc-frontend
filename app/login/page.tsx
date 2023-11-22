@@ -37,7 +37,7 @@ const Login = () => {
       redirect("/");
     } catch (error) {
       setProgressing(false);
-      alert("Failed to login");
+      // alert("Failed to login");
     }
   };
 

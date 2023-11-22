@@ -17,8 +17,8 @@ const Nav = ({ src, alt }: ProfileImage) => {
   const isLogged = true;
   const routesNames = [
     { route: "Home", path: "/" },
-    { route: "About", path: "/home" },
-    { route: "Customer", path: "/agent/customer/getDetails" },
+    // { route: "About", path: "/home" },
+    // { route: "Customer", path: "/agent/customer/getDetails" },
   ];
 
   const [toggleDropdown, setToggleDropdown] = useState(false);
@@ -59,7 +59,7 @@ const Nav = ({ src, alt }: ProfileImage) => {
               Sign Out
             </button>
 
-            <Link href="/profile">
+            <Link href="/">
               <Image
                 src={session?.user?.image || "/logo.svg"}
                 width={37}
