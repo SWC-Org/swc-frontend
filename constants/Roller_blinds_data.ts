@@ -100,6 +100,14 @@ export const Roller_blinds_data = {
       index: 4,
       data: "Beige",
     },
+    {
+      index: 5,
+      data: "Metal",
+    },
+    {
+      index: 6,
+      data: "Grey",
+    },
   ],
   Bottom_Rail: [
     {
@@ -128,6 +136,10 @@ export const Roller_blinds_data = {
       index: 4,
       data: "Beige",
     },
+    {
+      index: 5,
+      data: "Grey",
+    },
   ],
   Bottom_Color: [
     {
@@ -145,6 +157,10 @@ export const Roller_blinds_data = {
     {
       index: 4,
       data: "Beige",
+    },
+    {
+      index: 5,
+      data: "Silver",
     },
   ],
   Roll: [

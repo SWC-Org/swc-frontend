@@ -30,7 +30,7 @@ interface PlantationShutterProps {
     Layout_Details: string;
     Mount_methods: string;
     Frames_Configuration: string;
-    Frame_Size: number;
+    Frame_Size: string;
     Split_Tilt_Rod: string;
     Tilt_rod_type: string;
     T_Post_Quantity: number;
@@ -65,7 +65,7 @@ export default function PlantationShutter({
           Layout_Details: "",
           Mount_methods: "",
           Frames_Configuration: "",
-          Frame_Size: 0,
+          Frame_Size: " ",
           Split_Tilt_Rod: "",
           Tilt_rod_type: "",
           T_Post_Quantity: 0,
@@ -92,7 +92,7 @@ export default function PlantationShutter({
       windowData.Layout_Details &&
       windowData.Mount_methods &&
       windowData.Frames_Configuration &&
-      windowData.Frame_Size > 0 &&
+      windowData.Frame_Size &&
       windowData.Split_Tilt_Rod &&
       windowData.Tilt_rod_type &&
       windowData.T_Post_Quantity > 0 &&
@@ -108,7 +108,8 @@ export default function PlantationShutter({
       let updatedValue = {
         price:
           (((windowData["width"] / 1000) * windowData["Height"]) / 1000) *
-          windowData["Price_per_square_meter"],
+          windowData["Price_per_square_meter"] *
+          windowData["Surcharge_Value"],
       };
       setWindowData((wd) => ({
         ...wd,
@@ -375,16 +376,29 @@ export default function PlantationShutter({
                   index={0}
                   data={""}
                 />
-                <LableTextField
+                {/* <LableTextField
                   name={"Frame_Size"}
                   id={"Frame_Size"}
-                  label={"Frame Size"}
+                  label={"Frame Style"}
                   type={"number"}
                   placeholder="120.."
                   onChange={(event: SelectChangeEvent) => {
                     updateOnChange(event.target.name, event.target.value);
                   }}
                   value={windowData["Frame_Size"].toString()}
+                /> */}
+
+                <DropdownNormal
+                  label={"Frame Style"}
+                  id={"Frame_Size"}
+                  name={"Frame_Size"}
+                  options={Plantation_shutters_data.Frame_Size_opotions}
+                  onChange={(event: SelectChangeEvent) => {
+                    updateOnChange(event.target.name, event.target.value);
+                  }}
+                  value={windowData["Frame_Size"].toString()}
+                  index={0}
+                  data={""}
                 />
               </div>
               <div className="flex flex-col w-full sm:w-2/4 gap-3 mt-2">
@@ -484,7 +498,7 @@ export default function PlantationShutter({
           </section>
           <div className=" text-right mb-3">
             <Box component="div" sx={{ visibility: "visible" }}>
-              Price:  {windowData["price"].toFixed(2) } {" "}AUD
+              Price: {windowData["price"].toFixed(2)} AUD
             </Box>
           </div>
           <div className=" text-right mb-3">

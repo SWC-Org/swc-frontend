@@ -17,8 +17,8 @@ const Nav = ({ src, alt }: ProfileImage) => {
   const isLogged = true;
   const routesNames = [
     { route: "Home", path: "/" },
-    // { route: "About", path: "/home" },
-    // { route: "Customer", path: "/agent/customer/getDetails" },
+    { route: "About", path: "/home" },
+    { route: "Customer", path: "/agent/customer/getDetails" },
   ];
 
   const [toggleDropdown, setToggleDropdown] = useState(false);

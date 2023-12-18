@@ -37,7 +37,7 @@ interface RollerBlindProps {
     Color: string;
     Category: string;
     Control_Side: string;
-    Chanin_Type: string;
+    // Chanin_Type: string;
     Chain_Drop: string;
     Chain_Color: string;
     Bottom_Rail: string;
@@ -68,7 +68,7 @@ export default function RollerBlindSComponent({
           Color: "",
           Category: "",
           Control_Side: "",
-          Chanin_Type: "",
+          // Chanin_Type: "",
           Chain_Drop: "",
           Chain_Color: "",
           Bottom_Rail: "",
@@ -94,7 +94,7 @@ export default function RollerBlindSComponent({
       windowData.Color &&
       windowData.Category &&
       windowData.Control_Side &&
-      windowData.Chanin_Type &&
+      // windowData.Chanin_Type &&
       windowData.Chain_Drop &&
       windowData.Chain_Color &&
       windowData.Bottom_Rail &&
@@ -375,7 +375,7 @@ export default function RollerBlindSComponent({
                 index={0}
                 data={""}
               />
-              <DropdownNormal
+              {/* <DropdownNormal
                 label={"Chanin Type"}
                 id={"Chanin_Type"}
                 name={"Chanin_Type"}
@@ -386,7 +386,7 @@ export default function RollerBlindSComponent({
                 value={windowData["Chanin_Type"]}
                 index={0}
                 data={""}
-              />
+              /> */}
             </div>
             <div className="flex flex-col w-full sm:w-2/4 gap-3 mt-2">
               <DropdownNormal
@@ -492,7 +492,7 @@ export default function RollerBlindSComponent({
         <div className=" text-right mb-3">
           <Box component="div" sx={{ visibility: "visible" }}>
             {/* Price ${windowData["price"]} */}
-            Price:  {windowData["price"].toFixed(2) } {" "}AUD
+            Price: {windowData["price"]} AUD
           </Box>
         </div>
         <div className=" text-right mb-3">
