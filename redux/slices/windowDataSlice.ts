@@ -24,7 +24,7 @@ interface PlantationShutterData {
   Layout_Details: string;
   Mount_methods: string;
   Frames_Configuration: string;
-  Frame_Size: number;
+  Frame_Size: string;
   Split_Tilt_Rod: string;
   Tilt_rod_type: string;
   T_Post_Quantity: number;
@@ -64,7 +64,7 @@ interface RollerBlindData {
   Color: string;
   Category: string;
   Control_Side: string;
-  Chanin_Type: string;
+  // Chanin_Type: string;
   Chain_Drop: string;
   Chain_Color: string;
   Bottom_Rail: string;

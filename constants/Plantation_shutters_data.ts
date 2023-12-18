@@ -13,7 +13,7 @@ export const Plantation_shutters_data = {
   BladeSize: [
     {
       index: 1,
-      data: "33mm",
+      data: "63mm",
     },
     {
       index: 2,
@@ -85,26 +85,45 @@ export const Plantation_shutters_data = {
     },
   ],
 
-  layoutOptions: [
+  Frame_Size_opotions: [
     {
       index: 1,
-      data: "L",
+      data: "Z Frame ",
     },
     {
       index: 2,
-      data: "R",
+      data: "Recess L",
     },
     {
       index: 3,
-      data: "L-DR",
+      data: "Face L",
     },
     {
       index: 4,
-      data: "L-DRTL-DR",
+      data: "Custom",
+    },
+  ],
+
+  layoutOptions: [
+    {
+      index: 1,
+      data: "1",
+    },
+    {
+      index: 2,
+      data: "2",
+    },
+    {
+      index: 3,
+      data: "T1&B1",
+    },
+    {
+      index: 4,
+      data: "T2&B2",
     },
     {
       index: 5,
-      data: "LL-DRR",
+      data: "T1&B2",
     },
     {
       index: 6,
